@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">FESTIVA</string>
+    <string name="add_button">Add button</string>
+    <string name="more">More</string>
+    <string name="menu">Меню</string>
+    <string name="profile">Profile</string>
+    <string name="eventsThisMonth">События в этом месяце</string>
+    <string name="weekHolidays">Праздники недели</string>
+    <string name="premium">Премиум подписка</string>
+    <string name="question">Задать вопрос</string>
+    <string name="user_manual">Руководство пользователя</string>
+    <string name="back_main">Вернуться на главную</string>
+    <string name="exit">Выйти</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

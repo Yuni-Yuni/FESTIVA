@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="organic">#FF6A6F4C</color>
+    <color name="butter">#FFCBB89D</color>
+    <color name="coconut">#FFEDE1D2</color>
+    <color name="natural">#FF806044</color>
+    <color name="palm_oil">#FF5D2510</color>
+    <color name="cocoa">#FF412F26</color>
+    <color name="main_color">#FFC8D9E6</color>
+    <color name="buttons_color">#FF2F4156</color>
+    <color name="page_color">#FFF5F5F5</color>
+
+    <color name="red">#FFFF0000</color>
+</resources>
