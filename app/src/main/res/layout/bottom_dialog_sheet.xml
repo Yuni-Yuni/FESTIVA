@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/page_color">
+
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:gravity="center"
+        android:text="@string/createEvent"
+        android:textColor="@color/buttons_color"
+        android:textSize="36sp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold" />
+
+     <com.google.android.material.textfield.TextInputLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:backgroundTint="@color/black"
+         android:hint="Название события"
+         android:textColorHint="@color/buttons_color"
+         android:textColor="@color/buttons_color"
+         android:id="@+id/TextFieldLayout1"
+         android:layout_marginHorizontal="20dp"
+         android:layout_marginTop="20dp"
+         android:layout_marginBottom="10dp">
+
+         <com.google.android.material.textfield.TextInputEditText
+             android:id="@+id/editText1"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textColor="@color/buttons_color"
+             android:textColorHint="@color/buttons_color"
+             android:background="@drawable/edittext_border"/>
+
+     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="120dp"
+        android:background="@color/page_color"
+        android:hint="Содержание..."
+        android:textColorHint="@color/buttons_color"
+        style="@style/inputsEventStyle"
+        android:textColor="@color/buttons_color"
+        android:id="@+id/TextFieldLayout2"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="120dp"
+            android:textColor="@color/buttons_color"
+            android:textColorHint="@color/buttons_color"
+            android:background="@drawable/edittext_border"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:textColorHint="@color/buttons_color"
+        android:background="@drawable/edittext_border"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Дата"
+        android:layout_margin="20sp"
+        android:ems="10"
+        android:minHeight="48dp"
+        android:textSize="16sp"
+        android:paddingHorizontal="10sp"
+        android:focusable="false"
+        android:inputType="date"
+        android:clickable="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <EditText
+            android:id="@+id/editTextTime1"
+            android:textColorHint="@color/buttons_color"
+            android:layout_width="0dp"
+            android:layout_weight=".5"
+            android:minHeight="50dp"
+            android:hint="Начало"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/edittext_border"
+            android:paddingHorizontal="20dp"
+            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="time"
+            android:focusable="false"
+            android:clickable="true"/>
+
+        <EditText
+            android:id="@+id/editTextTime2"
+            android:textColorHint="@color/buttons_color"
+            android:layout_width="0dp"
+            android:minHeight="50dp"
+            android:hint="Конец"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/edittext_border"
+            android:paddingHorizontal="20dp"
+            android:textSize="16sp"
+            android:layout_weight=".5"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="time"
+            android:focusable="false"
+            android:clickable="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="Напомнить мне" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/reminderSwitch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:minHeight="50dp"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выбрать категорию"
+        android:textSize="20sp"
+        android:layout_marginHorizontal="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight=".3"
+            android:backgroundTint="#D09F97"
+            android:background="@drawable/button_background"
+            android:layout_margin="8dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight=".4"
+            android:backgroundTint="#2F3B57"
+            android:background="@drawable/button_background"
+            android:layout_margin="8dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight=".3"
+            android:backgroundTint="#BDCFE3"
+            android:background="@drawable/button_background"
+            android:layout_margin="8dp" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+         android:layout_width="match_parent"
+         android:layout_height="60dp"
+         android:id="@+id/dismiss"
+         android:layout_margin="20sp"
+         android:backgroundTint="@color/buttons_color"
+         android:text="Создать"
+         android:textColor="@color/page_color"
+         android:textSize="16sp" />
+
+</LinearLayout>

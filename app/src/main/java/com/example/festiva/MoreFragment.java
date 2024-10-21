@@ -11,12 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.festiva.databinding.FragmentMoreBinding;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MoreFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class MoreFragment extends Fragment {
+
+    FragmentMoreBinding binging;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,9 +65,20 @@ public class MoreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binging = FragmentMoreBinding.inflate(inflater, container, false);
 
+        binging.homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HomeFragment homeFragment = new HomeFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, homeFragment);
+                transaction.commit();
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_more, container, false);
+        return binging.getRoot();
+        //return inflater.inflate(R.layout.fragment_more, container, false);
     }
 
 }

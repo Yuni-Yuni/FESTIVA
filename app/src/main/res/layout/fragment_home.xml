@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginTop="-300dp"
+        android:layout_marginStart="-50dp"
+        android:layout_marginEnd="-50dp"
         android:background="@android:color/transparent">
 
         <ImageView
@@ -64,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif-medium"
+            android:layout_marginBottom="15dp"
             android:gravity="center"
             android:text="События, которые состоятся сегодня"
             android:textColor="@color/buttons_color"
@@ -81,8 +84,9 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card1"
                     android:layout_width="match_parent"
+                    android:minHeight="100dp"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="#00FFFFFF"
+                    app:cardBackgroundColor="@color/page_color"
                     android:layout_margin="@dimen/card_margin"
                     app:cardCornerRadius="@dimen/card_corner_radius">
 
@@ -92,8 +96,9 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card2"
                     android:layout_width="match_parent"
+                    android:minHeight="100dp"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="#00FFFFFF"
+                    app:cardBackgroundColor="@color/page_color"
                     android:layout_margin="@dimen/card_margin"
                     app:cardCornerRadius="@dimen/card_corner_radius">
 
@@ -103,58 +108,14 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card3"
                     android:layout_width="match_parent"
+                    android:minHeight="100dp"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="#00FFFFFF"
+                    app:cardBackgroundColor="@color/page_color"
                     android:layout_margin="@dimen/card_margin"
                     app:cardCornerRadius="@dimen/card_corner_radius">
 
                     <include layout="@layout/card_1" />
                 </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="#00FFFFFF"
-                    android:layout_margin="@dimen/card_margin"
-                    app:cardCornerRadius="@dimen/card_corner_radius">
-
-                    <include layout="@layout/card_1" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="#00FFFFFF"
-                    android:layout_margin="@dimen/card_margin"
-                    app:cardCornerRadius="@dimen/card_corner_radius">
-
-                    <include layout="@layout/card_1" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="#00FFFFFF"
-                    android:layout_margin="@dimen/card_margin"
-                    app:cardCornerRadius="@dimen/card_corner_radius">
-
-                    <include layout="@layout/card_1" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="#00FFFFFF"
-                    android:layout_margin="@dimen/card_margin"
-                    app:cardCornerRadius="@dimen/card_corner_radius">
-
-                    <include layout="@layout/card_1" />
-                </androidx.cardview.widget.CardView>
-
 
             </LinearLayout>
 

@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment"
-    android:background="@color/page_color">
+    android:background="@color/main_color">
 
     <LinearLayout
-        android:layout_width="500dp"
-        android:layout_height="350dp"
+        android:layout_width="600dp"
+        android:layout_height="650dp"
         android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="220dp"
         android:background="@android:color/transparent">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/circle"/>
+            android:src="@drawable/circle_white"/>
 
     </LinearLayout>
 
@@ -48,21 +48,10 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:contentDescription="@string/exit"
-                android:src="@drawable/ic_exit"
+                android:src="@drawable/ic_back"
                 android:background="@color/main_color"/>
 
-            <TextView
-                android:id="@+id/text1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/exit"
-                android:layout_gravity="center"
-                android:textColor="@color/buttons_color"
-                android:textSize="18sp"
-                />
-
         </LinearLayout>
-
 
         <ImageView
             android:id="@+id/imageView2"
@@ -78,9 +67,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="Пользователь123"
+            android:textStyle="bold"
             android:layout_gravity="center"
             android:textColor="@color/buttons_color"
-            android:textSize="18sp"
+            android:textSize="24sp"
             />
         <TextView
             android:id="@+id/text3"
@@ -89,55 +79,50 @@
             android:layout_marginTop="5dp"
             android:text="exampleEmail@gmail.com"
             android:layout_gravity="center"
-            android:textColor="@color/page_color"
-            android:textSize="14sp"
+            android:textColor="@color/buttons_color"
+            android:textSize="20sp"
             />
 
         <Button
+            android:id="@+id/settingsButton"
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="35dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="35dp"
-            android:text="Настройки профиля"
-            android:background="@drawable/button_background"
-            android:theme="@style/Button.Profile"
-            android:textColor="@color/page_color"/>
-
-
-        <TextView
-            android:id="@+id/text4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Выбрать тему"
-            android:layout_gravity="center"
+            android:layout_height="70dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/settings"
+            android:gravity="left|center"
+            android:textSize="16dp"
             android:textColor="@color/buttons_color"
-            android:textSize="18sp"
-            />
+            android:paddingHorizontal="40dp"/>
 
-
-        <TextView
-            android:id="@+id/text5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="Дата и время"
-            android:layout_gravity="center"
+        <Button
+            android:id="@+id/styleButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/style"
+            android:textSize="16dp"
+            android:gravity="left|center"
             android:textColor="@color/buttons_color"
-            android:textSize="14sp"
-            />
+            android:paddingHorizontal="40dp"/>
 
-        <TextView
-            android:id="@+id/text6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Виджеты"
-            android:layout_gravity="center"
+        <Button
+            android:id="@+id/vidgetButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:textSize="16dp"
+            android:text="@string/vidgets"
+            android:gravity="left|center"
             android:textColor="@color/buttons_color"
-            android:textSize="14sp"
-            />
+            android:paddingHorizontal="40dp"/>
+
+        <Button
+            android:id="@+id/exitButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/exit"
+            android:gravity="left|center"
+            android:textSize="16dp"
+            android:textColor="@color/buttons_color"
+            android:paddingHorizontal="40dp"/>
 
 
     </LinearLayout>
