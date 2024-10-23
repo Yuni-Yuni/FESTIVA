@@ -50,7 +50,7 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
@@ -62,7 +62,7 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif-medium"
@@ -74,7 +74,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,7 +83,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card1"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
+                    android:layout_gravity="center_horizontal"
                     android:minHeight="100dp"
                     android:layout_height="wrap_content"
                     app:cardBackgroundColor="@color/page_color"
@@ -95,7 +96,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card2"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
+                    android:layout_gravity="center_horizontal"
                     android:minHeight="100dp"
                     android:layout_height="wrap_content"
                     app:cardBackgroundColor="@color/page_color"
@@ -107,7 +109,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card3"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
+                    android:layout_gravity="center_horizontal"
                     android:minHeight="100dp"
                     android:layout_height="wrap_content"
                     app:cardBackgroundColor="@color/page_color"

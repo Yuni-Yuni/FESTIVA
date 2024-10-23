@@ -15,6 +15,9 @@
     <string name="style">Выбрать тему</string>
     <string name="vidgets">Виджеты</string>
     <string name="exit">Выйти</string>
+    <string name="layout">layout</string>
+    <string name="user">Пользователь123</string>
+    <string name="email">exampleEmail@gmail.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
