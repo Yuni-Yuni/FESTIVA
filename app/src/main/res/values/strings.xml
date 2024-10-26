@@ -18,6 +18,18 @@
     <string name="layout">layout</string>
     <string name="user">Пользователь123</string>
     <string name="email">exampleEmail@gmail.com</string>
+    <string name="event_title">Название события</string>
+    <string name="content_description">Содержание..</string>
+    <string name="data">Дата</string>
+    <string name="create">Создать</string>
+    <string name="start">Начало</string>
+    <string name="end">Конец</string>
+    <string name="remindMe">Напомнить мне</string>
+    <string name="createCard">Прислать открытку</string>
+    <string name="sendCard">Прислать поздравление</string>
+    <string name="thisMonthEvents">События в этом месяце</string>
+    <string name="past">Прошедшие</string>
+    <string name="future">Будущие</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

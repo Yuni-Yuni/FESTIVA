@@ -46,16 +46,15 @@
             android:textColor="@color/buttons_color"/>
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/event_this_month"
             android:layout_width="360dp"
-            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:text="@string/eventsThisMonth"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="60dp"
             android:background="@drawable/button_background"
             android:elevation="10dp"
-            android:textColor="@color/buttons_color"
-            />
+            android:text="@string/eventsThisMonth"
+            android:textColor="@color/buttons_color" />
 
         <Button
             android:id="@+id/button2"

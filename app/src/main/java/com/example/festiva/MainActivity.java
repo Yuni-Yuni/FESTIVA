@@ -143,10 +143,12 @@ public class MainActivity extends AppCompatActivity {
                 dismissBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         if (Objects.requireNonNull(editText.getText().toString().isEmpty())) {
-                            textInputLayout.setError("Please type something");
+                            textInputLayout.setError("Введите название события");
                         } else {
                             Toast.makeText(MainActivity.this, editText.getText().toString(), Toast.LENGTH_LONG).show();
+                            
 
                             bottomSheetDialog.dismiss();
                         }

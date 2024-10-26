@@ -36,10 +36,31 @@
             android:layout_marginBottom="12dp"
             android:src="@drawable/logo" />
 
-        <CalendarView
+        <!--<com.applandeo.materialcalendarview.CalendarView
+            android:id="@+id/calendarView2"
+            android:layout_width="350dp"
+            android:layout_height="380dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/calendar_background"
+            app:abbreviationsBarColor="@color/page_color"
+            app:abbreviationsLabelsColor="@color/black"
+            app:anotherMonthsDaysLabelsColor="@color/grey"
+            app:eventsEnabled="true"
+            app:forwardButtonSrc="@drawable/ic_arrow_forward"
+            app:headerColor="@color/page_color"
+            app:headerLabelColor="@color/black"
+            app:pagesColor="@color/page_color"
+            app:previousButtonSrc="@drawable/ic_arrow_back"
+            app:selectionColor="@color/main_color"
+            app:selectionLabelColor="@color/black"
+            app:todayLabelColor="@color/main_color"
+            app:type="one_day_picker" />-->
+
+
+       <CalendarView
             android:id="@+id/calendarView2"
             android:layout_width="wrap_content"
-            android:layout_height="325dp"
+            android:layout_height="350dp"
             android:layout_gravity="center"
             android:theme="@style/CalenderViewCustom"
             android:dateTextAppearance="@style/CalenderViewDateCustomText"
@@ -47,6 +68,11 @@
             android:background="@drawable/calendar_background"
             android:elevation="2dp"
             />
+
+        <!--<com.kizitonwose.calendar.view.CalendarView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendarView2"/>-->
 
         <TextView
             android:id="@+id/textView2"

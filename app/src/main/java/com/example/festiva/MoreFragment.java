@@ -76,9 +76,21 @@ public class MoreFragment extends Fragment {
                 transaction.commit();
             }
         });
+
+        binging.eventThisMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                This_month_EventFragment eventThisMonth = new This_month_EventFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, eventThisMonth);
+                transaction.commit();
+            }
+        });
+
         // Inflate the layout for this fragment
         return binging.getRoot();
         //return inflater.inflate(R.layout.fragment_more, container, false);
     }
+
 
 }

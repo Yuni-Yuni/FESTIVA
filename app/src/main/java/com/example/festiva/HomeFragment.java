@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,9 +75,9 @@ public class HomeFragment extends Fragment {
                 String selectedDate = new StringBuilder().append(mDay)
                         .append("-").append(mMonth + 1).append("-").append(mYear)
                         .append(" ").toString();
-                Toast.makeText(getActivity().getApplicationContext(), selectedDate, Toast.LENGTH_LONG).show();/**/
+                Toast.makeText(getActivity().getApplicationContext(), selectedDate, Toast.LENGTH_LONG).show();
             }
-        });
+        });/**/
 
         // Inflate the layout for this fragment
         return rootView;
