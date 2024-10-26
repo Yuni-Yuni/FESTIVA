@@ -5,7 +5,6 @@
     <string name="menu">Меню</string>
     <string name="profile">Profile</string>
     <string name="eventsThisMonth">События в этом месяце</string>
-    <string name="weekHolidays">Праздники недели</string>
     <string name="premium">Премиум подписка</string>
     <string name="question">Задать вопрос</string>
     <string name="user_manual">Руководство пользователя</string>
@@ -30,6 +29,10 @@
     <string name="thisMonthEvents">События в этом месяце</string>
     <string name="past">Прошедшие</string>
     <string name="future">Будущие</string>
+    <string name="weekEvents">Праздники недели</string>
+    <string name="ApplicationPolicy">Политика приложения</string>
+    <string name="FAQ">FAQ</string>
+    <string name="MainFunctional">Основной функционал</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

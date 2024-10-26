@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".This_month_EventFragment"
-    android:background="@color/main_color">
+    tools:context=".UserGuideFragment"
+    android:background="@color/page_color">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/circle_white">
+            android:src="@drawable/circle">
         </ImageView>
     </LinearLayout>
 
@@ -33,38 +33,9 @@
             android:layout_marginTop="25dp"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:text="@string/thisMonthEvents"
+            android:text="@string/user_manual"
             android:layout_gravity="center"
             android:textColor="@color/buttons_color"/>
-
-        <LinearLayout
-            android:layout_width="400dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                app:backgroundTint="@color/coconut"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="20dp"
-                android:text="@string/past"
-                android:background="@drawable/buttons_background"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                app:backgroundTint="@color/coconut"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="40dp"
-                android:text="@string/future"
-                android:background="@drawable/buttons_background"/>
-
-        </LinearLayout>
 
         <ImageButton
             android:id="@+id/homeButton"
@@ -79,6 +50,39 @@
             android:src="@drawable/ic_back"
             android:background="@android:color/transparent"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="350dp"
+            android:id="@+id/ApplicationPolicy"
+            android:layout_height="60dp"
+            app:backgroundTint="@color/page_color"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="120dp"
+            android:textSize="20sp"
+            android:textColor="@color/buttons_color"
+            android:text="@string/ApplicationPolicy"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="350dp"
+            android:id="@+id/FAQ"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            app:backgroundTint="@color/page_color"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/buttons_color"
+            android:text="@string/FAQ"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="350dp"
+            android:id="@+id/MainFunctional"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            app:backgroundTint="@color/page_color"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/buttons_color"
+            android:text="@string/MainFunctional"/>
+
     </LinearLayout>
 
-    </FrameLayout>
+</FrameLayout>

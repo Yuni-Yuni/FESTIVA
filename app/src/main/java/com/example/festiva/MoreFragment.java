@@ -87,6 +87,46 @@ public class MoreFragment extends Fragment {
             }
         });
 
+        binging.weekEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                This_Week_EventFragment thisWeekEventFragment = new This_Week_EventFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, thisWeekEventFragment);
+                transaction.commit();
+            }
+        });
+
+        binging.premium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PremiumFragment premiumFragment = new PremiumFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, premiumFragment);
+                transaction.commit();
+            }
+        });
+
+        binging.userGuide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserGuideFragment userGuideFragment = new UserGuideFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, userGuideFragment);
+                transaction.commit();
+            }
+        });
+
+        binging.askQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AskQuestionFragment askQuestionFragment = new AskQuestionFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, askQuestionFragment);
+                transaction.commit();
+            }
+        });
+
         // Inflate the layout for this fragment
         return binging.getRoot();
         //return inflater.inflate(R.layout.fragment_more, container, false);

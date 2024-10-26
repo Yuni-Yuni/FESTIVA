@@ -57,11 +57,11 @@
             android:textColor="@color/buttons_color" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/weekEvents"
             android:layout_width="360dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:text="@string/weekHolidays"
+            android:text="@string/weekEvents"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/button_background"
@@ -70,7 +70,7 @@
             />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/premium"
             android:layout_width="360dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
             />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/userGuide"
             android:layout_width="360dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
             />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/askQuestion"
             android:layout_width="360dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
