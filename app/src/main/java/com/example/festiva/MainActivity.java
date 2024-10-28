@@ -3,6 +3,7 @@ package com.example.festiva;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.festiva.databinding.ActivityMainBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -34,6 +36,8 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
     ActivityMainBinding binding;
     int year, month, day; // Переменные для хранения выбранной дат
 
@@ -41,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-
-
 
         setContentView(binding.getRoot());
 
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton button = findViewById(R.id.fab);
 
+        RecyclerView recyclerView = findViewById(R.id.listOfEvents);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,12 +77,12 @@ public class MainActivity extends AppCompatActivity {
                 bottomSheetDialog.show();
 
                 TextInputLayout textInputLayout = view1.findViewById(R.id.TextFieldLayout1);
-                TextInputEditText editText = view1.findViewById(R.id.editText1);
 
-                EditText editTextDate = view1.findViewById(R.id.editTextDate);
-
-                EditText editTextTimeStart = view1.findViewById(R.id.editTextTime1);
-                EditText editTextTimeEnd = view1.findViewById(R.id.editTextTime2);
+                TextInputEditText editTextEventName = view1.findViewById(R.id.eventName);
+                TextInputEditText editTextEventDescription = view1.findViewById(R.id.eventDescription);
+                EditText editTextDate = view1.findViewById(R.id.EventData);
+                EditText editTextTimeStart = view1.findViewById(R.id.EventStartTime);
+                EditText editTextTimeEnd = view1.findViewById(R.id.EventEndTime);
 
                 MaterialButton dismissBtn = view1.findViewById(R.id.dismiss);
 
@@ -144,12 +148,22 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        if (Objects.requireNonNull(editText.getText().toString().isEmpty())) {
-                            textInputLayout.setError("Введите название события");
-                        } else {
-                            Toast.makeText(MainActivity.this, editText.getText().toString(), Toast.LENGTH_LONG).show();
-                            
 
+                        if (Objects.requireNonNull(editTextEventName.getText()).toString().isEmpty()) {
+                            editTextEventName.setError("Введите название события");
+                        } else {
+
+                            MyDatabaseHelper myDB = new MyDatabaseHelper(MainActivity.this);
+                            /*myDB.addEvent(editTextEventName.getText().toString().trim(), editTextEventDescription.getText().toString().trim(),
+                                    Integer.parseInt(editTextDate.getText().toString().trim()), Integer.parseInt(editTextTimeStart.getText().toString().trim()),
+                                    Integer.parseInt(editTextTimeEnd.getText().toString().trim()));*/
+
+                            myDB.addEvent(editTextEventName.getText().toString().trim(), editTextEventDescription.getText().toString().trim(),
+                                    editTextDate.getText().toString().trim(), editTextTimeStart.getText().toString().trim(),
+                                    editTextTimeEnd.getText().toString().trim());
+
+
+                            Toast.makeText(MainActivity.this, editTextEventName.getText().toString(), Toast.LENGTH_LONG).show();
                             bottomSheetDialog.dismiss();
                         }
                     }
@@ -158,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 bottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
-                        Toast.makeText(MainActivity.this, "Bottom sheet dismissed", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Событие создано", Toast.LENGTH_LONG).show();
 
                     }
                 });

@@ -13,7 +13,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -50,11 +49,9 @@ dependencies {
 
     //calendar new
     //implementation("com.applandeo:material-calendar-view:1.9.2")
+
     // The view calendar library for Android
-   // implementation("com.kizitonwose.calendar:view:2.6.0")
-
-    // The compose calendar library for Android
-   // implementation("com.kizitonwose.calendar:compose:2.6.0")
-
-   // coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
+    //implementation("com.kizitonwose.calendar:view:2.6.0")
+    //implementation("com.kizitonwose.calendar:compose:2.6.0")
+    //coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
 }

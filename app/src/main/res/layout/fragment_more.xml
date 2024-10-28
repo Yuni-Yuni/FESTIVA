@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MoreFragment"
     android:background="@color/page_color">
 
@@ -48,6 +49,7 @@
         <Button
             android:id="@+id/event_this_month"
             android:layout_width="360dp"
+            app:backgroundTint="@color/page_color"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="60dp"
@@ -61,6 +63,7 @@
             android:layout_width="360dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
+            app:backgroundTint="@color/page_color"
             android:text="@string/weekEvents"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="20dp"
@@ -74,6 +77,7 @@
             android:layout_width="360dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
+            app:backgroundTint="@color/page_color"
             android:text="@string/premium"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="20dp"
@@ -87,6 +91,7 @@
             android:layout_width="360dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
+            app:backgroundTint="@color/page_color"
             android:text="@string/question"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="20dp"
@@ -100,6 +105,7 @@
             android:layout_width="360dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
+            app:backgroundTint="@color/page_color"
             android:text="@string/user_manual"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="20dp"
