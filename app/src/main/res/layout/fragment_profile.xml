@@ -86,46 +86,54 @@
             android:textSize="20sp"
             />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/settingsButton"
             android:layout_width="400dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="70dp"
             android:layout_marginTop="20dp"
             android:text="@string/settings"
+            android:enabled="false"
+            app:backgroundTint="@color/page_color"
             android:gravity="start|center"
             android:textSize="16sp"
             android:textColor="@color/buttons_color"
             android:paddingHorizontal="40dp"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/styleButton"
             android:layout_width="400dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="70dp"
             android:text="@string/style"
+            android:enabled="false"
+            app:backgroundTint="@color/page_color"
             android:textSize="16sp"
             android:gravity="start|center"
             android:textColor="@color/buttons_color"
             android:paddingHorizontal="40dp"/>
 
-        <Button
-            android:id="@+id/vidgetButton"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/widgetButton"
             android:layout_width="400dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="70dp"
             android:textSize="16sp"
             android:text="@string/vidgets"
+            android:enabled="false"
+            app:backgroundTint="@color/page_color"
             android:gravity="start|center"
             android:textColor="@color/buttons_color"
             android:paddingHorizontal="40dp"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/exitButton"
             android:layout_width="400dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="70dp"
             android:text="@string/exit"
+            android:enabled="false"
+            app:backgroundTint="@color/page_color"
             android:gravity="start|center"
             android:textSize="16sp"
             android:textColor="@color/buttons_color"

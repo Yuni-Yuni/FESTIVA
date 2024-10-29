@@ -1,9 +1,12 @@
 package com.example.festiva;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -12,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +24,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
  */
 public class HomeFragment extends Fragment {
 
+    MyDatabaseHelper myDB;
+    ArrayList<String> event_id, event_title, event_description, event_data, event_startTime, event_endTime;
+    CustomAdapter customAdapter;
 
+    View newView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,6 +78,27 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         CalendarView calendarView = (CalendarView) rootView.findViewById(R.id.calendarView2);
 
+        //=====================================
+
+        RecyclerView recyclerView = rootView.findViewById(R.id.listOfEvents);
+
+        myDB = new MyDatabaseHelper(getContext());
+        event_id = new ArrayList<>();
+        event_title = new ArrayList<>();
+        event_description = new ArrayList<>();
+        event_data = new ArrayList<>();
+        event_startTime = new ArrayList<>();
+        event_endTime = new ArrayList<>();
+
+        storeDataInArrays();
+
+        customAdapter = new CustomAdapter(getContext(), event_id, event_title, event_description);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        //=====================================
+
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -87,4 +115,44 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         return rootView;
     }
+
+    void storeDataInArrays(){
+        Cursor cursor = myDB.readAllData();
+        if(cursor.getCount() == 0){
+            Toast.makeText(getContext(),"No data.", Toast.LENGTH_SHORT).show();
+        }else{
+            while (cursor.moveToNext()){
+                event_id.add(cursor.getString(0));
+                event_title.add(cursor.getString(1));
+                event_description.add(cursor.getString(2));
+                event_data.add(cursor.getString(3));
+                event_startTime.add(cursor.getString(4));
+                event_endTime.add(cursor.getString(5));
+            }
+        }
+    }
+
+    public void onBottomSheetClosed(View rootview) {
+        //initializeRecyclerView(rootview);
+        //-----
+    }
+
+    public void initializeRecyclerView(View rootView) {
+        RecyclerView recyclerView = rootView.findViewById(R.id.listOfEvents);
+
+        myDB = new MyDatabaseHelper(getContext());
+        event_id = new ArrayList<>();
+        event_title = new ArrayList<>();
+        event_description = new ArrayList<>();
+        event_data = new ArrayList<>();
+        event_startTime = new ArrayList<>();
+        event_endTime = new ArrayList<>();
+
+        storeDataInArrays();
+
+        customAdapter = new CustomAdapter(getContext(), event_id, event_title, event_description);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
 }

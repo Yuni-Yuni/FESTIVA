@@ -87,7 +87,7 @@
             />
 
         <Button
-            android:id="@+id/userGuide"
+            android:id="@+id/askQuestion"
             android:layout_width="360dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             />
 
         <Button
-            android:id="@+id/askQuestion"
+            android:id="@+id/userGuide"
             android:layout_width="360dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"

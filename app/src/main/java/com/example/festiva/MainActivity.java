@@ -1,18 +1,20 @@
 package com.example.festiva;
 
+import static java.security.AccessController.getContext;
+
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.database.sqlite.SQLiteDatabase;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -31,16 +33,19 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
-
+    MyDatabaseHelper myDB1;
+    ArrayList<String> event_id, event_title, event_description, event_data, event_startTime, event_endTime;
 
     ActivityMainBinding binding;
     int year, month, day; // Переменные для хранения выбранной дат
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,14 +64,13 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.profile) {
                     loadFragment(new ProfileFragment());
                 }
-
                 return true;
             }
         });
 
         FloatingActionButton button = findViewById(R.id.fab);
 
-        RecyclerView recyclerView = findViewById(R.id.listOfEvents);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-
                         if (Objects.requireNonNull(editTextEventName.getText()).toString().isEmpty()) {
                             editTextEventName.setError("Введите название события");
                         } else {
@@ -162,24 +165,64 @@ public class MainActivity extends AppCompatActivity {
                                     editTextDate.getText().toString().trim(), editTextTimeStart.getText().toString().trim(),
                                     editTextTimeEnd.getText().toString().trim());
 
-
                             Toast.makeText(MainActivity.this, editTextEventName.getText().toString(), Toast.LENGTH_LONG).show();
+
                             bottomSheetDialog.dismiss();
                         }
                     }
                 });
 
+
+
                 bottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
-                        Toast.makeText(MainActivity.this, "Событие создано", Toast.LENGTH_LONG).show();
 
+                        int witchOneLoad = 50;
+
+                        Fragment currentFragment = getCurrentFragment();
+                        if (currentFragment instanceof HomeFragment) {
+                            witchOneLoad = 0;
+                        } else if (currentFragment instanceof MoreFragment) {
+                            witchOneLoad = 1;
+                        } else if (currentFragment instanceof ProfileFragment) {
+                            witchOneLoad = 2;
+                        } else if (currentFragment instanceof AskQuestionFragment) {
+                            witchOneLoad = 3;
+                        } else if (currentFragment instanceof PremiumFragment) {
+                            witchOneLoad = 4;
+                        } else if (currentFragment instanceof This_month_EventFragment) {
+                            witchOneLoad = 5;
+                        } else if (currentFragment instanceof This_Week_EventFragment) {
+                            witchOneLoad = 6;
+                        } else if (currentFragment instanceof UserGuideFragment) {
+                            witchOneLoad = 7;
+                        }
+                        //Log.d("ActiveFragment", String.valueOf(witchOneLoad));
+
+                        if (witchOneLoad == 0){
+                            loadFragment(new HomeFragment());
+                        }else if (witchOneLoad == 1){
+                            loadFragment(new MoreFragment());
+                        }else if (witchOneLoad == 2){
+                            loadFragment(new ProfileFragment());
+                        }else if (witchOneLoad == 3){
+                            loadFragment(new AskQuestionFragment());
+                        }else if (witchOneLoad == 4){
+                            loadFragment(new PremiumFragment());
+                        }else if (witchOneLoad == 5){
+                            loadFragment(new This_month_EventFragment());
+                        }else if (witchOneLoad == 6){
+                            loadFragment(new This_Week_EventFragment());
+                        }else {
+                            loadFragment(new UserGuideFragment());
+                        }
+
+                        Toast.makeText(MainActivity.this, "Закрыто нижнее диалоговое меню", Toast.LENGTH_LONG).show();
                     }
-                });
+                });/**/
             }
         });
-
-
     }
 
     private void loadFragment(Fragment fragment){
@@ -189,5 +232,9 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public Fragment getCurrentFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        return fragmentManager.findFragmentById(R.id.fragment_container); // Замените на ID вашего контейнера
+    }
 
 }
