@@ -1,20 +1,15 @@
 package com.example.festiva;
 
-import static java.security.AccessController.getContext;
-
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -23,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.festiva.databinding.ActivityMainBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -33,14 +27,12 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity{
 
-    MyDatabaseHelper myDB1;
-    ArrayList<String> event_id, event_title, event_description, event_data, event_startTime, event_endTime;
+    private int data_selected, month_selected, year_selected, hour_start, hour_end, minute_start, minute_end;
 
     ActivityMainBinding binding;
     int year, month, day; // Переменные для хранения выбранной дат
@@ -70,8 +62,6 @@ public class MainActivity extends AppCompatActivity{
 
         FloatingActionButton button = findViewById(R.id.fab);
 
-
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,6 +80,30 @@ public class MainActivity extends AppCompatActivity{
 
                 MaterialButton dismissBtn = view1.findViewById(R.id.dismiss);
 
+                /* Пресеты */
+
+                Calendar calendar = Calendar.getInstance();
+                int year_cur = calendar.get(Calendar.YEAR);
+                int month_cur = calendar.get(Calendar.MONTH) + 1;
+                int day_cur = calendar.get(Calendar.DAY_OF_MONTH);
+
+                data_selected = day_cur;
+                month_selected = month_cur;
+                year_selected = year_cur;
+
+                editTextDate.setText(day_cur + "." + (month_cur) + "." + year_cur);
+
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+
+                if (minute >=30) {
+                    hour += 1;
+                }
+
+                editTextTimeStart.setText(hour + ":00");
+                editTextTimeEnd.setText((hour + 1) + ":00");
+                /*     */
+
                 editTextDate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -103,6 +117,9 @@ public class MainActivity extends AppCompatActivity{
                         DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                data_selected = dayOfMonth;
+                                month_selected = month + 1;
+                                year_selected = year;
                                 // Форматируем выбранную дату в строку и устанавливаем в EditText
                                 editTextDate.setText(dayOfMonth + "." + (month + 1) + "." + year);
                             }
@@ -122,7 +139,14 @@ public class MainActivity extends AppCompatActivity{
                         timePickerDialog = new TimePickerDialog(MainActivity.this, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                                editTextTimeStart.setText( selectedHour + ":" + selectedMinute);
+                                hour_start = selectedHour;
+                                minute_start = selectedMinute;
+                                if (selectedMinute == 0) {
+                                    editTextTimeStart.setText( selectedHour + ":00");
+                                } else {
+                                    editTextTimeStart.setText( selectedHour + ":" + selectedMinute);
+                                }
+
                             }
                         }, hour, minute, true);
                         timePickerDialog.setTitle("Время начала");
@@ -134,13 +158,19 @@ public class MainActivity extends AppCompatActivity{
                     @Override
                     public void onClick(View view) {
                         Calendar mcurrentTime = Calendar.getInstance();
-                        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY) + 1;
                         int minute = mcurrentTime.get(Calendar.MINUTE);
                         TimePickerDialog timePickerDialog1;
                         timePickerDialog1 = new TimePickerDialog(MainActivity.this, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                                editTextTimeEnd.setText( selectedHour + ":" + selectedMinute);
+                                hour_end = selectedHour;
+                                minute_end = selectedMinute;
+                                if (selectedMinute == 0) {
+                                    editTextTimeEnd.setText( selectedHour + ":00");
+                                } else {
+                                    editTextTimeEnd.setText( selectedHour + ":" + selectedMinute);
+                                }
                             }
                         }, hour, minute, true);
                         timePickerDialog1.setTitle("Время окончания");
@@ -155,15 +185,10 @@ public class MainActivity extends AppCompatActivity{
                         if (Objects.requireNonNull(editTextEventName.getText()).toString().isEmpty()) {
                             editTextEventName.setError("Введите название события");
                         } else {
-
                             MyDatabaseHelper myDB = new MyDatabaseHelper(MainActivity.this);
-                            /*myDB.addEvent(editTextEventName.getText().toString().trim(), editTextEventDescription.getText().toString().trim(),
-                                    Integer.parseInt(editTextDate.getText().toString().trim()), Integer.parseInt(editTextTimeStart.getText().toString().trim()),
-                                    Integer.parseInt(editTextTimeEnd.getText().toString().trim()));*/
 
                             myDB.addEvent(editTextEventName.getText().toString().trim(), editTextEventDescription.getText().toString().trim(),
-                                    editTextDate.getText().toString().trim(), editTextTimeStart.getText().toString().trim(),
-                                    editTextTimeEnd.getText().toString().trim());
+                                    data_selected, month_selected, year_selected, hour_start, minute_start, hour_end, minute_end);
 
                             Toast.makeText(MainActivity.this, editTextEventName.getText().toString(), Toast.LENGTH_LONG).show();
 
@@ -172,49 +197,26 @@ public class MainActivity extends AppCompatActivity{
                     }
                 });
 
-
-
                 bottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
 
-                        int witchOneLoad = 50;
-
                         Fragment currentFragment = getCurrentFragment();
                         if (currentFragment instanceof HomeFragment) {
-                            witchOneLoad = 0;
-                        } else if (currentFragment instanceof MoreFragment) {
-                            witchOneLoad = 1;
-                        } else if (currentFragment instanceof ProfileFragment) {
-                            witchOneLoad = 2;
-                        } else if (currentFragment instanceof AskQuestionFragment) {
-                            witchOneLoad = 3;
-                        } else if (currentFragment instanceof PremiumFragment) {
-                            witchOneLoad = 4;
-                        } else if (currentFragment instanceof This_month_EventFragment) {
-                            witchOneLoad = 5;
-                        } else if (currentFragment instanceof This_Week_EventFragment) {
-                            witchOneLoad = 6;
-                        } else if (currentFragment instanceof UserGuideFragment) {
-                            witchOneLoad = 7;
-                        }
-                        //Log.d("ActiveFragment", String.valueOf(witchOneLoad));
-
-                        if (witchOneLoad == 0){
                             loadFragment(new HomeFragment());
-                        }else if (witchOneLoad == 1){
+                        } else if (currentFragment instanceof MoreFragment) {
                             loadFragment(new MoreFragment());
-                        }else if (witchOneLoad == 2){
+                        } else if (currentFragment instanceof ProfileFragment) {
                             loadFragment(new ProfileFragment());
-                        }else if (witchOneLoad == 3){
+                        } else if (currentFragment instanceof AskQuestionFragment) {
                             loadFragment(new AskQuestionFragment());
-                        }else if (witchOneLoad == 4){
+                        } else if (currentFragment instanceof PremiumFragment) {
                             loadFragment(new PremiumFragment());
-                        }else if (witchOneLoad == 5){
+                        } else if (currentFragment instanceof This_month_EventFragment) {
                             loadFragment(new This_month_EventFragment());
-                        }else if (witchOneLoad == 6){
+                        } else if (currentFragment instanceof This_Week_EventFragment) {
                             loadFragment(new This_Week_EventFragment());
-                        }else {
+                        } else if (currentFragment instanceof UserGuideFragment) {
                             loadFragment(new UserGuideFragment());
                         }
 

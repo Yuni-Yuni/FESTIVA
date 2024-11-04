@@ -15,28 +15,41 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     private Context context;
     private ArrayList<String> event_id, event_title, event_description;
+    private ArrayList<String> data_data, data_month, data_year, start_time_hour, start_time_minute, end_time_hour, end_time_minute;
 
-
-    CustomAdapter(Context context, ArrayList<String> event_id, ArrayList<String> event_title, ArrayList<String> event_description){
+    CustomAdapter(Context context, ArrayList<String> event_id, ArrayList<String> event_title, ArrayList<String> event_description,
+                  ArrayList<String> data_data, ArrayList<String> data_month, ArrayList<String> data_year, ArrayList<String> start_time_hour,
+                  ArrayList<String> start_time_minute, ArrayList<String> end_time_hour, ArrayList<String> end_time_minute){
         this.context = context;
         this.event_id = event_id;
         this.event_title = event_title;
         this.event_description = event_description;
+        this.data_data = data_data;
+        this.data_month = data_month;
+        this.data_year = data_year;
+        this.start_time_hour = start_time_hour;
+        this.start_time_minute = start_time_minute;
+        this.end_time_hour = end_time_hour;
+        this.end_time_minute = end_time_minute;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.my_row, parent, false);
+        View view = inflater.inflate(R.layout.my_row_try_new, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.event_id.setText(String.valueOf(event_id.get(position)));
+        //holder.event_id.setText(String.valueOf(event_id.get(position)));
         holder.event_title.setText(String.valueOf(event_title.get(position)));
-        holder.event_description.setText(String.valueOf(event_description.get(position)));
+        //holder.event_description.setText(String.valueOf(event_description.get(position)));
+        holder.event_startHour.setText(String.valueOf(start_time_hour.get(position)));
+        holder.event_startMinute.setText(String.valueOf(start_time_minute.get(position)));
+        holder.event_endHour.setText(String.valueOf(end_time_hour.get(position)));
+        holder.event_endMinute.setText(String.valueOf(end_time_minute.get(position)));
 
     }
 
@@ -47,13 +60,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView event_id, event_title, event_description;
+        //TextView event_id, event_title, event_description;
+        TextView event_title, event_startHour, event_startMinute, event_endHour, event_endMinute;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            event_id = itemView.findViewById(R.id.event_id_text);
+            //event_id = itemView.findViewById(R.id.event_id_text);
             event_title = itemView.findViewById(R.id.event_title);
-            event_description = itemView.findViewById(R.id.event_description);
+            event_startHour = itemView.findViewById(R.id.hourStart);
+            event_startMinute = itemView.findViewById(R.id.minuteStart);
+            event_endHour = itemView.findViewById(R.id.hourEnd);
+            event_endMinute = itemView.findViewById(R.id.minuteEnd);
+            //event_description = itemView.findViewById(R.id.event_description);
         }
     }
 }

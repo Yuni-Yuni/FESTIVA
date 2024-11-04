@@ -25,7 +25,8 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     MyDatabaseHelper myDB;
-    ArrayList<String> event_id, event_title, event_description, event_data, event_startTime, event_endTime;
+    ArrayList<String> event_id, event_title, event_description, event_data_data, event_data_month, event_data_year, event_startTime_hour,
+                            event_startTime_minute, event_endTime_hour, event_endTime_minute;
     CustomAdapter customAdapter;
 
     View newView;
@@ -86,13 +87,18 @@ public class HomeFragment extends Fragment {
         event_id = new ArrayList<>();
         event_title = new ArrayList<>();
         event_description = new ArrayList<>();
-        event_data = new ArrayList<>();
-        event_startTime = new ArrayList<>();
-        event_endTime = new ArrayList<>();
+        event_data_data = new ArrayList<>();
+        event_data_month = new ArrayList<>();
+        event_data_year = new ArrayList<>();
+        event_startTime_hour = new ArrayList<>();
+        event_startTime_minute = new ArrayList<>();
+        event_endTime_hour = new ArrayList<>();
+        event_endTime_minute = new ArrayList<>();
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(getContext(), event_id, event_title, event_description);
+        customAdapter = new CustomAdapter(getContext(), event_id, event_title, event_description, event_data_data, event_data_month,
+                                event_data_year, event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -125,34 +131,15 @@ public class HomeFragment extends Fragment {
                 event_id.add(cursor.getString(0));
                 event_title.add(cursor.getString(1));
                 event_description.add(cursor.getString(2));
-                event_data.add(cursor.getString(3));
-                event_startTime.add(cursor.getString(4));
-                event_endTime.add(cursor.getString(5));
+                event_data_data.add(cursor.getString(3));
+                event_data_month.add(cursor.getString(4));
+                event_data_year.add(cursor.getString(5));
+                event_startTime_hour.add(cursor.getString(6));
+                event_startTime_minute.add(cursor.getString(7));
+                event_endTime_hour.add(cursor.getString(8));
+                event_endTime_minute.add(cursor.getString(9));
             }
         }
-    }
-
-    public void onBottomSheetClosed(View rootview) {
-        //initializeRecyclerView(rootview);
-        //-----
-    }
-
-    public void initializeRecyclerView(View rootView) {
-        RecyclerView recyclerView = rootView.findViewById(R.id.listOfEvents);
-
-        myDB = new MyDatabaseHelper(getContext());
-        event_id = new ArrayList<>();
-        event_title = new ArrayList<>();
-        event_description = new ArrayList<>();
-        event_data = new ArrayList<>();
-        event_startTime = new ArrayList<>();
-        event_endTime = new ArrayList<>();
-
-        storeDataInArrays();
-
-        customAdapter = new CustomAdapter(getContext(), event_id, event_title, event_description);
-        recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
 }

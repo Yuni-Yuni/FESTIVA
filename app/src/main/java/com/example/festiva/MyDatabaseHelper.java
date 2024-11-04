@@ -12,16 +12,20 @@ import androidx.annotation.Nullable;
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
-    private static final String DATABASE_NAME = "fistiva_secondTry.db";
+    private static final String DATABASE_NAME = "FESTIVA_1.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String TABLE_NAME = "events";
     private static final String EVENT_ID = "_id";
     private static final String EVENT_NAME = "event_name";
     private static final String EVENT_DESCRIPTION = "event_description";
-    private static final String EVENT_DATA = "event_data";
-    private static final String EVENT_START_TIME = "event_start_time";
-    private static final String EVENT_END_TIME = "event_end_time";
+    private static final String EVENT_DATA_DATA = "event_data_data";
+    private static final String EVENT_DATA_MONTH = "event_data_month";
+    private static final String EVENT_DATA_YEAR = "event_data_year";
+    private static final String EVENT_START_TIME_HOUR = "event_start_time_hour";
+    private static final String EVENT_START_TIME_MINUTE = "event_start_time_minute";
+    private static final String EVENT_END_TIME_HOUR = "event_end_time_hour";
+    private static final String EVENT_END_TIME_MINUTE = "event_end_time_minute";
 
 
     public MyDatabaseHelper(@Nullable Context context) {
@@ -35,8 +39,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 "CREATE TABLE " + TABLE_NAME +
                         " (" + EVENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         EVENT_NAME + " TEXT, " + EVENT_DESCRIPTION + " TEXT, " +
-                        EVENT_DATA + " TEXT, " + EVENT_START_TIME + " TEXT, " +
-                        EVENT_END_TIME + " TEXT);"; //INTEGER
+                        EVENT_DATA_DATA + " INTEGER, " + EVENT_DATA_MONTH + " INTEGER, " +
+                        EVENT_DATA_YEAR + " INTEGER, " + EVENT_START_TIME_HOUR + " INTEGER, " +
+                        EVENT_START_TIME_MINUTE + " INTEGER, " + EVENT_END_TIME_HOUR + " INTEGER, " + EVENT_END_TIME_MINUTE + " INTEGER);"; //INTEGER
         db.execSQL(query);
 
     }
@@ -45,18 +50,23 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
-
     }
 
-    void addEvent(String title, String description, String data, String start_time, String end_time){ //int
+    void addEvent(String title, String description, int data_data, int data_month, int data_year, int start_time_hour,
+                                            int start_time_minute, int end_time_hour, int end_time_minute){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(EVENT_NAME, title);
         cv.put(EVENT_DESCRIPTION, description);
-        cv.put(EVENT_DATA, data);
-        cv.put(EVENT_START_TIME, start_time);
-        cv.put(EVENT_END_TIME, end_time);
+        cv.put(EVENT_DATA_DATA, data_data);
+        cv.put(EVENT_DATA_MONTH, data_month);
+        cv.put(EVENT_DATA_YEAR, data_year);
+        cv.put(EVENT_START_TIME_HOUR, start_time_hour);
+        cv.put(EVENT_START_TIME_MINUTE, start_time_minute);
+        cv.put(EVENT_END_TIME_HOUR, end_time_hour);
+        cv.put(EVENT_END_TIME_MINUTE, end_time_minute);
+
         long result = db.insert(TABLE_NAME, null, cv);
         if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_LONG).show();
