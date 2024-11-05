@@ -4,6 +4,8 @@
         <!-- Customize your light theme here. -->
             <item name="android:textColorPrimary">@color/buttons_color</item>
             <item name="android:textColor">@color/buttons_color</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">

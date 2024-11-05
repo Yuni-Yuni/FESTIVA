@@ -1,10 +1,13 @@
 package com.example.festiva;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,13 +107,13 @@ public class HomeFragment extends Fragment {
 
         storeDataOnCurrentDate(year, month + 1, day);
 
-        customAdapter = new CustomAdapter(getContext(), event_id, event_title, event_description, event_data_data, event_data_month,
+        //
+        customAdapter = new CustomAdapter(getActivity(), getContext(), event_id, event_title, event_description, event_data_data, event_data_month,
                                 event_data_year, event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //=====================================
-
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -129,6 +133,8 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
+
+
     void storeDataOnCurrentDate(int selectedYear, int selectedMonth, int selectedDay){
         Cursor cursor = myDB.readAllDataOnSelectedDate(selectedYear, selectedMonth, selectedDay);
         if(cursor.getCount() == 0){
@@ -142,9 +148,17 @@ public class HomeFragment extends Fragment {
                 event_data_month.add(cursor.getString(4));
                 event_data_year.add(cursor.getString(5));
                 event_startTime_hour.add(cursor.getString(6));
-                event_startTime_minute.add(cursor.getString(7));
+                if (Objects.equals(cursor.getString(7), "0")){
+                    event_startTime_minute.add("00");
+                } else {
+                    event_startTime_minute.add(cursor.getString(7));
+                }
                 event_endTime_hour.add(cursor.getString(8));
-                event_endTime_minute.add(cursor.getString(9));
+                if (Objects.equals(cursor.getString(9), "0")){
+                    event_endTime_minute.add("00");
+                } else {
+                    event_endTime_minute.add(cursor.getString(9));
+                }
             }
         }
     }
@@ -164,9 +178,17 @@ public class HomeFragment extends Fragment {
                 event_data_month.add(cursor.getString(4));
                 event_data_year.add(cursor.getString(5));
                 event_startTime_hour.add(cursor.getString(6));
-                event_startTime_minute.add(cursor.getString(7));
+                if (Objects.equals(cursor.getString(7), "0")){
+                    event_startTime_minute.add("00");
+                } else {
+                    event_startTime_minute.add(cursor.getString(7));
+                }
                 event_endTime_hour.add(cursor.getString(8));
-                event_endTime_minute.add(cursor.getString(9));
+                if (Objects.equals(cursor.getString(9), "0")){
+                    event_endTime_minute.add("00");
+                } else {
+                    event_endTime_minute.add(cursor.getString(9));
+                }
             }
         }
 

@@ -1,9 +1,12 @@
 package com.example.festiva;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,10 +20,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private Context context;
     private ArrayList<String> event_id, event_title, event_description;
     private ArrayList<String> data_data, data_month, data_year, start_time_hour, start_time_minute, end_time_hour, end_time_minute;
+    Activity activity;
 
-    CustomAdapter(Context context, ArrayList<String> event_id, ArrayList<String> event_title, ArrayList<String> event_description,
+    //
+    CustomAdapter(Activity activity, Context context, ArrayList<String> event_id, ArrayList<String> event_title, ArrayList<String> event_description,
                   ArrayList<String> data_data, ArrayList<String> data_month, ArrayList<String> data_year, ArrayList<String> start_time_hour,
                   ArrayList<String> start_time_minute, ArrayList<String> end_time_hour, ArrayList<String> end_time_minute){
+        this.activity = activity;
         this.context = context;
         this.event_id = event_id;
         this.event_title = event_title;
@@ -43,7 +49,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         //holder.event_id.setText(String.valueOf(event_id.get(position)));
         holder.event_title.setText(String.valueOf(event_title.get(position)));
         //holder.event_description.setText(String.valueOf(event_description.get(position)));
@@ -51,6 +57,24 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.event_startMinute.setText(String.valueOf(start_time_minute.get(position)));
         holder.event_endHour.setText(String.valueOf(end_time_hour.get(position)));
         holder.event_endMinute.setText(String.valueOf(end_time_minute.get(position)));
+
+        holder.EventLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, UpdateEventActivity.class);
+                intent.putExtra("id", String.valueOf(event_id.get(position)));
+                intent.putExtra("title", String.valueOf(event_title.get(position)));
+                intent.putExtra("description", String.valueOf(event_description.get(position)));
+                intent.putExtra("dateData", String.valueOf(data_data.get(position)));
+                intent.putExtra("dateMonth", String.valueOf(data_month.get(position)));
+                intent.putExtra("dateYear", String.valueOf(data_year.get(position)));
+                intent.putExtra("startTimeHour", String.valueOf(start_time_hour.get(position)));
+                intent.putExtra("startTimeMinute", String.valueOf(start_time_minute.get(position)));
+                intent.putExtra("endTimeHour", String.valueOf(end_time_hour.get(position)));
+                intent.putExtra("endTimeMinute", String.valueOf(end_time_minute.get(position)));
+                activity.startActivityForResult(intent, 1);
+            }
+        });
 
     }
 
@@ -63,6 +87,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         //TextView event_id, event_title, event_description;
         TextView event_title, event_startHour, event_startMinute, event_endHour, event_endMinute;
+        LinearLayout EventLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,7 +97,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             event_startMinute = itemView.findViewById(R.id.minuteStart);
             event_endHour = itemView.findViewById(R.id.hourEnd);
             event_endMinute = itemView.findViewById(R.id.minuteEnd);
+            EventLayout = itemView.findViewById(R.id.EventLayout);
             //event_description = itemView.findViewById(R.id.event_description);
+
         }
     }
 

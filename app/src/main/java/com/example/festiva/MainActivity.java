@@ -4,16 +4,19 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -100,6 +103,11 @@ public class MainActivity extends AppCompatActivity{
                 if (minute >=30) {
                     hour += 1;
                 }
+
+                hour_start = hour;
+                minute_start = 0;
+                hour_end = hour + 1;
+                minute_end = 0;
 
                 editTextTimeStart.setText(hour + ":00");
                 editTextTimeEnd.setText((hour + 1) + ":00");
@@ -234,6 +242,15 @@ public class MainActivity extends AppCompatActivity{
                 });/**/
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            recreate();
+            //loadFragment(new HomeFragment());
+        }
     }
 
     private void loadFragment(Fragment fragment){

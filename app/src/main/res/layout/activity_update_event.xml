@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateEventActivity"
+    android:orientation="vertical"
+    android:background="@color/page_color">
+
+    <EditText
+        android:id="@+id/editEventTitle"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        android:hint="@string/event_title"
+        android:textColorHint="@color/buttons_color"
+        android:layout_gravity="center_horizontal"
+        android:gravity="start"
+        android:layout_marginTop="80dp"/>
+
+    <EditText
+        android:id="@+id/editEventDescription"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:hint="@string/content_description"
+        android:textColorHint="@color/buttons_color"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/editEventDate"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="date"
+        android:hint="@string/data"
+        android:autofillHints="@string/data"
+        android:textColorHint="@color/buttons_color"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:focusable="false"
+        android:clickable="true"/>
+
+    <EditText
+        android:id="@+id/editEventStartTime"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="time"
+        android:hint="@string/start"
+        android:textColorHint="@color/buttons_color"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:focusable="false"
+        android:clickable="true"/>
+
+    <EditText
+        android:id="@+id/editEventEndTime"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="time"
+        android:hint="@string/end"
+        android:textColorHint="@color/buttons_color"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:focusable="false"
+        android:clickable="true"/>
+
+    <Button
+        android:id="@+id/updateButton"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/buttons_color"
+        android:text="Изменить"
+        android:textColor="@color/page_color" />
+
+
+</LinearLayout>
