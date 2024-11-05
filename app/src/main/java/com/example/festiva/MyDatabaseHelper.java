@@ -85,4 +85,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    Cursor readAllDataOnSelectedDate(int selectedYear, int selectedMonth, int selectedDay){
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EVENT_DATA_DATA + " = " + selectedDay + " AND "
+                                    + EVENT_DATA_MONTH + " = " + selectedMonth + " AND " + EVENT_DATA_YEAR + " = " + selectedYear + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+            //Toast.makeText(context, "cursor = " + cursor.getCount(), Toast.LENGTH_LONG).show();
+
+        }
+        return cursor;
+    }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -73,5 +74,34 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             event_endMinute = itemView.findViewById(R.id.minuteEnd);
             //event_description = itemView.findViewById(R.id.event_description);
         }
+    }
+
+    // Метод для обновления данных
+    public void updateData(ArrayList<String> newEventId, ArrayList<String> newEventTitle, ArrayList<String> newEventDescription,
+                           ArrayList<String> newDataData, ArrayList<String> newDataMonth, ArrayList<String> newDataYear,
+                           ArrayList<String> newStartTimeHour, ArrayList<String> newStartTimeMinute, ArrayList<String> newEndTimeHour, ArrayList<String> newEndTimeMinute) {
+        this.event_id = newEventId;
+        this.event_title = newEventTitle;
+        this.event_description = newEventDescription;
+        this.data_data = newDataData;
+        this.data_month = newDataMonth;
+        this.data_year = newDataYear;
+        this.start_time_hour = newStartTimeHour;
+        this.start_time_minute = newStartTimeMinute;
+        this.end_time_hour = newEndTimeHour;
+        this.end_time_minute = newEndTimeMinute;
+    }
+
+    public void deleteData() {
+        this.event_id.clear();
+        this.event_title.clear();
+        this.event_description.clear();
+        this.data_data.clear();
+        this.data_month.clear();
+        this.data_year.clear();
+        this.start_time_hour.clear();
+        this.start_time_minute.clear();
+        this.end_time_hour.clear();
+        this.end_time_minute.clear();
     }
 }

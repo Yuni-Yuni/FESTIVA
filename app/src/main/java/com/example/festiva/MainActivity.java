@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity{
     private int data_selected, month_selected, year_selected, hour_start, hour_end, minute_start, minute_end;
 
     ActivityMainBinding binding;
+    boolean statement = false;
     int year, month, day; // Переменные для хранения выбранной дат
 
     @SuppressLint("NotifyDataSetChanged")
@@ -141,6 +142,7 @@ public class MainActivity extends AppCompatActivity{
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                                 hour_start = selectedHour;
                                 minute_start = selectedMinute;
+                                statement = true;
                                 if (selectedMinute == 0) {
                                     editTextTimeStart.setText( selectedHour + ":00");
                                 } else {
@@ -157,9 +159,16 @@ public class MainActivity extends AppCompatActivity{
                 editTextTimeEnd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        int hour, minute;
+                        if (!statement)
+                        {
                         Calendar mcurrentTime = Calendar.getInstance();
-                        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY) + 1;
-                        int minute = mcurrentTime.get(Calendar.MINUTE);
+                        hour = mcurrentTime.get(Calendar.HOUR_OF_DAY) + 1;
+                        minute = mcurrentTime.get(Calendar.MINUTE);
+                        } else {
+                            hour = hour_start + 1;
+                            minute = minute_start;
+                        }
                         TimePickerDialog timePickerDialog1;
                         timePickerDialog1 = new TimePickerDialog(MainActivity.this, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
                             @Override
@@ -236,7 +245,7 @@ public class MainActivity extends AppCompatActivity{
 
     public Fragment getCurrentFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        return fragmentManager.findFragmentById(R.id.fragment_container); // Замените на ID вашего контейнера
+        return fragmentManager.findFragmentById(R.id.fragment_container);
     }
 
 }

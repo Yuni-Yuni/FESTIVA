@@ -16,6 +16,7 @@ import android.widget.CalendarView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,7 +96,12 @@ public class HomeFragment extends Fragment {
         event_endTime_hour = new ArrayList<>();
         event_endTime_minute = new ArrayList<>();
 
-        storeDataInArrays();
+        Calendar currentDate = Calendar.getInstance();
+        int year = currentDate.get(Calendar.YEAR);
+        int month = currentDate.get(Calendar.MONTH);
+        int day = currentDate.get(Calendar.DAY_OF_MONTH);
+
+        storeDataOnCurrentDate(year, month + 1, day);
 
         customAdapter = new CustomAdapter(getContext(), event_id, event_title, event_description, event_data_data, event_data_month,
                                 event_data_year, event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute);
@@ -108,22 +114,23 @@ public class HomeFragment extends Fragment {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                int mYear = year;
+                /*int mYear = year;
                 int mMonth = month;
                 int mDay = dayOfMonth;
                 String selectedDate = new StringBuilder().append(mDay)
                         .append("-").append(mMonth + 1).append("-").append(mYear)
                         .append(" ").toString();
-                Toast.makeText(getActivity().getApplicationContext(), selectedDate, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity().getApplicationContext(), selectedDate, Toast.LENGTH_LONG).show();*/
+                storeDataInArraysOnSelectedDate(year, month + 1, dayOfMonth);
             }
-        });/**/
+        });
 
         // Inflate the layout for this fragment
         return rootView;
     }
 
-    void storeDataInArrays(){
-        Cursor cursor = myDB.readAllData();
+    void storeDataOnCurrentDate(int selectedYear, int selectedMonth, int selectedDay){
+        Cursor cursor = myDB.readAllDataOnSelectedDate(selectedYear, selectedMonth, selectedDay);
         if(cursor.getCount() == 0){
             Toast.makeText(getContext(),"No data.", Toast.LENGTH_SHORT).show();
         }else{
@@ -140,6 +147,32 @@ public class HomeFragment extends Fragment {
                 event_endTime_minute.add(cursor.getString(9));
             }
         }
+    }
+
+
+    void storeDataInArraysOnSelectedDate(int selectedYear, int selectedMonth, int selectedDay){
+        customAdapter.deleteData();
+        Cursor cursor = myDB.readAllDataOnSelectedDate(selectedYear, selectedMonth, selectedDay);
+        if(cursor.getCount() == 0){
+            Toast.makeText(getContext(),"No data.", Toast.LENGTH_SHORT).show();
+        }else{
+            while (cursor.moveToNext()){
+                event_id.add(cursor.getString(0));
+                event_title.add(cursor.getString(1));
+                event_description.add(cursor.getString(2));
+                event_data_data.add(cursor.getString(3));
+                event_data_month.add(cursor.getString(4));
+                event_data_year.add(cursor.getString(5));
+                event_startTime_hour.add(cursor.getString(6));
+                event_startTime_minute.add(cursor.getString(7));
+                event_endTime_hour.add(cursor.getString(8));
+                event_endTime_minute.add(cursor.getString(9));
+            }
+        }
+
+        customAdapter.updateData(event_id, event_title, event_description, event_data_data, event_data_month, event_data_year,
+                            event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute);
+        customAdapter.notifyDataSetChanged();
     }
 
 }
