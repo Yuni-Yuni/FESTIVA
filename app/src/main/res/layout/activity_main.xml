@@ -24,31 +24,38 @@
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_container">
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottom_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="bottom"
             android:backgroundTint="@color/main_color"
+            android:layout_alignParentBottom="true"
             app:fabCradleMargin="20dp"
+            app:fabAlignmentMode="center"
             app:fabCradleRoundedCornerRadius="20dp"
+            app:fabAnchorMode="cradle"
+            android:focusable="false"
             app:fabCradleVerticalOffset="8dp">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_nav"
+                style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="16dp"
                 android:background="@android:color/transparent"
                 app:itemIconSize="36dp"
-                app:itemIconTint="@color/buttons_color"
                 app:itemTextColor="@color/buttons_color"
                 app:labelVisibilityMode="unlabeled"
                 app:elevation="0dp"
-                app:menu="@menu/bottom_nav_menu" />
+                android:focusable="false"
+                app:itemIconTint="@color/buttons_color"
+                app:itemBackground="@android:color/transparent"
+                app:menu="@menu/bottom_nav_menu"/>
 
         </com.google.android.material.bottomappbar.BottomAppBar>
 
@@ -60,8 +67,12 @@
             android:src="@drawable/ic_add"
             android:contentDescription="@string/add_button"
             app:itemIconSize="36dp"
+            android:layout_gravity="center"
             app:layout_anchor="@id/bottom_app_bar"
-            app:tint="@color/page_color" />
+            app:layout_anchorGravity="top|center"
+            android:elevation="0dp"
+            app:tint="@color/page_color"
+            style="@style/RoundedFloatingActionButton"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

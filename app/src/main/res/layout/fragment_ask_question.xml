@@ -27,23 +27,22 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:textSize="28sp"
             android:textStyle="bold"
             android:text="@string/question"
             android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginHorizontal="20dp"
             android:textColor="@color/buttons_color"/>
-
-
 
         <ImageButton
             android:id="@+id/homeButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="-160dp"
+            android:layout_marginHorizontal="15dp"
             android:layout_marginTop="30dp"
             android:maxHeight="36dp"
             android:maxWidth="36dp"

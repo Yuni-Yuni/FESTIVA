@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private ArrayList<String> event_id, event_title, event_description;
     private ArrayList<String> data_data, data_month, data_year, start_time_hour, start_time_minute, end_time_hour, end_time_minute;
     Activity activity;
+
+    Animation translate_anim;
 
     //
     CustomAdapter(Activity activity, Context context, ArrayList<String> event_id, ArrayList<String> event_title, ArrayList<String> event_description,
@@ -98,6 +102,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             event_endHour = itemView.findViewById(R.id.hourEnd);
             event_endMinute = itemView.findViewById(R.id.minuteEnd);
             EventLayout = itemView.findViewById(R.id.EventLayout);
+            translate_anim = AnimationUtils.loadAnimation(context, R.anim.translate_anim);
+            EventLayout.setAnimation(translate_anim);
+
             //event_description = itemView.findViewById(R.id.event_description);
 
         }

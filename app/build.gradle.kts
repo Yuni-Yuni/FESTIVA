@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.example.festiva"
         minSdk = 27
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -45,7 +45,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("com.google.android.material:material:1.12.0")
+    implementation("com.google.android.material:material:1.12.0")//1.12.0
 
     //calendar new
     //implementation("com.applandeo:material-calendar-view:1.9.2")

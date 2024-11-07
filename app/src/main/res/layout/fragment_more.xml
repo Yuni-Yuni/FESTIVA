@@ -29,7 +29,9 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="374dp"
+            android:layout_width="match_parent"
+            android:maxWidth="374dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_height="57dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="25dp"
@@ -39,20 +41,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:textSize="32sp"
             android:textStyle="bold"
             android:text="@string/menu"
             android:layout_gravity="center"
+            android:gravity="center"
             android:textColor="@color/buttons_color"/>
 
         <Button
             android:id="@+id/event_this_month"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
+            android:maxWidth="360dp"
+            android:layout_marginHorizontal="25dp"
             app:backgroundTint="@color/page_color"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/button_background"
             android:elevation="10dp"
             android:text="@string/eventsThisMonth"
@@ -60,13 +65,14 @@
 
         <Button
             android:id="@+id/weekEvents"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
+            android:maxWidth="360dp"
+            android:layout_marginHorizontal="25dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
             app:backgroundTint="@color/page_color"
             android:text="@string/weekEvents"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button_background"
             android:elevation="10dp"
             android:textColor="@color/buttons_color"
@@ -74,13 +80,14 @@
 
         <Button
             android:id="@+id/premium"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
+            android:maxWidth="360dp"
+            android:layout_marginHorizontal="25dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
             app:backgroundTint="@color/page_color"
             android:text="@string/premium"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button_background"
             android:elevation="10dp"
             android:textColor="@color/buttons_color"
@@ -88,13 +95,14 @@
 
         <Button
             android:id="@+id/askQuestion"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
+            android:maxWidth="360dp"
+            android:layout_marginHorizontal="25dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
             app:backgroundTint="@color/page_color"
             android:text="@string/question"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button_background"
             android:elevation="10dp"
             android:textColor="@color/buttons_color"
@@ -102,31 +110,31 @@
 
         <Button
             android:id="@+id/userGuide"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
+            android:maxWidth="360dp"
+            android:layout_marginHorizontal="25dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
             app:backgroundTint="@color/page_color"
             android:text="@string/user_manual"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button_background"
             android:elevation="10dp"
             android:textColor="@color/buttons_color"
             />
 
+
         <ImageButton
             android:id="@+id/homeButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="-160dp"
+            android:layout_marginHorizontal="15dp"
             android:layout_marginTop="30dp"
             android:maxHeight="36dp"
             android:maxWidth="36dp"
             android:contentDescription="@string/back_main"
             android:src="@drawable/ic_back"
-            android:background="@drawable/button_background"/>
-
+            android:background="@android:color/transparent"/>
 
     </LinearLayout>
 

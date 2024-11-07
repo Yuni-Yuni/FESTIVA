@@ -9,9 +9,25 @@
     android:orientation="vertical"
     android:background="@color/page_color">
 
+    <ImageButton
+        android:id="@+id/homeButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="30dp"
+        android:maxHeight="36dp"
+        android:maxWidth="36dp"
+        android:contentDescription="@string/back_main"
+        android:src="@drawable/ic_back"
+        android:background="@drawable/button_background"
+        android:onClick="backToHomeFragment"/>
+
     <EditText
         android:id="@+id/editEventTitle"
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
+        android:maxWidth="380dp"
+        android:minWidth="320dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="text"
@@ -20,11 +36,14 @@
         android:textColorHint="@color/buttons_color"
         android:layout_gravity="center_horizontal"
         android:gravity="start"
-        android:layout_marginTop="80dp"/>
+        android:layout_marginTop="30dp"/>
 
     <EditText
         android:id="@+id/editEventDescription"
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
+        android:maxWidth="380dp"
+        android:minWidth="320dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_height="50dp"
         android:ems="10"
         android:gravity="start|top"
@@ -36,7 +55,10 @@
 
     <EditText
         android:id="@+id/editEventDate"
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
+        android:maxWidth="380dp"
+        android:minWidth="320dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="date"
@@ -45,12 +67,16 @@
         android:textColorHint="@color/buttons_color"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:drawableEnd="@drawable/ic_calendar"
         android:focusable="false"
         android:clickable="true"/>
 
     <EditText
         android:id="@+id/editEventStartTime"
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
+        android:maxWidth="380dp"
+        android:minWidth="320dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="time"
@@ -58,12 +84,16 @@
         android:textColorHint="@color/buttons_color"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:drawableEnd="@drawable/ic_clock"
         android:focusable="false"
         android:clickable="true"/>
 
     <EditText
         android:id="@+id/editEventEndTime"
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
+        android:maxWidth="380dp"
+        android:minWidth="320dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="time"
@@ -71,17 +101,34 @@
         android:textColorHint="@color/buttons_color"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:drawableEnd="@drawable/ic_clock"
         android:focusable="false"
         android:clickable="true"/>
 
     <Button
         android:id="@+id/updateButton"
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
+        android:maxWidth="380dp"
+        android:minWidth="320dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/buttons_color"
         android:text="Изменить"
+        android:textColor="@color/page_color" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:maxWidth="380dp"
+        android:minWidth="320dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/buttons_color"
+        android:text="Удалить"
         android:textColor="@color/page_color" />
 
 

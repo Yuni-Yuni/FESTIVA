@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -23,6 +22,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.festiva.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -51,16 +51,21 @@ public class MainActivity extends AppCompatActivity{
 
         loadFragment(new HomeFragment());
 
-        binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.clearFocus();
+        bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.more) {
                     loadFragment(new MoreFragment());
+                    return true;
                 } else if (id == R.id.profile) {
                     loadFragment(new ProfileFragment());
+                    return true;
                 }
-                return true;
+                return false;
             }
         });
 
@@ -249,7 +254,6 @@ public class MainActivity extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             recreate();
-            //loadFragment(new HomeFragment());
         }
     }
 

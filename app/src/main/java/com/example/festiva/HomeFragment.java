@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,7 +35,9 @@ public class HomeFragment extends Fragment {
                             event_startTime_minute, event_endTime_hour, event_endTime_minute;
     CustomAdapter customAdapter;
 
-    View newView;
+    ImageView imageView;
+    boolean statement = false;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -107,7 +110,6 @@ public class HomeFragment extends Fragment {
 
         storeDataOnCurrentDate(year, month + 1, day);
 
-        //
         customAdapter = new CustomAdapter(getActivity(), getContext(), event_id, event_title, event_description, event_data_data, event_data_month,
                                 event_data_year, event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute);
         recyclerView.setAdapter(customAdapter);
@@ -115,31 +117,29 @@ public class HomeFragment extends Fragment {
 
         //=====================================
 
+        imageView = (ImageView) rootView.findViewById(R.id.emptyField);
+        ImageNoDataAppearence(statement);
+
+        //=====================================
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                /*int mYear = year;
-                int mMonth = month;
-                int mDay = dayOfMonth;
-                String selectedDate = new StringBuilder().append(mDay)
-                        .append("-").append(mMonth + 1).append("-").append(mYear)
-                        .append(" ").toString();
-                //Toast.makeText(getActivity().getApplicationContext(), selectedDate, Toast.LENGTH_LONG).show();*/
                 storeDataInArraysOnSelectedDate(year, month + 1, dayOfMonth);
+                ImageNoDataAppearence(statement);
             }
         });
 
-        // Inflate the layout for this fragment
         return rootView;
     }
-
-
 
     void storeDataOnCurrentDate(int selectedYear, int selectedMonth, int selectedDay){
         Cursor cursor = myDB.readAllDataOnSelectedDate(selectedYear, selectedMonth, selectedDay);
         if(cursor.getCount() == 0){
-            Toast.makeText(getContext(),"No data.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(),"No data.", Toast.LENGTH_SHORT).show();
+            statement = true;
         }else{
+            statement = false;
             while (cursor.moveToNext()){
                 event_id.add(cursor.getString(0));
                 event_title.add(cursor.getString(1));
@@ -160,16 +160,17 @@ public class HomeFragment extends Fragment {
                     event_endTime_minute.add(cursor.getString(9));
                 }
             }
+
         }
     }
-
 
     void storeDataInArraysOnSelectedDate(int selectedYear, int selectedMonth, int selectedDay){
         customAdapter.deleteData();
         Cursor cursor = myDB.readAllDataOnSelectedDate(selectedYear, selectedMonth, selectedDay);
         if(cursor.getCount() == 0){
-            Toast.makeText(getContext(),"No data.", Toast.LENGTH_SHORT).show();
+            statement = true;
         }else{
+            statement = false;
             while (cursor.moveToNext()){
                 event_id.add(cursor.getString(0));
                 event_title.add(cursor.getString(1));
@@ -195,6 +196,14 @@ public class HomeFragment extends Fragment {
         customAdapter.updateData(event_id, event_title, event_description, event_data_data, event_data_month, event_data_year,
                             event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute);
         customAdapter.notifyDataSetChanged();
+    }
+
+    void ImageNoDataAppearence(boolean statement){
+        if (statement){
+        imageView.setVisibility(View.VISIBLE);
+        } else {
+            imageView.setVisibility(View.GONE);
+        }
     }
 
 }

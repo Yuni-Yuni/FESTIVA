@@ -1,11 +1,14 @@
 package com.example.festiva;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -13,10 +16,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Calendar;
+
 public class UpdateEventActivity extends AppCompatActivity {
 
     EditText title, description, date, startTime, endTime;//date_data, date_month, date_year, startHour, startMinute, endHour, endMinute;
-    Button updateButton;
+    Button updateButton, deleteButton;
 
     String id_str, title_str, description_str, date_data_str, date_month_str, date_year_str, startHour_str, startMinute_str, endHour_str, endMinute_str;
 
@@ -31,6 +36,7 @@ public class UpdateEventActivity extends AppCompatActivity {
         startTime = findViewById(R.id.editEventStartTime);
         endTime = findViewById(R.id.editEventEndTime);
         updateButton = findViewById(R.id.updateButton);
+        deleteButton = findViewById(R.id.deleteButton);
 
         getAndSetIntentData();
 
@@ -105,6 +111,13 @@ public class UpdateEventActivity extends AppCompatActivity {
             }
         });
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ConfirmDialog();
+            }
+        });
+
     }
 
     void getAndSetIntentData(){
@@ -133,5 +146,35 @@ public class UpdateEventActivity extends AppCompatActivity {
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public void backToHomeFragment(View view) {
+        finish();
+        /*
+        * Intent intent = new Intent(this, MainActivity.class);
+        * startActivity(intent);
+        * finish();
+        */
+    }
+
+    void ConfirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Удалить событие?");
+        builder.setMessage("Вы уверены, что хотите удалить событие?");
+        builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateEventActivity.this);
+                myDB.deleteOneRow(id_str);
+                finish();
+            }
+        });
+        builder.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
     }
 }
