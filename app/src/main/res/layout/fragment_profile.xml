@@ -35,8 +35,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="374dp"
+        android:layout_width="match_parent"
+        android:maxWidth="374dp"
+        android:minWidth="320dp"
         android:layout_height="57dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:contentDescription="@string/app_name"
@@ -46,8 +49,7 @@
             android:id="@+id/homeButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="-150dp"
+            android:layout_marginHorizontal="15dp"
             android:layout_marginTop="20dp"
             android:maxHeight="36dp"
             android:maxWidth="36dp"
@@ -60,9 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            app:srcCompat="@drawable/avatar"
-            />
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/avatar" />
 
         <TextView
             android:id="@+id/text2"
@@ -84,60 +85,81 @@
             android:layout_gravity="center"
             android:textColor="@color/buttons_color"
             android:textSize="20sp"
+            android:layout_marginBottom="20dp"
             />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/settingsButton"
-            android:layout_width="400dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="70dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/settings"
-            android:enabled="false"
-            app:backgroundTint="@color/page_color"
-            android:gravity="start|center"
-            android:textSize="16sp"
-            android:textColor="@color/buttons_color"
-            android:paddingHorizontal="40dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/styleButton"
-            android:layout_width="400dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="70dp"
-            android:text="@string/style"
-            android:enabled="false"
-            app:backgroundTint="@color/page_color"
-            android:textSize="16sp"
-            android:gravity="start|center"
-            android:textColor="@color/buttons_color"
-            android:paddingHorizontal="40dp"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:maxWidth="380dp"
+            android:minWidth="320dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/widgetButton"
-            android:layout_width="400dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="70dp"
-            android:textSize="16sp"
-            android:text="@string/vidgets"
-            android:enabled="false"
-            app:backgroundTint="@color/page_color"
-            android:gravity="start|center"
-            android:textColor="@color/buttons_color"
-            android:paddingHorizontal="40dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/exitButton"
-            android:layout_width="400dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="70dp"
-            android:text="@string/exit"
-            android:enabled="false"
-            app:backgroundTint="@color/page_color"
-            android:gravity="start|center"
-            android:textSize="16sp"
-            android:textColor="@color/buttons_color"
-            android:paddingHorizontal="40dp"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settingsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal"
+                    android:enabled="false"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="40dp"
+                    android:text="@string/settings"
+                    android:textColor="@color/buttons_color"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/page_color"
+                    android:drawableEnd="@drawable/ic_arrow_forward"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/styleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal"
+                    android:enabled="false"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="40dp"
+                    android:text="@string/style"
+                    android:textColor="@color/buttons_color"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/page_color"
+                    android:drawableEnd="@drawable/ic_arrow_forward"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/widgetButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal"
+                    android:enabled="false"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="40dp"
+                    android:text="@string/vidgets"
+                    android:textColor="@color/buttons_color"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/page_color"
+                    android:drawableEnd="@drawable/ic_arrow_forward"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/exitButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal"
+                    android:enabled="false"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="40dp"
+                    android:text="@string/exit"
+                    android:textColor="@color/buttons_color"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/page_color"
+                    android:drawableEnd="@drawable/ic_arrow_forward"/>
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

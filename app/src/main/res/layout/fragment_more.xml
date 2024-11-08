@@ -31,6 +31,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:maxWidth="374dp"
+            android:minWidth="320dp"
             android:layout_marginHorizontal="20dp"
             android:layout_height="57dp"
             android:layout_gravity="center_horizontal"
@@ -47,94 +48,107 @@
             android:text="@string/menu"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_marginBottom="50dp"
             android:textColor="@color/buttons_color"/>
 
-        <Button
-            android:id="@+id/event_this_month"
+        <ScrollView
             android:layout_width="match_parent"
-            android:maxWidth="360dp"
-            android:layout_marginHorizontal="25dp"
-            app:backgroundTint="@color/page_color"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/button_background"
-            android:elevation="10dp"
-            android:text="@string/eventsThisMonth"
-            android:textColor="@color/buttons_color" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/weekEvents"
-            android:layout_width="match_parent"
-            android:maxWidth="360dp"
-            android:layout_marginHorizontal="25dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            app:backgroundTint="@color/page_color"
-            android:text="@string/weekEvents"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/button_background"
-            android:elevation="10dp"
-            android:textColor="@color/buttons_color"
-            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/premium"
-            android:layout_width="match_parent"
-            android:maxWidth="360dp"
-            android:layout_marginHorizontal="25dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            app:backgroundTint="@color/page_color"
-            android:text="@string/premium"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/button_background"
-            android:elevation="10dp"
-            android:textColor="@color/buttons_color"
-            />
+                <Button
+                    android:id="@+id/event_this_month"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="25dp"
 
-        <Button
-            android:id="@+id/askQuestion"
-            android:layout_width="match_parent"
-            android:maxWidth="360dp"
-            android:layout_marginHorizontal="25dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            app:backgroundTint="@color/page_color"
-            android:text="@string/question"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/button_background"
-            android:elevation="10dp"
-            android:textColor="@color/buttons_color"
-            />
+                    android:background="@drawable/button_background"
+                    android:elevation="10dp"
+                    android:maxWidth="360dp"
+                    android:text="@string/eventsThisMonth"
+                    android:textColor="@color/buttons_color"
+                    app:backgroundTint="@color/page_color" />
 
-        <Button
-            android:id="@+id/userGuide"
-            android:layout_width="match_parent"
-            android:maxWidth="360dp"
-            android:layout_marginHorizontal="25dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            app:backgroundTint="@color/page_color"
-            android:text="@string/user_manual"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/button_background"
-            android:elevation="10dp"
-            android:textColor="@color/buttons_color"
-            />
+                <Button
+                    android:id="@+id/weekEvents"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_background"
+                    android:elevation="10dp"
+                    android:maxWidth="360dp"
+                    android:text="@string/weekEvents"
+                    android:textColor="@color/buttons_color"
+                    app:backgroundTint="@color/page_color" />
 
+                <Button
+                    android:id="@+id/premium"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_background"
+                    android:elevation="10dp"
+                    android:maxWidth="360dp"
+                    android:text="@string/premium"
+                    android:textColor="@color/buttons_color"
+                    app:backgroundTint="@color/page_color" />
 
-        <ImageButton
-            android:id="@+id/homeButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="30dp"
-            android:maxHeight="36dp"
-            android:maxWidth="36dp"
-            android:contentDescription="@string/back_main"
-            android:src="@drawable/ic_back"
-            android:background="@android:color/transparent"/>
+                <Button
+                    android:id="@+id/askQuestion"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_background"
+                    android:elevation="10dp"
+                    android:maxWidth="360dp"
+                    android:text="@string/question"
+                    android:textColor="@color/buttons_color"
+                    app:backgroundTint="@color/page_color" />
+
+                <Button
+                    android:id="@+id/userGuide"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_background"
+                    android:elevation="10dp"
+                    android:maxWidth="360dp"
+                    android:text="@string/user_manual"
+                    android:textColor="@color/buttons_color"
+                    app:backgroundTint="@color/page_color" />
+
+                <ImageButton
+                    android:id="@+id/homeButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/back_main"
+                    android:maxWidth="36dp"
+                    android:maxHeight="36dp"
+                    android:src="@drawable/ic_back" />
+            </LinearLayout>
+        </ScrollView>
+
 
     </LinearLayout>
 

@@ -22,6 +22,8 @@
         </ImageView>
     </LinearLayout>
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,100 +35,79 @@
             android:layout_height="57dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="25dp"
-            android:layout_marginBottom="12dp"
             android:src="@drawable/logo" />
 
-        <!--<com.applandeo.materialcalendarview.CalendarView
-            android:id="@+id/calendarView2"
-            android:layout_width="350dp"
-            android:layout_height="380dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/calendar_background"
-            app:abbreviationsBarColor="@color/page_color"
-            app:abbreviationsLabelsColor="@color/black"
-            app:anotherMonthsDaysLabelsColor="@color/grey"
-            app:eventsEnabled="true"
-            app:forwardButtonSrc="@drawable/ic_arrow_forward"
-            app:headerColor="@color/page_color"
-            app:headerLabelColor="@color/black"
-            app:pagesColor="@color/page_color"
-            app:previousButtonSrc="@drawable/ic_arrow_back"
-            app:selectionColor="@color/main_color"
-            app:selectionLabelColor="@color/black"
-            app:todayLabelColor="@color/main_color"
-            app:type="one_day_picker" />-->
-
-
-       <CalendarView
+        <CalendarView
             android:id="@+id/calendarView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:theme="@style/CalenderViewCustom"
-            android:dateTextAppearance="@style/CalenderViewDateCustomText"
-            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
-            android:background="@drawable/calendar_background"
-            android:elevation="2dp"
-            />
-
-        <!--<com.kizitonwose.calendar.view.CalendarView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/calendarView2"/>-->
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:text="Привет, Пользователь123!"
-            android:textColor="@color/buttons_color"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="15dp"
-            android:gravity="center"
-            android:text="События, которые состоятся сегодня"
-            android:textColor="@color/buttons_color"
-            android:textSize="16sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listOfEvents"
-            android:layout_width="match_parent"
-            android:minWidth="320dp"
-            android:maxWidth="400dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:background="@drawable/calendar_background"
+            android:dateTextAppearance="@style/CalenderViewDateCustomText"
+            android:elevation="2dp"
+            android:theme="@style/CalenderViewCustom"
+            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText" />
 
-        </androidx.recyclerview.widget.RecyclerView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/listOfEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginHorizontal="20dp"
+                        android:maxWidth="400dp"
+                        android:minWidth="320dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.4">
+
+                        <ImageView
+                            android:id="@+id/emptyField"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:alpha="0.4"
+                            android:minWidth="150dp"
+                            android:minHeight="150dp"
+                            android:src="@drawable/ic_empty"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/emptyText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:alpha="0.6"
+                            android:gravity="center"
+                            android:text="Как-то пустовато сегодня.."
+                            android:textColor="@color/buttons_color"
+                            android:textSize="16sp"
+                            android:visibility="gone"/>
+
+                    </LinearLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/emptyField"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:alpha="0.4"
-            android:src="@drawable/ic_empty"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout><!-- -->
-
 
 </FrameLayout>

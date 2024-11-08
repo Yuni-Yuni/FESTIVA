@@ -1,13 +1,9 @@
 package com.example.festiva;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,6 +32,7 @@ public class HomeFragment extends Fragment {
     CustomAdapter customAdapter;
 
     ImageView imageView;
+    TextView textEmpty;
     boolean statement = false;
 
 
@@ -118,7 +115,9 @@ public class HomeFragment extends Fragment {
         //=====================================
 
         imageView = (ImageView) rootView.findViewById(R.id.emptyField);
+        textEmpty = (TextView) rootView.findViewById(R.id.emptyText);
         ImageNoDataAppearence(statement);
+
 
         //=====================================
 
@@ -201,8 +200,10 @@ public class HomeFragment extends Fragment {
     void ImageNoDataAppearence(boolean statement){
         if (statement){
         imageView.setVisibility(View.VISIBLE);
+        textEmpty.setVisibility(View.VISIBLE);
         } else {
             imageView.setVisibility(View.GONE);
+            textEmpty.setVisibility(View.GONE);
         }
     }
 
