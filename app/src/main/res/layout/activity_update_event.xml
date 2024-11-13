@@ -9,106 +9,178 @@
     android:orientation="vertical"
     android:background="@color/page_color">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="374dp"
+        android:layout_height="57dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:maxWidth="400dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginHorizontal="20dp"
+        android:text="@string/updateEvent"
+        android:fontFamily="@font/montserrat_medium"
+        android:textColor="@color/buttons_color"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp" />
+
     <ImageButton
         android:id="@+id/homeButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="10dp"
         android:maxHeight="36dp"
         android:maxWidth="36dp"
         android:contentDescription="@string/back_main"
         android:src="@drawable/ic_back"
-        android:background="@drawable/button_background"
+        android:background="@android:color/transparent"
         android:onClick="backToHomeFragment"/>
 
-    <EditText
-        android:id="@+id/editEventTitle"
-        android:layout_width="wrap_content"
-        android:maxWidth="380dp"
-        android:minWidth="320dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text=""
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextFieldLayoutEditEventTitle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:maxWidth="400dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="10dp"
+        app:boxStrokeColor="@color/buttons_color"
         android:hint="@string/event_title"
+        app:hintTextColor="@color/buttons_color"
+        android:fontFamily="@font/montserrat_regular"
+        app:boxStrokeErrorColor="@color/red"
+        app:cursorColor="@color/buttons_color"
         android:textColorHint="@color/buttons_color"
-        android:textColor="@color/buttons_color"
-        android:layout_gravity="center_horizontal"
-        android:gravity="start"
-        android:layout_marginTop="30dp"/>
+        android:textColor="@color/buttons_color">
 
-    <EditText
-        android:id="@+id/editEventDescription"
-        android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editEventTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/buttons_color"
+            app:cursorColor="@color/buttons_color"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColorHint="@color/buttons_color"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextFieldLayoutEditEventDescription"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
         android:maxWidth="380dp"
-        android:minWidth="320dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_height="50dp"
-        android:textColor="@color/buttons_color"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:hint="@string/content_description"
-        android:textColorHint="@color/buttons_color"
+        android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginBottom="10dp"
+        app:boxStrokeColor="@color/buttons_color"
+        android:hint="@string/content_description"
+        app:hintTextColor="@color/buttons_color"
+        android:fontFamily="@font/montserrat_regular"
+        app:boxStrokeErrorColor="@color/red"
+        app:cursorColor="@color/buttons_color"
+        android:textColorHint="@color/buttons_color"
+        android:textColor="@color/buttons_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editEventDescription"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_height="match_parent"
+            app:cursorColor="@color/buttons_color"
+            android:textColor="@color/buttons_color"
+            android:gravity="top|start"
+            android:textColorHint="@color/buttons_color"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
         android:id="@+id/editEventDate"
-        android:layout_width="wrap_content"
-        android:maxWidth="380dp"
+        android:textColorHint="@color/buttons_color"
         android:textColor="@color/buttons_color"
+        android:background="@drawable/edittext_border"
+        android:layout_width="match_parent"
+        android:maxWidth="380dp"
         android:minWidth="320dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="date"
+        android:layout_marginHorizontal="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:hint="@string/data"
+        android:fontFamily="@font/montserrat_regular"
         android:autofillHints="@string/data"
-        android:textColorHint="@color/buttons_color"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginVertical="10dp"
+        android:ems="10"
+        android:minHeight="48dp"
+        android:textSize="16sp"
+        android:paddingHorizontal="20dp"
+        android:focusable="false"
+        android:inputType="date"
         android:drawableEnd="@drawable/ic_calendar"
-        android:focusable="false"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:drawableTint="@color/text_date"/>
 
-    <EditText
-        android:id="@+id/editEventStartTime"
-        android:layout_width="wrap_content"
-        android:maxWidth="380dp"
-        android:textColor="@color/buttons_color"
-        android:minWidth="320dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="time"
-        android:hint="@string/start"
-        android:textColorHint="@color/buttons_color"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:drawableEnd="@drawable/ic_clock"
-        android:focusable="false"
-        android:clickable="true"/>
+        android:layout_marginHorizontal="10dp"
+        android:maxWidth="380dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/editEventEndTime"
-        android:textColor="@color/buttons_color"
-        android:layout_width="wrap_content"
-        android:maxWidth="380dp"
-        android:minWidth="320dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="time"
-        android:hint="@string/end"
-        android:textColorHint="@color/buttons_color"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:drawableEnd="@drawable/ic_clock"
-        android:focusable="false"
-        android:clickable="true"/>
+        <EditText
+            android:id="@+id/editEventStartTime"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="10dp"
+            android:autofillHints="@string/start"
+            android:background="@drawable/edittext_border"
+            android:clickable="true"
+            android:drawableEnd="@drawable/ic_clock"
+            android:ems="10"
+            android:focusable="false"
+            android:fontFamily="@font/montserrat_regular"
+            android:hint="@string/start"
+            android:inputType="time"
+            android:maxWidth="380dp"
+            android:minWidth="320dp"
+            android:paddingHorizontal="20dp"
+            android:textColor="@color/buttons_color"
+            android:textColorHint="@color/buttons_color"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editEventEndTime"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="10dp"
+            android:autofillHints="@string/start"
+            android:background="@drawable/edittext_border"
+            android:clickable="true"
+            android:drawableEnd="@drawable/ic_clock"
+            android:ems="10"
+            android:focusable="false"
+            android:fontFamily="@font/montserrat_regular"
+            android:hint="@string/end"
+            android:inputType="time"
+            android:maxWidth="380dp"
+            android:minWidth="320dp"
+            android:paddingHorizontal="20dp"
+            android:textColor="@color/buttons_color"
+            android:textColorHint="@color/buttons_color"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/updateButton"
@@ -119,7 +191,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/buttons_color"
         android:text="Изменить"
         android:textColor="@color/page_color" />

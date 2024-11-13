@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,10 +9,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="-300dp"
-        android:layout_marginStart="-50dp"
-        android:layout_marginEnd="-50dp"
+        android:layout_height="410dp"
+        android:layout_marginTop="-200dp"
+        android:layout_marginStart="-56dp"
+        android:layout_marginEnd="-56dp"
         android:background="@android:color/transparent">
 
         <ImageView
@@ -33,24 +34,124 @@
             android:maxWidth="380dp"
             android:layout_marginHorizontal="20dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:textSize="28sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_regular"
             android:text="@string/weekEvents"
             android:layout_gravity="center"
             android:textColor="@color/buttons_color"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:minWidth="320dp"
+            android:maxWidth="380dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/previousWeek"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginStart="4dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="previousWeek"
+                android:maxWidth="36dp"
+                android:maxHeight="36dp"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/startWeekDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:gravity="center"
+                android:text="11.12.2024"
+                android:textColor="@color/buttons_color"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/previousWeek"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:gravity="center"
+                android:text="–"
+                android:textColor="@color/buttons_color"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/endWeekDate"
+                app:layout_constraintStart_toEndOf="@+id/startWeekDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/endWeekDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:gravity="center"
+                android:text="17.11.2024"
+                android:textColor="@color/buttons_color"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/nextWeek"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/nextWeek"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="4dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="nextWeek"
+                android:maxWidth="36dp"
+                android:maxHeight="36dp"
+                android:src="@drawable/ic_arrow_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
             android:id="@+id/homeButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="30dp"
             android:maxHeight="36dp"
             android:maxWidth="36dp"
             android:contentDescription="@string/back_main"
             android:src="@drawable/ic_back"
             android:background="@android:color/transparent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_events"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:maxWidth="380dp"
+            android:layout_marginTop="20dp"/>
 
     </LinearLayout>
 

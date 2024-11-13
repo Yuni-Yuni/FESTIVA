@@ -102,8 +102,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             event_endHour = itemView.findViewById(R.id.hourEnd);
             event_endMinute = itemView.findViewById(R.id.minuteEnd);
             EventLayout = itemView.findViewById(R.id.EventLayout);
-            translate_anim = AnimationUtils.loadAnimation(context, R.anim.translate_anim);
-            EventLayout.setAnimation(translate_anim);
 
             //event_description = itemView.findViewById(R.id.event_description);
 

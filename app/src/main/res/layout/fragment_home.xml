@@ -9,10 +9,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="-300dp"
-        android:layout_marginStart="-50dp"
-        android:layout_marginEnd="-50dp"
+        android:layout_height="410dp"
+        android:layout_marginTop="-200dp"
+        android:layout_marginStart="-56dp"
+        android:layout_marginEnd="-56dp"
         android:background="@android:color/transparent">
 
         <ImageView
@@ -21,8 +21,6 @@
             android:src="@drawable/circle">
         </ImageView>
     </LinearLayout>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,6 +37,7 @@
 
         <CalendarView
             android:id="@+id/calendarView2"
+            android:fontFamily="@font/montserrat_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -47,8 +46,8 @@
             android:dateTextAppearance="@style/CalenderViewDateCustomText"
             android:elevation="2dp"
             android:theme="@style/CalenderViewCustom"
-            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText" />
-
+            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+            />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -98,13 +97,13 @@
                             android:layout_gravity="center_horizontal"
                             android:alpha="0.6"
                             android:gravity="center"
-                            android:text="Как-то пустовато сегодня.."
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Как-то пустовато.."
                             android:textColor="@color/buttons_color"
                             android:textSize="16sp"
                             android:visibility="gone"/>
 
                     </LinearLayout>
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

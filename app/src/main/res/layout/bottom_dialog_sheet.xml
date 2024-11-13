@@ -16,11 +16,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_marginHorizontal="20dp"
         android:text="@string/createEvent"
+        android:fontFamily="@font/montserrat_medium"
         android:textColor="@color/buttons_color"
         android:textSize="36sp"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold" />
+        android:layout_marginTop="10dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextFieldLayout1"
@@ -33,6 +34,10 @@
         android:layout_marginVertical="10dp"
         app:boxStrokeColor="@color/buttons_color"
         android:hint="@string/event_title"
+        app:hintTextColor="@color/buttons_color"
+        android:fontFamily="@font/montserrat_regular"
+        app:boxStrokeErrorColor="@color/red"
+        app:cursorColor="@color/buttons_color"
         android:textColorHint="@color/buttons_color"
         android:textColor="@color/buttons_color">
 
@@ -41,6 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/buttons_color"
+            app:cursorColor="@color/buttons_color"
+            android:fontFamily="@font/montserrat_regular"
             android:textColorHint="@color/buttons_color"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -56,13 +63,19 @@
         android:layout_marginBottom="10dp"
         app:boxStrokeColor="@color/buttons_color"
         android:hint="@string/content_description"
+        app:hintTextColor="@color/buttons_color"
+        android:fontFamily="@font/montserrat_regular"
+        app:boxStrokeErrorColor="@color/red"
+        app:cursorColor="@color/buttons_color"
         android:textColorHint="@color/buttons_color"
         android:textColor="@color/buttons_color">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/eventDescription"
             android:layout_width="match_parent"
+            android:fontFamily="@font/montserrat_regular"
             android:layout_height="match_parent"
+            app:cursorColor="@color/buttons_color"
             android:textColor="@color/buttons_color"
             android:textColorHint="@color/buttons_color"/>
 
@@ -79,6 +92,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:hint="@string/data"
+        android:fontFamily="@font/montserrat_regular"
         android:autofillHints="@string/data"
         android:layout_marginVertical="10dp"
         android:ems="10"
@@ -104,6 +118,7 @@
             android:textColorHint="@color/buttons_color"
             android:layout_width="0dp"
             android:layout_weight=".5"
+            android:fontFamily="@font/montserrat_regular"
             android:textColor="@color/buttons_color"
             android:autofillHints="@string/start"
             android:minHeight="50dp"
@@ -126,6 +141,7 @@
             android:minHeight="50dp"
             android:autofillHints="@string/end"
             android:hint="@string/end"
+            android:fontFamily="@font/montserrat_regular"
             android:textColor="@color/buttons_color"
             android:layout_marginHorizontal="10dp"
             android:background="@drawable/edittext_border"
@@ -152,6 +168,7 @@
             android:textColor="@color/buttons_color"
             android:layout_marginTop="10dp"
             android:textSize="16sp"
+            android:fontFamily="@font/montserrat_regular"
             android:checked="false"
             app:thumbTint="@color/white"
             app:thumbIconTint="@color/main_color"
@@ -167,6 +184,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
         android:text="@string/createCard"
+        android:fontFamily="@font/montserrat_regular"
         android:textColor="@color/buttons_color"
         android:textSize="16sp"
         android:checked="false"
@@ -184,6 +202,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
         android:text="@string/sendCard"
+        android:fontFamily="@font/montserrat_regular"
         android:textColor="@color/buttons_color"
         android:textSize="16sp"
         android:checked="false"
@@ -200,6 +219,7 @@
          android:layout_gravity="center_horizontal"
          android:layout_height="60dp"
          android:id="@+id/dismiss"
+        android:fontFamily="@font/montserrat_regular"
          android:layout_marginTop="10dp"
          android:backgroundTint="@color/buttons_color"
          android:text="@string/create"

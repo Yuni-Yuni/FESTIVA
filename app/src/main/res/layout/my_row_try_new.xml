@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:fontFamily="@font/montserrat_semi_bold"
                 android:text="Название события"
                 android:textColor="@color/buttons_color"
                 android:textSize="20sp"
@@ -44,8 +45,9 @@
                 android:id="@+id/hourStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/natural"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="00"
+                android:textColor="@color/text_date"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,8 +55,9 @@
                 android:id="@+id/twoDots1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/natural"
+                android:fontFamily="@font/montserrat_regular"
                 android:text=":"
+                android:textColor="@color/text_date"
                 app:layout_constraintStart_toEndOf="@+id/hourStart"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,8 +65,9 @@
                 android:id="@+id/minuteStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/natural"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="00"
+                android:textColor="@color/text_date"
                 app:layout_constraintStart_toEndOf="@+id/twoDots1"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,8 +75,9 @@
                 android:id="@+id/dash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/natural"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="–"
+                android:textColor="@color/text_date"
                 app:layout_constraintStart_toEndOf="@+id/minuteStart"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,8 +85,9 @@
                 android:id="@+id/hourEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/natural"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="00"
+                android:textColor="@color/text_date"
                 app:layout_constraintStart_toEndOf="@+id/dash"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,8 +95,9 @@
                 android:id="@+id/twoDots2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/natural"
+                android:fontFamily="@font/montserrat_regular"
                 android:text=":"
+                android:textColor="@color/text_date"
                 app:layout_constraintStart_toEndOf="@+id/hourEnd"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,8 +105,9 @@
                 android:id="@+id/minuteEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/natural"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="00"
+                android:textColor="@color/text_date"
                 app:layout_constraintStart_toEndOf="@+id/twoDots2"
                 app:layout_constraintTop_toTopOf="parent" />
 

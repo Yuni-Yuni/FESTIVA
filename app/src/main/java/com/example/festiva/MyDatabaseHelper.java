@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.Calendar;
+
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
@@ -41,7 +43,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                         EVENT_NAME + " TEXT, " + EVENT_DESCRIPTION + " TEXT, " +
                         EVENT_DATA_DATA + " INTEGER, " + EVENT_DATA_MONTH + " INTEGER, " +
                         EVENT_DATA_YEAR + " INTEGER, " + EVENT_START_TIME_HOUR + " INTEGER, " +
-                        EVENT_START_TIME_MINUTE + " INTEGER, " + EVENT_END_TIME_HOUR + " INTEGER, " + EVENT_END_TIME_MINUTE + " INTEGER);"; //INTEGER
+                        EVENT_START_TIME_MINUTE + " INTEGER, " + EVENT_END_TIME_HOUR + " INTEGER, " + EVENT_END_TIME_MINUTE + " INTEGER);";
         db.execSQL(query);
 
     }
@@ -68,11 +70,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(EVENT_END_TIME_MINUTE, end_time_minute);
 
         long result = db.insert(TABLE_NAME, null, cv);
-        if(result == -1){
+        /*if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(context, "Success", Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
     Cursor readAllData(){
@@ -116,20 +118,46 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(EVENT_END_TIME_MINUTE, end_time_minute);
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
-        if(result == -1){
+        /*if(result == -1){
             Toast.makeText(context, "Failed to update", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(context, "Success updated", Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
     void deleteOneRow(String row_id){
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
-        if(result == -1){
+        /*if(result == -1){
             Toast.makeText(context, "Failed to delete", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(context, "Successfully deleted", Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
+
+    public Cursor getEventsForWeek(Calendar startOfWeek, Calendar endOfWeek) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Дата начала и конца недели
+        int startDay = startOfWeek.get(Calendar.DAY_OF_MONTH);
+        int startMonth = startOfWeek.get(Calendar.MONTH) + 1; // Месяцы в Calendar начинаются с 0
+        int startYear = startOfWeek.get(Calendar.YEAR);
+        int endDay = endOfWeek.get(Calendar.DAY_OF_MONTH);
+        int endMonth = endOfWeek.get(Calendar.MONTH) + 1;
+        int endYear = endOfWeek.get(Calendar.YEAR);
+
+        //Toast.makeText(context, startDay + "." + startMonth + "." + startYear + "---" + endDay + "." + endMonth + "." + endYear , Toast.LENGTH_LONG).show();
+
+        // Запрос для выборки событий, попадающих в диапазон дат
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EVENT_DATA_YEAR + " = ? AND " +
+                EVENT_DATA_MONTH + " = ? AND " + EVENT_DATA_DATA + " >= ?" + " AND " + EVENT_DATA_YEAR + " = ? AND " +
+                EVENT_DATA_MONTH + " = ? AND " + EVENT_DATA_DATA + " <= ?";
+        String[] args = {
+                String.valueOf(startYear), String.valueOf(startMonth), String.valueOf(startDay),
+                String.valueOf(endYear), String.valueOf(endMonth), String.valueOf(endDay)
+        };
+
+        return db.rawQuery(query, args);
+    }
+
 }

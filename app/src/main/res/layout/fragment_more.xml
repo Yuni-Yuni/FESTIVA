@@ -9,10 +9,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="-300dp"
-        android:layout_marginStart="-50dp"
-        android:layout_marginEnd="-50dp"
+        android:layout_height="410dp"
+        android:layout_marginTop="-200dp"
+        android:layout_marginStart="-56dp"
+        android:layout_marginEnd="-56dp"
         android:background="@android:color/transparent">
 
         <ImageView
@@ -42,14 +42,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:textSize="32sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_regular"
             android:text="@string/menu"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginBottom="50dp"
             android:textColor="@color/buttons_color"/>
+
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="10dp"
+            android:maxHeight="36dp"
+            android:maxWidth="36dp"
+            android:contentDescription="@string/back_main"
+            android:src="@drawable/ic_back"
+            android:background="@android:color/transparent"
+            android:layout_marginBottom="20dp"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -61,14 +73,16 @@
                 android:orientation="vertical" >
 
                 <Button
+                    android:layout_marginTop="10dp"
                     android:id="@+id/event_this_month"
                     style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="16sp"
+                    android:background="@drawable/button_background"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="25dp"
-
-                    android:background="@drawable/button_background"
                     android:elevation="10dp"
                     android:maxWidth="360dp"
                     android:text="@string/eventsThisMonth"
@@ -79,7 +93,9 @@
                     android:id="@+id/weekEvents"
                     style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="16sp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="25dp"
                     android:layout_marginTop="10dp"
@@ -94,7 +110,9 @@
                     android:id="@+id/premium"
                     style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="16sp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="25dp"
                     android:layout_marginTop="10dp"
@@ -109,7 +127,9 @@
                     android:id="@+id/askQuestion"
                     style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="16sp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="25dp"
                     android:layout_marginTop="10dp"
@@ -124,7 +144,10 @@
                     android:id="@+id/userGuide"
                     style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="20dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="25dp"
                     android:layout_marginTop="10dp"
@@ -134,21 +157,8 @@
                     android:text="@string/user_manual"
                     android:textColor="@color/buttons_color"
                     app:backgroundTint="@color/page_color" />
-
-                <ImageButton
-                    android:id="@+id/homeButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="30dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/back_main"
-                    android:maxWidth="36dp"
-                    android:maxHeight="36dp"
-                    android:src="@drawable/ic_back" />
             </LinearLayout>
         </ScrollView>
-
 
     </LinearLayout>
 

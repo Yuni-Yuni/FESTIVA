@@ -108,11 +108,15 @@ public class MainActivity extends AppCompatActivity{
                 if (minute >=30) {
                     hour += 1;
                 }
+                if (hour>=24){
+                    hour = 0;
+                }
 
                 hour_start = hour;
                 minute_start = 0;
                 hour_end = hour + 1;
                 minute_end = 0;
+
 
                 editTextTimeStart.setText(hour + ":00");
                 editTextTimeEnd.setText((hour + 1) + ":00");
@@ -212,7 +216,7 @@ public class MainActivity extends AppCompatActivity{
                             myDB.addEvent(editTextEventName.getText().toString().trim(), editTextEventDescription.getText().toString().trim(),
                                     data_selected, month_selected, year_selected, hour_start, minute_start, hour_end, minute_end);
 
-                            Toast.makeText(MainActivity.this, editTextEventName.getText().toString(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(MainActivity.this, editTextEventName.getText().toString(), Toast.LENGTH_LONG).show();
 
                             bottomSheetDialog.dismiss();
                         }
@@ -242,7 +246,7 @@ public class MainActivity extends AppCompatActivity{
                             loadFragment(new UserGuideFragment());
                         }
 
-                        Toast.makeText(MainActivity.this, "Закрыто нижнее диалоговое меню", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MainActivity.this, "Закрыто нижнее диалоговое меню", Toast.LENGTH_LONG).show();
                     }
                 });/**/
             }

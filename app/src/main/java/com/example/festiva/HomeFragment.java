@@ -1,6 +1,7 @@
 package com.example.festiva;
 
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -117,7 +118,6 @@ public class HomeFragment extends Fragment {
         imageView = (ImageView) rootView.findViewById(R.id.emptyField);
         textEmpty = (TextView) rootView.findViewById(R.id.emptyText);
         ImageNoDataAppearence(statement);
-
 
         //=====================================
 
