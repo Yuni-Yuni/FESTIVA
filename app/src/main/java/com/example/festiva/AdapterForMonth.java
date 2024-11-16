@@ -6,26 +6,22 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
+public class AdapterForMonth extends RecyclerView.Adapter<AdapterForMonth.MyViewHolder>{
 
     private Context context;
     private ArrayList<String> event_id, event_title, event_description;
     private ArrayList<String> data_data, data_month, data_year, start_time_hour, start_time_minute, end_time_hour, end_time_minute;
     Activity activity;
 
-    //
-    CustomAdapter(Activity activity, Context context, ArrayList<String> event_id, ArrayList<String> event_title, ArrayList<String> event_description,
+    AdapterForMonth(Activity activity, Context context, ArrayList<String> event_id, ArrayList<String> event_title, ArrayList<String> event_description,
                   ArrayList<String> data_data, ArrayList<String> data_month, ArrayList<String> data_year, ArrayList<String> start_time_hour,
                   ArrayList<String> start_time_minute, ArrayList<String> end_time_hour, ArrayList<String> end_time_minute){
         this.activity = activity;
@@ -44,14 +40,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterForMonth.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.my_row_try_new, parent, false);
-        return new MyViewHolder(view);
+        View view = inflater.inflate(R.layout.card_for_month_events, parent, false);
+        return new AdapterForMonth.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //holder.event_id.setText(String.valueOf(event_id.get(position)));
         holder.event_title.setText(String.valueOf(event_title.get(position)));
         //holder.event_description.setText(String.valueOf(event_description.get(position)));
@@ -60,10 +56,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.event_endHour.setText(String.valueOf(end_time_hour.get(position)));
         holder.event_endMinute.setText(String.valueOf(end_time_minute.get(position)));
 
+        holder.event_date.setText(String.valueOf(data_data.get(position)));
+        holder.event_month.setText(String.valueOf(data_month.get(position)));
+        holder.event_year.setText(String.valueOf(data_year.get(position)));
+
         holder.EventLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, UpdateEventActivity.class);
+                Intent intent = new Intent(context, UpdateEventInMonthView.class);
                 intent.putExtra("id", String.valueOf(event_id.get(position)));
                 intent.putExtra("title", String.valueOf(event_title.get(position)));
                 intent.putExtra("description", String.valueOf(event_description.get(position)));
@@ -74,10 +74,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 intent.putExtra("startTimeMinute", String.valueOf(start_time_minute.get(position)));
                 intent.putExtra("endTimeHour", String.valueOf(end_time_hour.get(position)));
                 intent.putExtra("endTimeMinute", String.valueOf(end_time_minute.get(position)));
-                activity.startActivityForResult(intent, 1);
+                activity.startActivityForResult(intent, 2);
             }
         });
-
     }
 
     @Override
@@ -89,17 +88,24 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         //TextView event_id, event_title, event_description;
         TextView event_title, event_startHour, event_startMinute, event_endHour, event_endMinute;
+        TextView event_date, event_month, event_year;
         LinearLayout EventLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            //event_id = itemView.findViewById(R.id.event_id_text);
+
             event_title = itemView.findViewById(R.id.event_title);
+
             event_startHour = itemView.findViewById(R.id.hourStart);
             event_startMinute = itemView.findViewById(R.id.minuteStart);
             event_endHour = itemView.findViewById(R.id.hourEnd);
             event_endMinute = itemView.findViewById(R.id.minuteEnd);
-            EventLayout = itemView.findViewById(R.id.EventLayout);
+
+            event_date = itemView.findViewById(R.id.date);
+            event_month = itemView.findViewById(R.id.month);
+            event_year = itemView.findViewById(R.id.year);
+
+            EventLayout = itemView.findViewById(R.id.EventLayoutMonth);
 
             //event_description = itemView.findViewById(R.id.event_description);
 
@@ -134,4 +140,5 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.end_time_hour.clear();
         this.end_time_minute.clear();
     }
+
 }

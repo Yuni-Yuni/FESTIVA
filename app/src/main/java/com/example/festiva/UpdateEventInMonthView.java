@@ -6,30 +6,34 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import java.util.Calendar;
-
-public class UpdateEventActivity extends AppCompatActivity {
+public class UpdateEventInMonthView extends AppCompatActivity {
 
     EditText title, description, date, startTime, endTime;//date_data, date_month, date_year, startHour, startMinute, endHour, endMinute;
     Button updateButton, deleteButton;
 
     String id_str, title_str, description_str, date_data_str, date_month_str, date_year_str, startHour_str, startMinute_str, endHour_str, endMinute_str;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_event);
+        setContentView(R.layout.activity_update_event_in_month_view);
 
         title = findViewById(R.id.editEventTitle);
         description = findViewById(R.id.editEventDescription);
@@ -44,7 +48,7 @@ public class UpdateEventActivity extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateEventActivity.this);
+                MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateEventInMonthView.this);
 
                 myDB.updateData(id_str, title.getText().toString().trim(), description.getText().toString().trim(),
                         Integer.parseInt(date_data_str), Integer.parseInt(date_month_str), Integer.parseInt(date_year_str),
@@ -57,7 +61,7 @@ public class UpdateEventActivity extends AppCompatActivity {
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(UpdateEventActivity.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(UpdateEventInMonthView.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
                         date_data_str = Integer.toString(dayOfMonth);
@@ -74,7 +78,7 @@ public class UpdateEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 TimePickerDialog timePickerDialog;
-                timePickerDialog = new TimePickerDialog(UpdateEventActivity.this, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
+                timePickerDialog = new TimePickerDialog(UpdateEventInMonthView.this, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         startHour_str = Integer.toString(selectedHour);
@@ -95,7 +99,7 @@ public class UpdateEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 TimePickerDialog timePickerDialog;
-                timePickerDialog = new TimePickerDialog(UpdateEventActivity.this, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
+                timePickerDialog = new TimePickerDialog(UpdateEventInMonthView.this, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         endHour_str = Integer.toString(selectedHour);
@@ -118,7 +122,6 @@ public class UpdateEventActivity extends AppCompatActivity {
                 ConfirmDialog();
             }
         });
-
     }
 
     void getAndSetIntentData(){
@@ -150,10 +153,14 @@ public class UpdateEventActivity extends AppCompatActivity {
     }
 
     public void backToHomeFragment(View view) {
-        Intent returnIntent = new Intent();
-        setResult(RESULT_OK, returnIntent); // Указываем успешный результат
-        finish(); // Завершаем SecondActivity
+        finish();
+    }
 
+    private void loadFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container , fragment);
+        transaction.commit();
     }
 
     void ConfirmDialog(){
@@ -163,7 +170,7 @@ public class UpdateEventActivity extends AppCompatActivity {
         builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateEventActivity.this);
+                MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateEventInMonthView.this);
                 myDB.deleteOneRow(id_str);
                 finish();
             }

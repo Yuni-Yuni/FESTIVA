@@ -1,9 +1,12 @@
 package com.example.festiva;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -11,10 +14,15 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.festiva.databinding.FragmentProfileBinding;
+
+import java.io.File;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,8 +30,6 @@ import com.example.festiva.databinding.FragmentProfileBinding;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
-
-    FragmentProfileBinding binding;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,10 +76,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         // Программная установка ширины и высоты для LinearLayout
-        LinearLayout linearLayout = binding.layoutCircleProfile;
+        LinearLayout linearLayout = view.findViewById(R.id.layout_circle_profile);//binding.layoutCircleProfile;
 
         // Получение размеров экрана
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -105,7 +111,9 @@ public class ProfileFragment extends Fragment {
             Log.e("FragmentProfile", "LinearLayout не найден в разметке");
         }
 
-        binding.homeButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton homeButton = view.findViewById(R.id.homeButton);
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 HomeFragment homeFragment = new HomeFragment();
@@ -116,15 +124,21 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        /*View view = findViewById(R.id.nutrition_bar_filled);
-        LayoutParams layoutParams = view.getLayoutParams();
-        layoutParams.width = newWidth;
-        view.setLayoutParams(layoutParams);*/
+        Button settingsButton = view.findViewById(R.id.settingsButton);
 
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SettingsFragment settingsFragment = new SettingsFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, settingsFragment);
+                transaction.commit();
 
+            }
+        });
 
         // Inflate the layout for this fragment
-        return binding.getRoot();
+        return view;
         //return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 }

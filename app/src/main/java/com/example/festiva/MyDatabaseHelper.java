@@ -102,6 +102,41 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    Cursor readDataForThisMonthFuture(int startTimeHour, int startTimeMinute, int selectedYear, int selectedMonth, int selectedDay){
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EVENT_DATA_MONTH + " = " + selectedMonth + " AND " +
+                EVENT_DATA_YEAR + " = " + selectedYear + " AND (" +  EVENT_DATA_DATA + " > " + selectedDay + " OR (" +
+                EVENT_DATA_DATA + " = " + selectedDay + " AND (" + EVENT_START_TIME_HOUR + " > " + startTimeHour + " OR (" +
+                EVENT_START_TIME_HOUR + " = " + startTimeHour + " AND " + EVENT_START_TIME_MINUTE + " >= " + startTimeMinute + ")))) " +
+                "ORDER BY " + EVENT_DATA_YEAR + ", " + EVENT_DATA_MONTH + ", " + EVENT_DATA_DATA + ", " + EVENT_START_TIME_HOUR + ", " + EVENT_START_TIME_MINUTE + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+            //Toast.makeText(context, "cursor = " + cursor.getCount(), Toast.LENGTH_LONG).show();
+
+        }
+        return cursor;
+    }
+
+    Cursor readDataForThisMonthPast(int startTimeHour, int startTimeMinute, int selectedYear, int selectedMonth, int selectedDay){
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EVENT_DATA_MONTH + " = " + selectedMonth + " AND " +
+                EVENT_DATA_YEAR + " = " + selectedYear + " AND (" +  EVENT_DATA_DATA + " < " + selectedDay + " OR (" +
+                EVENT_DATA_DATA + " = " + selectedDay + " AND (" + EVENT_START_TIME_HOUR + " < " + startTimeHour + " OR (" +
+                EVENT_START_TIME_HOUR + " = " + startTimeHour + " AND " + EVENT_START_TIME_MINUTE + " < " + startTimeMinute + ")))) " +
+                "ORDER BY " + EVENT_DATA_YEAR + ", " + EVENT_DATA_MONTH + ", " + EVENT_DATA_DATA + ", " + EVENT_START_TIME_HOUR + ", " + EVENT_START_TIME_MINUTE + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+            //Toast.makeText(context, "cursor = " + cursor.getCount(), Toast.LENGTH_LONG).show();
+
+        }
+        return cursor;
+    }
+
+
     void updateData(String row_id, String title, String description, int data_data, int data_month, int data_year, int start_time_hour,
                     int start_time_minute, int end_time_hour, int end_time_minute){
         SQLiteDatabase db = this.getWritableDatabase();

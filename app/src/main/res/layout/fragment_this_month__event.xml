@@ -52,6 +52,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/last"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/buttons_background"
@@ -65,6 +66,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/future"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -92,6 +94,71 @@
             android:src="@drawable/ic_back"
             android:background="@android:color/transparent"/>
 
+        <!--<androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listOfEventsForMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxWidth="380dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"/>-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listOfEventsForMonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginHorizontal="20dp"
+                android:maxWidth="400dp"
+                android:minWidth="320dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4">
+
+                <ImageView
+                    android:id="@+id/emptyField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:alpha="0.4"
+                    android:minWidth="150dp"
+                    android:minHeight="150dp"
+                    android:src="@drawable/ic_empty"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/emptyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:alpha="0.6"
+                    android:gravity="center"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Как-то пустовато.."
+                    android:textColor="@color/buttons_color"
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>

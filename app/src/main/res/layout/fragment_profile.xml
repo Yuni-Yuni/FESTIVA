@@ -46,9 +46,9 @@
         android:src="@drawable/logo" />
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/avatarImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
             android:layout_marginTop="80dp"
             app:srcCompat="@drawable/avatar"
@@ -59,6 +59,7 @@
             android:layout_height="wrap_content"
             android:maxWidth="380dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
             >
 
             <ImageButton
@@ -161,7 +162,6 @@
                     android:id="@+id/settingsButton"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:layout_marginTop="30dp"
                     android:layout_gravity="center_horizontal"
                     android:enabled="true"
                     android:elevation="2dp"

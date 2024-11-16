@@ -36,6 +36,7 @@
             android:src="@drawable/logo" />
 
         <CalendarView
+            android:layout_marginTop="10dp"
             android:id="@+id/calendarView2"
             android:fontFamily="@font/montserrat_regular"
             android:layout_width="wrap_content"

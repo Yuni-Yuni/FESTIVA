@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -39,17 +40,26 @@ public class MainActivity extends AppCompatActivity{
 
     ActivityMainBinding binding;
     boolean statement = false;
-    int year, month, day; // Переменные для хранения выбранной дат
+    int year, month, day;// Переменные для хранения выбранной дат
+    SharedPreferences.Editor editor;
 
-    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         setContentView(binding.getRoot());
 
-        loadFragment(new HomeFragment());
+        boolean isChecked = sharedPreferences.getBoolean("isChecked", false);
+
+        if (isChecked) {
+            loadFragment(new This_month_EventFragment());
+        } else {
+            loadFragment(new HomeFragment());
+        }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.clearFocus();
@@ -244,6 +254,8 @@ public class MainActivity extends AppCompatActivity{
                             loadFragment(new This_Week_EventFragment());
                         } else if (currentFragment instanceof UserGuideFragment) {
                             loadFragment(new UserGuideFragment());
+                        } else if (currentFragment instanceof SettingsFragment) {
+                            loadFragment(new SettingsFragment());
                         }
 
                         //Toast.makeText(MainActivity.this, "Закрыто нижнее диалоговое меню", Toast.LENGTH_LONG).show();
@@ -256,9 +268,16 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            recreate();
+        if (requestCode == 2) {
+            editor.putBoolean("isChecked", true);
+            editor.apply(); // Или editor.commit()
         }
+
+        if (requestCode == 1) {
+            editor.putBoolean("isChecked", false);
+            editor.apply(); // Или editor.commit()
+        }
+        recreate();
     }
 
     private void loadFragment(Fragment fragment){
