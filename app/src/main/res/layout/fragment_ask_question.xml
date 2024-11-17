@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AskQuestionFragment"
     android:background="@color/page_color">
 
@@ -46,11 +47,160 @@
             android:layout_height="50dp"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="105dp"
-            android:maxHeight="36dp"
-            android:maxWidth="36dp"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/back_main"
-            android:src="@drawable/ic_back"
-            android:background="@android:color/transparent"/>
+            android:maxWidth="36dp"
+            android:maxHeight="36dp"
+            android:src="@drawable/ic_back" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/background_for_ask"
+                    android:elevation="5dp"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/titleOfMessageLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:hint="Тема"
+                        android:maxWidth="380dp"
+                        android:textColor="@color/buttons_color"
+                        android:textColorHint="@color/buttons_color"
+                        app:boxStrokeColor="@color/buttons_color_light"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:cursorColor="@color/buttons_color"
+                        app:hintTextColor="@color/buttons_color">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/titleOfMessage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:gravity="center|start"
+                            android:textColor="@color/buttons_color"
+                            android:textColorHint="@color/buttons_color"
+                            app:cursorColor="@color/buttons_color" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/questionDescriptionLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:hint="@string/content_description"
+                        android:maxWidth="380dp"
+                        android:textColor="@color/buttons_color"
+                        android:textColorHint="@color/buttons_color"
+                        app:boxStrokeColor="@color/buttons_color_light"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:cursorColor="@color/buttons_color"
+                        app:hintTextColor="@color/buttons_color">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/questionDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:gravity="center|start|top"
+                            android:textColor="@color/buttons_color"
+                            android:textColorHint="@color/buttons_color"
+                            app:cursorColor="@color/buttons_color" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/emailUserLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:hint="Ваш Email"
+                        android:maxWidth="380dp"
+                        android:textColor="@color/buttons_color"
+                        android:textColorHint="@color/buttons_color"
+                        app:boxStrokeColor="@color/buttons_color_light"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:cursorColor="@color/buttons_color"
+                        app:hintTextColor="@color/buttons_color">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/emailUser"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:gravity="center|start|top"
+                            android:textColor="@color/buttons_color"
+                            android:textColorHint="@color/buttons_color"
+                            app:cursorColor="@color/buttons_color" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_error"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="5dp"
+                        android:checked="false"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:maxWidth="380dp"
+                        android:paddingHorizontal="20dp"
+                        android:text="Это сообщение об ошибке"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        app:thumbIconTint="@color/main_color"
+                        app:thumbTint="@color/white"
+                        app:trackTint="@color/main_color" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/sender"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:backgroundTint="@color/buttons_color"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:maxWidth="380dp"
+                        android:text="Отправить"
+                        android:textColor="@color/page_color"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
 
     </LinearLayout>
 

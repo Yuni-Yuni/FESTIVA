@@ -10,6 +10,7 @@
     <color name="cocoa">#FF412F26</color>
     <color name="main_color">#FFC8D9E6</color>
     <color name="buttons_color">#FF2F4156</color>
+    <color name="buttons_color_light" alpha="0.15">#FF2F4156</color>
     <color name="page_color" alpha="0.7">#FFF5F5F5</color>
     <color name="grey">#FF808080</color>
     <color name="text_date">#B2867A</color>

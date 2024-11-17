@@ -8,9 +8,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.festiva.databinding.FragmentAskQuestionBinding;
 import com.example.festiva.databinding.FragmentUserGuideBinding;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,9 +68,18 @@ public class AskQuestionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentAskQuestionBinding.inflate(inflater, container, false);
 
-        binding.homeButton.setOnClickListener(new View.OnClickListener() {
+        View view = inflater.inflate(R.layout.fragment_ask_question, container, false);
+
+        ImageButton homeButton = view.findViewById(R.id.homeButton);
+
+        TextInputEditText title = view.findViewById(R.id.titleOfMessage);
+        TextInputEditText description = view.findViewById(R.id.questionDescription);
+        TextInputEditText email = view.findViewById(R.id.emailUser);
+
+        MaterialButton button = view.findViewById(R.id.sender);
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MoreFragment moreFragment = new MoreFragment();
@@ -76,7 +89,14 @@ public class AskQuestionFragment extends Fragment {
             }
         });
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         // Inflate the layout for this fragment
-        return binding.getRoot();
+        return view;
     }
 }

@@ -1,12 +1,22 @@
 package com.example.festiva;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,9 +25,13 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -36,29 +50,45 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity{
 
+    private static final int RC_NOTIFICATION = 99;
     private int data_selected, month_selected, year_selected, hour_start, hour_end, minute_start, minute_end;
 
-    ActivityMainBinding binding;
     boolean statement = false;
     int year, month, day;// Переменные для хранения выбранной дат
     SharedPreferences.Editor editor;
 
+    MyDatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
+
+        createNotificationChannel(this);
+
+        CreateNotifications(this);
+
+        // Отправляем уведомление
+        sendNotification(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, RC_NOTIFICATION);
+        }
 
         boolean isChecked = sharedPreferences.getBoolean("isChecked", false);
 
         if (isChecked) {
             loadFragment(new This_month_EventFragment());
+            editor.putBoolean("isChecked", false);
+            editor.apply(); // Или editor.commit()
         } else {
             loadFragment(new HomeFragment());
+            editor.putBoolean("isChecked", false);
+            editor.apply(); // Или editor.commit()
         }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -226,6 +256,7 @@ public class MainActivity extends AppCompatActivity{
                             myDB.addEvent(editTextEventName.getText().toString().trim(), editTextEventDescription.getText().toString().trim(),
                                     data_selected, month_selected, year_selected, hour_start, minute_start, hour_end, minute_end);
 
+                            CreateNotifications(MainActivity.this);
                             //Toast.makeText(MainActivity.this, editTextEventName.getText().toString(), Toast.LENGTH_LONG).show();
 
                             bottomSheetDialog.dismiss();
@@ -290,6 +321,127 @@ public class MainActivity extends AppCompatActivity{
     public Fragment getCurrentFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         return fragmentManager.findFragmentById(R.id.fragment_container);
+    }
+
+    private void createNotificationChannel(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            String channelId = "test_channel_id";
+            String channelName = "Test Channel";
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription("Test notifications");
+            NotificationManager manager = context.getSystemService(NotificationManager.class);
+            if (manager != null) {
+                manager.createNotificationChannel(channel);
+            }
+        }
+    }
+
+    private void sendNotification(Context context) {
+        String channelId = "test_channel_id";
+        int notificationId = 1;
+
+        Intent intent = new Intent(context, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
+                .setSmallIcon(R.drawable.notification_icon)
+                .setContentTitle("Пробное уведомление")
+                .setContentText("Возникает постоянно при запуске программы")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (notificationManager != null) {
+            //notificationManager.notify(notificationId, builder.build());
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == RC_NOTIFICATION){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //Toast.makeText(this, "ALLOWED", Toast.LENGTH_SHORT).show();
+            } else {
+                //Toast.makeText(this, "DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void scheduleNotification(Context context, String title, String message, int year, int month, int day, int hour, int minute) {
+        Intent intent = new Intent(context, NotificationReceiver.class);
+        intent.putExtra("title", title);
+        if(!message.isEmpty()){
+            intent.putExtra("message", message);
+        }
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+
+        // Установите дату и время
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0); // Установите секунды в 0 для точности
+
+        // Проверьте, что указанное время в будущем
+        long triggerTime = calendar.getTimeInMillis();
+        if (triggerTime < System.currentTimeMillis()) {
+            Log.e("AlarmManager", "Scheduled time is in the past. Alarm not set.");
+            return; // Не устанавливайте будильник, если время в прошлом
+        }
+
+        // Настройте AlarmManager
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+            } else {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+            }
+            Log.d("AlarmManager", "Alarm set for: " + calendar.getTime());
+        } else {
+            Log.e("AlarmManager", "AlarmManager is null. Alarm not set.");
+        }
+    }
+
+    public void CreateNotifications(Context context){
+        db = new MyDatabaseHelper(context);
+
+        // Получите все события из базы данных
+        Cursor cursor = db.readAllData();
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String eventName = cursor.getString(cursor.getColumnIndexOrThrow("event_name"));
+                String eventDescription = cursor.getString(cursor.getColumnIndexOrThrow("event_description"));
+                int day = cursor.getInt(cursor.getColumnIndexOrThrow("event_data_data"));
+                int month = cursor.getInt(cursor.getColumnIndexOrThrow("event_data_month"));
+                int year = cursor.getInt(cursor.getColumnIndexOrThrow("event_data_year"));
+                int startHour = cursor.getInt(cursor.getColumnIndexOrThrow("event_start_time_hour"));
+                int startMinute = cursor.getInt(cursor.getColumnIndexOrThrow("event_start_time_minute"));
+                int endHour = cursor.getInt(cursor.getColumnIndexOrThrow("event_end_time_hour"));
+                int endMinute = cursor.getInt(cursor.getColumnIndexOrThrow("event_end_time_minute"));
+
+                // Запланируйте уведомление
+                scheduleNotification(this, eventName, eventDescription, year, month, day, startHour, startMinute);
+
+            } while (cursor.moveToNext());
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
     }
 
 }
