@@ -5,8 +5,10 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -34,6 +36,10 @@ public class UpdateEventInMonthView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_event_in_month_view);
+
+        Window window = getWindow();
+        window.setNavigationBarColor(Color.TRANSPARENT);
+        window.setStatusBarColor(Color.TRANSPARENT);
 
         title = findViewById(R.id.editEventTitle);
         description = findViewById(R.id.editEventDescription);
@@ -154,13 +160,6 @@ public class UpdateEventInMonthView extends AppCompatActivity {
 
     public void backToHomeFragment(View view) {
         finish();
-    }
-
-    private void loadFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_container , fragment);
-        transaction.commit();
     }
 
     void ConfirmDialog(){

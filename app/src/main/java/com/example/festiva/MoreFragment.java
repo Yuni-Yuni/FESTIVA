@@ -97,6 +97,16 @@ public class MoreFragment extends Fragment {
             }
         });
 
+        binging.cardsAndGreetings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CardsAndGreetingsFragment cardsAndGreetingsFragment = new CardsAndGreetingsFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, cardsAndGreetingsFragment);
+                transaction.commit();
+            }
+        });
+
         binging.premium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -14,12 +14,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -55,7 +57,9 @@ public class MainActivity extends AppCompatActivity{
 
     boolean statement = false;
     int year, month, day;// Переменные для хранения выбранной дат
+
     SharedPreferences.Editor editor;
+    SharedPreferences sharedPreferences;
 
     MyDatabaseHelper db;
 
@@ -63,10 +67,14 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         setContentView(R.layout.activity_main);
+
+        Window window = getWindow();
+        window.setNavigationBarColor(Color.TRANSPARENT);
+        window.setStatusBarColor(Color.TRANSPARENT);
 
         createNotificationChannel(this);
 
@@ -100,9 +108,13 @@ public class MainActivity extends AppCompatActivity{
                 int id = item.getItemId();
                 if (id == R.id.more) {
                     loadFragment(new MoreFragment());
+                    editor.putBoolean("lastOrFuture", false);
+                    editor.apply();
                     return true;
                 } else if (id == R.id.profile) {
                     loadFragment(new ProfileFragment());
+                    editor.putBoolean("lastOrFuture", false);
+                    editor.apply();
                     return true;
                 }
                 return false;
@@ -150,6 +162,7 @@ public class MainActivity extends AppCompatActivity{
                 }
                 if (hour>=24){
                     hour = 0;
+                    editTextDate.setText(day_cur+1 + "." + (month_cur) + "." + year_cur);
                 }
 
                 hour_start = hour;
@@ -302,6 +315,14 @@ public class MainActivity extends AppCompatActivity{
         if (requestCode == 2) {
             editor.putBoolean("isChecked", true);
             editor.apply(); // Или editor.commit()
+            boolean lastOrFuture = sharedPreferences.getBoolean("lastOrFuture", false);
+            if (lastOrFuture){
+                editor.putBoolean("lastOrFuture", true);
+                editor.apply();
+            } else {
+                editor.putBoolean("lastOrFuture", false);
+                editor.apply();
+            }
         }
 
         if (requestCode == 1) {

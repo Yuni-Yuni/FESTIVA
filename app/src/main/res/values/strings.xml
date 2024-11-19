@@ -36,6 +36,8 @@
     <string name="MainFunctional">Основной функционал</string>
     <string name="LoginOrSignIn">Синхронизировать аккаунт</string>
     <string name="updateEvent">Изменить событие</string>
+    <string name="cards">Открытки</string>
+    <string name="greetings">Поздравления</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

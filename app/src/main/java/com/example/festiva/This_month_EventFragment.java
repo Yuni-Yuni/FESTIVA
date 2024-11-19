@@ -1,5 +1,9 @@
 package com.example.festiva;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -35,6 +39,8 @@ public class This_month_EventFragment extends Fragment {
     ImageView imageView;
     TextView textEmpty;
     boolean statement = false;
+
+    SharedPreferences.Editor editor;
 
     MyDatabaseHelper myDB;
     ArrayList<String> event_id, event_title, event_description, event_data_data, event_data_month, event_data_year, event_startTime_hour,
@@ -87,13 +93,16 @@ public class This_month_EventFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_this_month__event, container, false);
 
-
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         ImageButton homeButton = view.findViewById(R.id.homeButton);
 
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editor.putBoolean("lastOrFuture", false);
+                editor.apply();
                 MoreFragment moreFragment = new MoreFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, moreFragment);
@@ -126,7 +135,23 @@ public class This_month_EventFragment extends Fragment {
         int hour = currentDate.get(Calendar.HOUR_OF_DAY);
         int minute = currentDate.get(Calendar.MINUTE);
 
-        readDataForThisMonthFutureForLoad(hour, minute, year, month + 1, day);
+        boolean lastOrFuture = sharedPreferences.getBoolean("lastOrFuture", false);
+
+        if (lastOrFuture){
+            //readDataForThisMonthPastForLoad(hour, minute, year, month + 1, day);
+            last.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.text_date));
+            last.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.page_color));
+            future.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), android.R.color.transparent));
+            future.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.buttons_color));
+            readDataForThisMonthPastForLoad(hour, minute, year, month + 1, day);
+        } else {
+            //readDataForThisMonthFutureForLoad(hour, minute, year, month + 1, day);
+            future.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.text_date));
+            future.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.page_color));
+            last.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), android.R.color.transparent));
+            last.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.buttons_color));
+            readDataForThisMonthFutureForLoad(hour, minute, year, month + 1, day);
+        }
 
         customAdapter = new AdapterForMonth(getActivity(), getContext(), event_id, event_title, event_description, event_data_data, event_data_month,
                 event_data_year, event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute);
@@ -136,6 +161,8 @@ public class This_month_EventFragment extends Fragment {
         last.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editor.putBoolean("lastOrFuture", true);
+                editor.apply();
                 last.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.text_date));
                 last.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.page_color));
                 future.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), android.R.color.transparent));
@@ -148,6 +175,8 @@ public class This_month_EventFragment extends Fragment {
         future.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editor.putBoolean("lastOrFuture", false);
+                editor.apply();
                 future.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.text_date));
                 future.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.page_color));
                 last.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), android.R.color.transparent));
@@ -167,6 +196,37 @@ public class This_month_EventFragment extends Fragment {
 
     void readDataForThisMonthFutureForLoad(int startTimeHour, int startTimeMinute, int selectedYear, int selectedMonth, int selectedDay){
         Cursor cursor = myDB.readDataForThisMonthFuture(startTimeHour, startTimeMinute, selectedYear, selectedMonth, selectedDay);
+        if(cursor.getCount() == 0){
+            //Toast.makeText(getContext(),"No data.", Toast.LENGTH_SHORT).show();
+            statement = true;
+        }else{
+            statement = false;
+            while (cursor.moveToNext()){
+                event_id.add(cursor.getString(0));
+                event_title.add(cursor.getString(1));
+                event_description.add(cursor.getString(2));
+                event_data_data.add(cursor.getString(3));
+                event_data_month.add(cursor.getString(4));
+                event_data_year.add(cursor.getString(5));
+                event_startTime_hour.add(cursor.getString(6));
+                if (Objects.equals(cursor.getString(7), "0")){
+                    event_startTime_minute.add("00");
+                } else {
+                    event_startTime_minute.add(cursor.getString(7));
+                }
+                event_endTime_hour.add(cursor.getString(8));
+                if (Objects.equals(cursor.getString(9), "0")){
+                    event_endTime_minute.add("00");
+                } else {
+                    event_endTime_minute.add(cursor.getString(9));
+                }
+            }
+
+        }
+    }
+
+    void readDataForThisMonthPastForLoad(int startTimeHour, int startTimeMinute, int selectedYear, int selectedMonth, int selectedDay){
+        Cursor cursor = myDB.readDataForThisMonthPast(startTimeHour, startTimeMinute, selectedYear, selectedMonth, selectedDay);
         if(cursor.getCount() == 0){
             //Toast.makeText(getContext(),"No data.", Toast.LENGTH_SHORT).show();
             statement = true;
