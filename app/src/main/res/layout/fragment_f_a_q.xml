@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FAQFragment"
+    android:background="@color/page_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="-300dp"
+        android:layout_marginStart="-50dp"
+        android:layout_marginEnd="-50dp"
+        android:background="@android:color/transparent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/circle">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:minWidth="320dp"
+            android:layout_marginHorizontal="20dp"
+            android:maxWidth="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="28sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/FAQ"
+            android:layout_gravity="center"
+            android:textColor="@color/buttons_color"/>
+
+        <TextView
+            android:id="@+id/backToUserGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="110dp"
+            android:contentDescription="@string/back_main"
+            android:text="Назад"
+            android:textColor="@color/buttons_color"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:drawableLeft="@drawable/ic_arrow_back" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/howChangePassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Как изменить пароль?"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/howChangePasswordText"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/howChangePasswordText"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/howRenewSubscription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Как продлить подписку?"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/howRenewSubscriptionText"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/howRenewSubscriptionText"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/howTurnOffReminders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Как отключить напоминания?"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/howTurnOffRemindersText"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/howTurnOffReminders"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/howAddContactAutomaticGreetings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Как добавить контакт для автоматического поздравления?"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/howAddContactAutomaticGreetingsText"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/howAddContactAutomaticGreetingsText"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/howChangeGreetingText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Можно ли изменить текст сгенерированного поздравления?"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/howChangeGreetingTextText"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/howChangeGreetingTextText"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/howRestoreAccess"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Как восстановить доступ к аккаунту, если забыл пароль?"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/howRestoreAccessText"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/howRestoreAccessText"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/howCancelSubscription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Как отменить подписку?"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/howCancelSubscriptionText"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/howCancelSubscriptionText"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/howRegularEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Какие события можно сделать регулярными?"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/howRegularEventsText"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/howRegularEventsText"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/howContactCustomerSupport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Как связаться со службой поддержки?"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/howContactCustomerSupportText"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/howContactCustomerSupportText"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ApplicationPolicyFragment"
+    android:background="@color/page_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="-300dp"
+        android:layout_marginStart="-50dp"
+        android:layout_marginEnd="-50dp"
+        android:background="@android:color/transparent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/circle">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:minWidth="320dp"
+            android:layout_marginHorizontal="20dp"
+            android:maxWidth="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="28sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/ApplicationPolicy"
+            android:layout_gravity="center"
+            android:textColor="@color/buttons_color"/>
+
+        <TextView
+            android:id="@+id/backToUserGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="110dp"
+            android:contentDescription="@string/back_main"
+            android:text="Назад"
+            android:textColor="@color/buttons_color"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:drawableLeft="@drawable/ic_arrow_back" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/aboutCompany"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="О компании"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/aboutCompanyText"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/aboutCompany"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/contacts"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Контакты:"
+                        android:textAlignment="inherit"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/dataAndPrivacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Данные и конфиденциальность"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/dataAndPrivacyText"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Настоящая Политика конфиденциальности описывает наши правила и процедуры сбора, использования и раскрытия Вашей информации при использовании Сервиса, а также рассказывает о Ваших правах на конфиденциальность и о том, как закон защищает Вас.\n\n Мы используем Ваши персональные данные для предоставления и улучшения Сервиса. Используя Сервис, Вы соглашаетесь на сбор и использование информации в соответствии с настоящей Политикой конфиденциальности."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/installationAndRegistration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Установка и регистрация"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle1"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Установка приложения"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle1Part1"
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="1. Загрузка: Откройте Google Play Store на вашем устройстве Android."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle1Part2"
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="2. Поиск приложения: В строке поиска введите название нашего приложения «Festiva»."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle1Part3"
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="3. Установка: Нажмите на кнопку «Установить» рядом с иконкой приложения и дождитесь завершения загрузки."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle1Part4"
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="4. Открытие приложения: После установки нажмите «Открыть», чтобы запустить приложение."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle2"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Регистрация и вход"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle2Subtitle1"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="1. Создание новой учётной записи:"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle2Subtitle1Part1"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● На экране профиля выберите «Зарегистрироваться»."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle2Subtitle1Part2"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Введите свой логин, электронную почту и создайте надёжный пароль."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle2Subtitle1Part3"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Нажмите «Зарегистрироваться», чтобы создать аккаунт."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle2Subtitle1Part4"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● На вашу почту придёт подтверждение. Перейдите по ссылке в письме, чтобы завершить регистрацию."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle2Subtitle2"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="2. Вход в учётную запись:"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle2Subtitle2Part1"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Если у вас уже есть аккаунт, на экране профиля выберите «Войти»."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle2Subtitle2Part2"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Введите свой логин или электронную почту и пароль, затем нажмите «Войти»."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle2Subtitle2Part3"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Если вы забыли пароль, нажмите «Забыли пароль?» и следуйте инструкциям для его восстановления."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle3"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Подписка и активация пробного периода."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle3Part1"
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="● После регистрации вы можете начать бесплатное использование или активировать пробный период премиум-подписки."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle3Part2"
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Перейдите в «Меню» → «Премиум подписка», чтобы ознакомиться с вариантами подписок и выбрать нужный."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/installationAndRegistrationTextTitle3Part3"
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Для премиум-пользователей доступны дополнительные функции, такие как отсутствие рекламы, ведение планера, настройка темы оформления, синхронизация с Google и другими устройствами."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/accountAndSettings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Учетная запись и настройки"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Управление профилем"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle1Part1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="● Изменение данных профиля: Чтобы обновить логин, электронную почту или пароль, перейдите в «Профиль» и нажмите кнопку изменения, расположенную рядом с вашей аватаром."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle1Part2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="● Для изменения пароля введите старый и новый пароли, после чего подтвердите изменения."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle1Part3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="● Электронная почта и логин могут быть изменены без подтверждения пароля."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Настройка подписки"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle2Part1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="● Просмотр текущей подписки: В разделе «Меню» → «Премиум подписка» вы можете увидеть свой текущий статус подписки (бесплатная, пробная, премиум)."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle2Part2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="● Изменение подписки: При необходимости здесь же можно перейти на другой тип подписки или продлить текущую."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle2Part3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="● Управление пробным периодом: Если вы используете пробный период, он автоматически обновится до премиум-подписки по истечении срока действия. В разделе «Подписка» можно узнать дату завершения пробного периода."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Персонализация интерфейса"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle3Part1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="● Цветовая тема: Настройте цветовую схему приложения в разделе «Меню» → «Выбрать тему» на светлый или темный режим, в зависимости от ваших предпочтений."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Управление уведомлениями"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle4Part1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="● Уведомления о событиях и напоминаниях: Включите или отключите уведомления для событий и напоминаний, выбрав в настройках соответствующие пункты."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/accountAndSettingsTextTitle4Part2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="● Частота уведомлений: Настройте, как часто и за сколько времени до события вы хотите получать уведомления."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/supportAndFeedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="center"
+                        android:text="Поддержка и обратная связь"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/supportAndFeedbackTextPart1"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Мы стремимся сделать ваше использование приложения максимально комфортным и удобным. Если у вас возникли вопросы или вы хотите поделиться своими предложениями, команда поддержки всегда готова помочь."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/supportAndFeedbackTextPart2"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Способы связи со службой поддержки."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/supportAndFeedbackTextPart3"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Через приложение: В разделе «Меню» выберите «Задать вопрос». Укажите ваш вопрос или проблему и отправьте сообщение. Наша служба поддержки свяжется с вами в кратчайшие сроки."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/supportAndFeedbackTextPart4"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Электронная почта: Вы также можете отправить свои вопросы и предложения на наш адрес электронной почты: maysarina10@gmail.com. Пожалуйста, укажите в письме детали проблемы и контактные данные для связи."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/supportAndFeedbackTextPart5"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Часто задаваемые вопросы (FAQ): Перед обращением в поддержку рекомендуем заглянуть в раздел «Вопросы и ответы (FAQ)» в руководстве пользователя. Возможно, ответ на ваш вопрос уже есть среди часто задаваемых вопросов."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/supportAndFeedbackTextPart6"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Отправка отзывов и предложений."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/supportAndFeedbackTextPart7"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Внутри приложения: В «Меню» выберите пункт «Оставить отзыв». Здесь вы можете предложить новые функции, указать на улучшения или оставить общий отзыв о вашем опыте использования приложения."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/supportAndFeedbackTextPart8"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Оценка приложения: Если вам нравится приложение, вы можете оценить его в Google Play Store. Ваши отзывы помогут нам понять, что нужно улучшить, и развивать приложение в нужном направлении."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/supportAndFeedbackTextPart9"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Чего ожидать от службы поддержки."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/supportAndFeedbackTextPart10"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Мы стремимся ответить на ваши запросы как можно быстрее, но время отклика может варьироваться в зависимости от количества обращений. Обычно мы отвечаем в течение 24–48 часов."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/supportAndFeedbackTextPart11"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="Мы ценим ваши отзывы и поддержку, ведь именно они помогают нам улучшать приложение и добавлять функции, которые вам нужны. Благодарим за использование нашего приложения и надеемся, что оно станет вашим надежным помощником!"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>

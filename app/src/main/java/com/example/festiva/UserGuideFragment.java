@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.festiva.databinding.FragmentUserGuideBinding;
 
@@ -63,9 +65,11 @@ public class UserGuideFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentUserGuideBinding.inflate(inflater, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_guide, container, false);
 
-        binding.homeButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton homeButton = view.findViewById(R.id.homeButton);
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MoreFragment moreFragment = new MoreFragment();
@@ -75,7 +79,43 @@ public class UserGuideFragment extends Fragment {
             }
         });
 
+        Button ApplicationPolicity = view.findViewById(R.id.ApplicationPolicy);
+
+        ApplicationPolicity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApplicationPolicyFragment applicationPolicyFragment = new ApplicationPolicyFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, applicationPolicyFragment);
+                transaction.commit();
+            }
+        });
+
+        Button FAQ = view.findViewById(R.id.FAQ);
+
+        FAQ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FAQFragment FAQFragment = new FAQFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, FAQFragment);
+                transaction.commit();
+            }
+        });
+
+        Button MainFunctions = view.findViewById(R.id.MainFunctional);
+
+        MainFunctions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainFunctionsFragment MainFunctionsFragment = new MainFunctionsFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, MainFunctionsFragment);
+                transaction.commit();
+            }
+        });
+
         // Inflate the layout for this fragment
-        return binding.getRoot();
+        return view;
     }
 }

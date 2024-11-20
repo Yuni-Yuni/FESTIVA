@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainFunctionsFragment"
+    android:background="@color/page_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="-300dp"
+        android:layout_marginStart="-50dp"
+        android:layout_marginEnd="-50dp"
+        android:background="@android:color/transparent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/circle">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:minWidth="320dp"
+            android:layout_marginHorizontal="20dp"
+            android:maxWidth="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="28sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/MainFunctional"
+            android:layout_gravity="center"
+            android:textColor="@color/buttons_color"/>
+
+        <TextView
+            android:id="@+id/backToUserGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="110dp"
+            android:contentDescription="@string/back_main"
+            android:text="Назад"
+            android:textColor="@color/buttons_color"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:drawableLeft="@drawable/ic_arrow_back" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/calendarAndEventCreation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="left"
+                        android:text="Календарь и создание событий"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/calendarAndEventCreationTextPart1"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Просмотр календаря: На главном экране отображается календарь, который можно просматривать в различных режимах (день, неделя, месяц). Для удобного перехода между днями и месяцами используйте кнопки навигации."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/calendarAndEventCreationTextPart2"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Создание события: Нажмите на кнопку с плюсом внизу экрана. Заполните поля:"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/calendarAndEventCreationTextPart3"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Название и содержание события."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/calendarAndEventCreationTextPart4"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Дата и время – укажите, когда начнется и закончится событие."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/calendarAndEventCreationTextPart5"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Прислать открытку – включите эту функцию, если необходимо, чтобы в день события была сгенерирована поздравительная открытка."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/calendarAndEventCreationTextPart6"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Прислать поздравление – включите эту функцию, если необходимо, чтобы в день события был сгенерирован поздравительный текст."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/calendarAndEventCreationTextPart7"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Повторение – настройте событие как регулярное (ежедневное, еженедельное и т.д.), если требуется."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/calendarAndEventCreationTextPart8"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Категория – выберите подходящую категорию, например, «Работа», «Праздник», «Личное»."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/calendarAndEventCreationTextPart9"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Напомнить мне за – включите и настройте напоминание для события, если требуется."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/calendarAndEventCreationTextPart10"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Редактирование и удаление событий: Откройте событие, чтобы внести изменения или удалить его при необходимости."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reminder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="start"
+                        android:text="Напоминания"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/reminderTextPart1"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Добавление напоминаний: Для каждого события можно добавить напоминание. Выберите время, за которое хотите получить уведомление до начала события."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/reminderTextPart2"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Редактирование и удаление напоминаний: В событии можно изменить или удалить напоминание."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/reminderTextPart3"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Уведомления: Включите или отключите уведомления для напоминаний через настройки приложения, чтобы получать оповещения по нужным событиям."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/generationGreetingsPostcards"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="start"
+                        android:text="Генерация поздравлений и открыток"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/generationGreetingsPostcardsTextPart1"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Создание поздравления: Выберите событие, для которого хотите подготовить поздравление. Нажмите «Создать поздравление» и выберите шаблон, основанный на категории события."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/generationGreetingsPostcardsTextPart2"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Выбор шаблона и стиля поздравления: Укажите стиль поздравления (например, официальное, дружеское, романтическое), и приложение автоматически сгенерирует текст на основе выбранного шаблона."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/generationGreetingsPostcardsTextPart3"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Редактирование поздравления: Вы можете отредактировать сгенерированный текст по своему усмотрению."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/generationGreetingsPostcardsTextPart4"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Предварительный просмотр открытки: Нажмите «Просмотр», чтобы увидеть, как будет выглядеть открытка."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/generationGreetingsPostcardsTextPart5"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Отправка поздравления: Отправьте поздравление через SMS, электронную почту или социальные сети."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="5dp"
+                    android:background="@drawable/background_for_ask"
+                    android:maxWidth="380dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/subscriptionManagement"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:gravity="start"
+                        android:text="Управление подпиской"
+                        android:textStyle="bold"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/subscriptionManagementTextPart1"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Типы подписок: Приложение поддерживает три типа подписок – бесплатная, пробная и премиум."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/subscriptionManagementTextPart2"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Переключение и продление подписки: Перейдите в раздел «Меню» → «Премиум подписка», чтобы просмотреть доступные варианты. Нажмите на нужную подписку, чтобы активировать её или продлить."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <TextView
+                        android:id="@+id/subscriptionManagementTextPart3"
+                        android:layout_width="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="● Преимущества премиум-подписки: Отсутствие рекламы, ведение планера, настройка темы оформления, синхронизация с Google и другими устройствами."
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</FrameLayout>
