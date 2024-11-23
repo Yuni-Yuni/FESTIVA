@@ -1,9 +1,8 @@
 package com.example.festiva;
 
-import android.annotation.SuppressLint;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -17,33 +16,32 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.festiva.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -63,6 +61,13 @@ public class MainActivity extends AppCompatActivity{
 
     MyDatabaseHelper db;
 
+    SwitchMaterial switchHoliday, switch_Reminder;
+    private String holidayName = "";
+    private String fromPerson = "";
+    private String toPerson = "";
+
+    private int RemindMe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,11 +82,6 @@ public class MainActivity extends AppCompatActivity{
         window.setStatusBarColor(Color.TRANSPARENT);
 
         createNotificationChannel(this);
-
-        CreateNotifications(this);
-
-        // Отправляем уведомление
-        sendNotification(this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
             requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, RC_NOTIFICATION);
@@ -126,6 +126,10 @@ public class MainActivity extends AppCompatActivity{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holidayName = "";
+                fromPerson = "";
+                toPerson = "";
+
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
                 View view1 = LayoutInflater.from(MainActivity.this).inflate(R.layout.bottom_dialog_sheet, null);
                 bottomSheetDialog.setContentView(view1);
@@ -138,6 +142,24 @@ public class MainActivity extends AppCompatActivity{
                 EditText editTextDate = view1.findViewById(R.id.EventData);
                 EditText editTextTimeStart = view1.findViewById(R.id.EventStartTime);
                 EditText editTextTimeEnd = view1.findViewById(R.id.EventEndTime);
+
+                switchHoliday = view1.findViewById(R.id.switch_card_sender);
+
+                switchHoliday.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        showHolidayDialog();
+                    }
+                });
+
+                switch_Reminder = view1.findViewById(R.id.switch_Reminder);
+
+                switch_Reminder.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        RemindMe = 1;
+                    } else {
+                        RemindMe = 0;
+                    }
+                });
 
                 MaterialButton dismissBtn = view1.findViewById(R.id.dismiss);
 
@@ -170,10 +192,10 @@ public class MainActivity extends AppCompatActivity{
                 hour_end = hour + 1;
                 minute_end = 0;
 
-
                 editTextTimeStart.setText(hour + ":00");
                 editTextTimeEnd.setText((hour + 1) + ":00");
-                /*     */
+
+                /*        */
 
                 editTextDate.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -185,7 +207,7 @@ public class MainActivity extends AppCompatActivity{
                         day = calendar.get(Calendar.DAY_OF_MONTH);
 
                         // Создаем и показываем DatePickerDialog
-                        DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, R.style.CustomDatePickerDialog, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 data_selected = dayOfMonth;
@@ -195,6 +217,18 @@ public class MainActivity extends AppCompatActivity{
                                 editTextDate.setText(dayOfMonth + "." + (month + 1) + "." + year);
                             }
                         }, year, month, day);
+
+                        datePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface dialogInterface) {
+                                Button positiveButton = datePickerDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                                Button negativeButton = datePickerDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+
+                                // Задаем фон кнопкам
+                                positiveButton.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.buttons_color));
+                                negativeButton.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.buttons_color));
+                            }
+                        });
 
                         datePickerDialog.show();
                     }
@@ -207,15 +241,21 @@ public class MainActivity extends AppCompatActivity{
                         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                         int minute = mcurrentTime.get(Calendar.MINUTE);
                         TimePickerDialog timePickerDialog;
-                        timePickerDialog = new TimePickerDialog(MainActivity.this, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
+                        timePickerDialog = new TimePickerDialog(MainActivity.this, R.style.CustomTimePickerDialog, new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                                 hour_start = selectedHour;
                                 minute_start = selectedMinute;
                                 statement = true;
-                                if (selectedMinute == 0) {
-                                    editTextTimeStart.setText( selectedHour + ":00");
-                                } else {
+                                if (selectedMinute < 10) {
+                                    if (selectedMinute == 0)
+                                    {
+                                        editTextTimeStart.setText( selectedHour + ":00");
+                                    } else {
+                                        editTextTimeStart.setText( selectedHour + ":0" + selectedMinute);
+                                    }
+                                }
+                                else {
                                     editTextTimeStart.setText( selectedHour + ":" + selectedMinute);
                                 }
 
@@ -240,14 +280,20 @@ public class MainActivity extends AppCompatActivity{
                             minute = minute_start;
                         }
                         TimePickerDialog timePickerDialog1;
-                        timePickerDialog1 = new TimePickerDialog(MainActivity.this, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
+                        timePickerDialog1 = new TimePickerDialog(MainActivity.this, R.style.CustomTimePickerDialog, new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                                 hour_end = selectedHour;
                                 minute_end = selectedMinute;
-                                if (selectedMinute == 0) {
-                                    editTextTimeEnd.setText( selectedHour + ":00");
-                                } else {
+                                if (selectedMinute < 10) {
+                                    if (selectedMinute == 0)
+                                    {
+                                        editTextTimeEnd.setText( selectedHour + ":00");
+                                    } else {
+                                        editTextTimeEnd.setText( selectedHour + ":0" + selectedMinute);
+                                    }
+                                }
+                                else {
                                     editTextTimeEnd.setText( selectedHour + ":" + selectedMinute);
                                 }
                             }
@@ -267,9 +313,12 @@ public class MainActivity extends AppCompatActivity{
                             MyDatabaseHelper myDB = new MyDatabaseHelper(MainActivity.this);
 
                             myDB.addEvent(editTextEventName.getText().toString().trim(), editTextEventDescription.getText().toString().trim(),
-                                    data_selected, month_selected, year_selected, hour_start, minute_start, hour_end, minute_end);
+                                    data_selected, month_selected, year_selected, hour_start, minute_start, hour_end, minute_end, RemindMe);
 
-                            CreateNotifications(MainActivity.this);
+                            if (RemindMe == 1)
+                            {
+                                CreateNotification(MainActivity.this);
+                            }
                             //Toast.makeText(MainActivity.this, editTextEventName.getText().toString(), Toast.LENGTH_LONG).show();
 
                             bottomSheetDialog.dismiss();
@@ -301,10 +350,8 @@ public class MainActivity extends AppCompatActivity{
                         } else if (currentFragment instanceof SettingsFragment) {
                             loadFragment(new SettingsFragment());
                         }
-
-                        //Toast.makeText(MainActivity.this, "Закрыто нижнее диалоговое меню", Toast.LENGTH_LONG).show();
                     }
-                });/**/
+                });
             }
         });
     }
@@ -357,32 +404,6 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private void sendNotification(Context context) {
-        String channelId = "test_channel_id";
-        int notificationId = 1;
-
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                context,
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
-                .setSmallIcon(R.drawable.notification_icon)
-                .setContentTitle("Пробное уведомление")
-                .setContentText("Возникает постоянно при запуске программы")
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
-
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (notificationManager != null) {
-            //notificationManager.notify(notificationId, builder.build());
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -396,37 +417,41 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public void scheduleNotification(Context context, String title, String message, int year, int month, int day, int hour, int minute) {
+    private boolean isNotificationScheduled(Context context, int eventId) {
+        Intent intent = new Intent(context, NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context, eventId, intent, PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE);
+
+        return pendingIntent != null; // Вернёт true, если PendingIntent существует
+    }
+
+    public void scheduleNotification(Context context, String title, String message, int year, int month, int day, int hour, int minute, int eventId) {
         Intent intent = new Intent(context, NotificationReceiver.class);
         intent.putExtra("title", title);
-        if(!message.isEmpty()){
+        if (!message.isEmpty()) {
             intent.putExtra("message", message);
         }
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                context, eventId, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-
-        // Установите дату и время
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.DAY_OF_MONTH, day);
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0); // Установите секунды в 0 для точности
+        calendar.set(Calendar.SECOND, 0);
 
-        // Проверьте, что указанное время в будущем
         long triggerTime = calendar.getTimeInMillis();
         if (triggerTime < System.currentTimeMillis()) {
             Log.e("AlarmManager", "Scheduled time is in the past. Alarm not set.");
-            return; // Не устанавливайте будильник, если время в прошлом
+            return;
         }
 
-        // Настройте AlarmManager
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarmManager != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
             } else {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
@@ -437,7 +462,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public void CreateNotifications(Context context){
+    public void CreateNotification(Context context){
         db = new MyDatabaseHelper(context);
 
         // Получите все события из базы данных
@@ -451,18 +476,96 @@ public class MainActivity extends AppCompatActivity{
                 int year = cursor.getInt(cursor.getColumnIndexOrThrow("event_data_year"));
                 int startHour = cursor.getInt(cursor.getColumnIndexOrThrow("event_start_time_hour"));
                 int startMinute = cursor.getInt(cursor.getColumnIndexOrThrow("event_start_time_minute"));
-                int endHour = cursor.getInt(cursor.getColumnIndexOrThrow("event_end_time_hour"));
-                int endMinute = cursor.getInt(cursor.getColumnIndexOrThrow("event_end_time_minute"));
+                int eventId = cursor.getInt(cursor.getColumnIndexOrThrow("_id")); // Уникальный ID события
+                boolean remindMe = cursor.getInt(cursor.getColumnIndexOrThrow("event_reminder")) == 1; // Проверка флага "напомнить мне"
 
                 // Запланируйте уведомление
-                scheduleNotification(this, eventName, eventDescription, year, month, day, startHour, startMinute);
-
+                if (remindMe && !isNotificationScheduled(context, eventId)) {
+                    scheduleNotification(context, eventName, eventDescription, year, month, day, startHour, startMinute, eventId);
+                }
             } while (cursor.moveToNext());
         }
 
         if (cursor != null) {
             cursor.close();
         }
+    }
+
+    private void showHolidayDialog() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_for_event_greeting, null);
+
+        EditText inputHolidayName = dialogView.findViewById(R.id.greetingName);
+        EditText inputFrom = dialogView.findViewById(R.id.fromWho);
+        EditText inputTo = dialogView.findViewById(R.id.toWho);
+
+        inputHolidayName.setText(holidayName);
+        inputFrom.setText(fromPerson);
+        inputTo.setText(toPerson); // Восстановление данных
+
+        // Создаем диалог
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomTimePickerDialog);
+        builder.setTitle("Введите данные для поздравления")
+                .setPositiveButton("ОК", null)
+                .setNegativeButton("Отмена", (dialog, which) -> {
+                    // Сохраняем данные, если пользователь нажал "Отмена"
+                    holidayName = inputHolidayName.getText().toString();
+                    fromPerson = inputFrom.getText().toString();
+                    toPerson = inputTo.getText().toString();
+                    switchHoliday.setChecked(false);
+                })
+                .setOnCancelListener(dialog -> {
+                    // Сохраняем данные, если пользователь случайно закрыл диалог
+                    holidayName = inputHolidayName.getText().toString();
+                    fromPerson = inputFrom.getText().toString();
+                    toPerson = inputTo.getText().toString();
+                    switchHoliday.setChecked(false);
+                });
+
+        // Добавляем поля ввода в диалог
+        builder.setView(dialogView);
+
+        AlertDialog dialog = builder.create();
+
+        // Устанавливаем кастомный слушатель для кнопки "ОК"
+        dialog.setOnShowListener(d -> {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+                boolean allFieldsValid = true;
+
+                // Проверка каждого поля на пустоту
+                if (TextUtils.isEmpty(inputHolidayName.getText())) {
+                    inputHolidayName.setError("Введите название праздника");
+                    allFieldsValid = false;
+                } else {
+                    inputHolidayName.setError(null);
+                }
+
+                if (TextUtils.isEmpty(inputTo.getText())) {
+                    inputTo.setError("Введите получателя поздравления");
+                    allFieldsValid = false;
+                } else {
+                    inputTo.setError(null);
+                }
+
+                // Если все поля заполнены, закрываем диалог и сохраняем данные
+                if (allFieldsValid) {
+                    holidayName = inputHolidayName.getText().toString();
+                    fromPerson = inputFrom.getText().toString();
+                    toPerson = inputTo.getText().toString();
+
+                    saveToDatabase(holidayName, fromPerson, toPerson);
+                    //Toast.makeText(MainActivity.this, "Данные сохранены", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss(); // Закрываем диалог
+                }
+            });
+        });
+
+        dialog.show();
+    }
+
+    private void saveToDatabase(String holidayName, String from, String to) {
+        // Реализуйте сохранение в SQLite
+        // Например: databaseHelper.insertData(holidayName, from, to);
     }
 
 }

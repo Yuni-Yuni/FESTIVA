@@ -12,8 +12,23 @@
 
     </style>
 
-    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+    <style name="CustomDatePickerDialog" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="colorAccent">@color/main_color</item>
+        <item name="android:textColor">@color/buttons_color</item>
+        <item name="hintTextColor">@color/buttons_color</item>
+        <item name="android:textColorPrimary">@color/buttons_color</item>
+    </style>
+
+    <style name="CustomTimePickerDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/main_color</item>
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="backgroundTint">@color/main_color</item>
+        <item name="android:colorPrimary">@color/main_color</item>
+        <item name="android:windowBackground">@color/main_color</item>
+        <item name="android:background">@color/page_color</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColorPrimary">@color/buttons_color</item>
+        <item name="android:textColor">@color/buttons_color</item>
     </style>
 
     <style name="inputsEventStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

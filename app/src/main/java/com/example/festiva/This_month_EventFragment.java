@@ -45,6 +45,7 @@ public class This_month_EventFragment extends Fragment {
     MyDatabaseHelper myDB;
     ArrayList<String> event_id, event_title, event_description, event_data_data, event_data_month, event_data_year, event_startTime_hour,
             event_startTime_minute, event_endTime_hour, event_endTime_minute;
+    ArrayList<Integer> event_reminder;
     AdapterForMonth customAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -126,6 +127,7 @@ public class This_month_EventFragment extends Fragment {
         event_startTime_minute = new ArrayList<>();
         event_endTime_hour = new ArrayList<>();
         event_endTime_minute = new ArrayList<>();
+        event_reminder = new ArrayList<>();
 
         Calendar currentDate = Calendar.getInstance();
         int year = currentDate.get(Calendar.YEAR);
@@ -154,7 +156,7 @@ public class This_month_EventFragment extends Fragment {
         }
 
         customAdapter = new AdapterForMonth(getActivity(), getContext(), event_id, event_title, event_description, event_data_data, event_data_month,
-                event_data_year, event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute);
+                event_data_year, event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -211,15 +213,20 @@ public class This_month_EventFragment extends Fragment {
                 event_startTime_hour.add(cursor.getString(6));
                 if (Objects.equals(cursor.getString(7), "0")){
                     event_startTime_minute.add("00");
+                } else if (cursor.getInt(7) < 10){
+                    event_startTime_minute.add("0" + cursor.getString(7));
                 } else {
                     event_startTime_minute.add(cursor.getString(7));
                 }
                 event_endTime_hour.add(cursor.getString(8));
                 if (Objects.equals(cursor.getString(9), "0")){
                     event_endTime_minute.add("00");
+                } else if (cursor.getInt(9) < 10){
+                    event_endTime_minute.add("0" + cursor.getString(9));
                 } else {
                     event_endTime_minute.add(cursor.getString(9));
                 }
+                event_reminder.add(cursor.getInt(10));
             }
 
         }
@@ -242,15 +249,20 @@ public class This_month_EventFragment extends Fragment {
                 event_startTime_hour.add(cursor.getString(6));
                 if (Objects.equals(cursor.getString(7), "0")){
                     event_startTime_minute.add("00");
+                } else if (cursor.getInt(7) < 10){
+                    event_startTime_minute.add("0" + cursor.getString(7));
                 } else {
                     event_startTime_minute.add(cursor.getString(7));
                 }
                 event_endTime_hour.add(cursor.getString(8));
                 if (Objects.equals(cursor.getString(9), "0")){
                     event_endTime_minute.add("00");
+                } else if (cursor.getInt(9) < 10){
+                    event_endTime_minute.add("0" + cursor.getString(9));
                 } else {
                     event_endTime_minute.add(cursor.getString(9));
                 }
+                event_reminder.add(cursor.getInt(10));
             }
 
         }
@@ -274,20 +286,25 @@ public class This_month_EventFragment extends Fragment {
                 event_startTime_hour.add(cursor.getString(6));
                 if (Objects.equals(cursor.getString(7), "0")){
                     event_startTime_minute.add("00");
+                } else if (cursor.getInt(7) < 10){
+                    event_startTime_minute.add("0" + cursor.getString(7));
                 } else {
                     event_startTime_minute.add(cursor.getString(7));
                 }
                 event_endTime_hour.add(cursor.getString(8));
                 if (Objects.equals(cursor.getString(9), "0")){
                     event_endTime_minute.add("00");
+                } else if (cursor.getInt(9) < 10){
+                    event_endTime_minute.add("0" + cursor.getString(9));
                 } else {
                     event_endTime_minute.add(cursor.getString(9));
                 }
+                event_reminder.add(cursor.getInt(10));
             }
         }
 
         customAdapter.updateData(event_id, event_title, event_description, event_data_data, event_data_month, event_data_year,
-                event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute);
+                event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder);
         customAdapter.notifyDataSetChanged();
     }
 
@@ -309,20 +326,25 @@ public class This_month_EventFragment extends Fragment {
                 event_startTime_hour.add(cursor.getString(6));
                 if (Objects.equals(cursor.getString(7), "0")){
                     event_startTime_minute.add("00");
+                } else if (cursor.getInt(7) < 10){
+                    event_startTime_minute.add("0" + cursor.getString(7));
                 } else {
                     event_startTime_minute.add(cursor.getString(7));
                 }
                 event_endTime_hour.add(cursor.getString(8));
                 if (Objects.equals(cursor.getString(9), "0")){
                     event_endTime_minute.add("00");
+                } else if (cursor.getInt(9) < 10){
+                    event_endTime_minute.add("0" + cursor.getString(9));
                 } else {
                     event_endTime_minute.add(cursor.getString(9));
                 }
+                event_reminder.add(cursor.getInt(10));
             }
         }
 
         customAdapter.updateData(event_id, event_title, event_description, event_data_data, event_data_month, event_data_year,
-                event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute);
+                event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder);
         customAdapter.notifyDataSetChanged();
     }
 

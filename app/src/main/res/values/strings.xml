@@ -48,7 +48,9 @@
     <string name="howRegularEventsText">Приложение поддерживает настройку повторяющихся событий, таких как «ежедневно», «еженедельно», «ежемесячно» и «ежегодно». Вы можете установить повторение для любого события при его создании или редактировании.</string>
     <string name="howContactCustomerSupportText">В разделе «Меню» → «Задать вопрос» опишите ваш вопрос или проблему. Вы также можете отправить предложения по улучшению приложения.</string>
     <string name="aboutCompany"><b>Компания Festiva</b> - это инновационное приложение-календарь, созданное для того, чтобы вдохновлять и упрощать повседневную жизнь пользователей. Наша миссия - помогать людям эффективно планировать своё время, находить вдохновение и незабываемые впечатления.</string>
-
+    <string name="greetingName">Название события</string>
+    <string name="fromWho">От кого</string>
+    <string name="toWho">Кому</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

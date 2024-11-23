@@ -192,6 +192,58 @@
 
             </LinearLayout>
 
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_Reminder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
+                android:checked="false"
+                android:fontFamily="@font/montserrat_regular"
+                android:maxWidth="380dp"
+                android:paddingHorizontal="20dp"
+                android:text="@string/remindMe"
+                android:textColor="@color/buttons_color"
+                android:textSize="16sp"
+                app:thumbIconTint="@color/main_color"
+                app:thumbTint="@color/white"
+                app:trackTint="@color/main_color" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_card_generation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="10dp"
+                android:checked="false"
+                android:fontFamily="@font/montserrat_regular"
+                android:maxWidth="380dp"
+                android:paddingHorizontal="20dp"
+                android:text="@string/createCard"
+                android:textColor="@color/buttons_color"
+                android:textSize="16sp"
+                app:thumbIconTint="@color/main_color"
+                app:thumbTint="@color/white"
+                app:trackTint="@color/main_color" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_card_sender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="10dp"
+                android:checked="false"
+                android:fontFamily="@font/montserrat_regular"
+                android:maxWidth="380dp"
+                android:paddingHorizontal="20dp"
+                android:text="@string/sendCard"
+                android:textColor="@color/buttons_color"
+                android:textSize="16sp"
+                app:thumbIconTint="@color/main_color"
+                app:thumbTint="@color/white"
+                app:trackTint="@color/main_color" />
+
             <Button
                 android:id="@+id/updateButton"
                 style="@style/Widget.MaterialComponents.Button"
@@ -214,6 +266,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
                 android:backgroundTint="@color/buttons_color"
                 android:maxWidth="380dp"
                 android:minWidth="320dp"

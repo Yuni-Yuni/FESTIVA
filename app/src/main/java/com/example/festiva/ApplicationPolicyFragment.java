@@ -263,7 +263,7 @@ public class ApplicationPolicyFragment extends Fragment {
                     supportAndFeedbackTextPart8.setVisibility(View.VISIBLE);
                     supportAndFeedbackTextPart9.setVisibility(View.VISIBLE);
                     supportAndFeedbackTextPart10.setVisibility(View.VISIBLE);
-                    accountAndSettingsTextTitle4.setVisibility(View.VISIBLE);
+                    supportAndFeedbackTextPart11.setVisibility(View.VISIBLE);
                 } else {
                     supportAndFeedbackTextPart1.setVisibility(View.GONE);
                     supportAndFeedbackTextPart2.setVisibility(View.GONE);

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/page_color">
+
+    <EditText
+        android:id="@+id/greetingName"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/greetingName"
+        android:textColorHint="@color/buttons_color"
+        android:textColor="@color/buttons_color"
+        android:layout_margin="10dp"
+        android:autofillHints=""
+        android:clickable="true"
+        android:focusable="true"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"
+        android:fontFamily="@font/montserrat_regular"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/edittext_border"
+        android:textSize="16sp"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/fromWho"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/fromWho"
+        android:textColorHint="@color/buttons_color"
+        android:textColor="@color/buttons_color"
+        android:autofillHints=""
+        android:clickable="true"
+        android:focusable="true"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"
+        android:fontFamily="@font/montserrat_regular"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/edittext_border"
+        android:textSize="16sp"
+        android:layout_margin="10dp" />
+
+    <EditText
+        android:id="@+id/toWho"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/toWho"
+        android:autofillHints=""
+        android:textColorHint="@color/buttons_color"
+        android:textColor="@color/buttons_color"
+        android:clickable="true"
+        android:focusable="true"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"
+        android:fontFamily="@font/montserrat_regular"
+        android:paddingHorizontal="20dp"
+        android:background="@drawable/edittext_border"
+        android:layout_margin="10dp"
+        android:textSize="16sp"/>
+</LinearLayout>

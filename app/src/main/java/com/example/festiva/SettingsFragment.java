@@ -110,7 +110,7 @@ public class SettingsFragment extends Fragment {
         View dialogView = inflater.inflate(R.layout.dialog_layout, null);
         TextInputEditText editText = dialogView.findViewById(R.id.Name);
 
-        AlertDialog dialog = new AlertDialog.Builder(requireContext())
+        AlertDialog dialog = new AlertDialog.Builder(requireContext(), R.style.CustomTimePickerDialog)
                 .setTitle("Изменить текст")
                 .setView(dialogView)
                 .setPositiveButton("OK", (dialogInterface, i) -> {
