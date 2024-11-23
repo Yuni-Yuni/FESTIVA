@@ -20,6 +20,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -35,7 +36,16 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Calendar;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class UpdateEventInMonthView extends AppCompatActivity {
 
@@ -46,12 +56,18 @@ public class UpdateEventInMonthView extends AppCompatActivity {
     private String fromPerson = "";
     private String toPerson = "";
 
+    String textGreeting;
+
+    TextView greeting, greetingTitle;
+
     SwitchMaterial switchHoliday, switch_Reminder;
 
     String id_str, title_str, description_str, date_data_str, date_month_str, date_year_str, startHour_str, startMinute_str, endHour_str, endMinute_str;
 
-    Integer reminder;
+    Integer reminder, greeting_ID;
     Integer ins_reminder;
+    private int createGreeting;
+    private int GreetingID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +89,19 @@ public class UpdateEventInMonthView extends AppCompatActivity {
         switchHoliday = findViewById(R.id.switch_card_sender);
         switch_Reminder = findViewById(R.id.switch_Reminder);
 
+        greeting = findViewById(R.id.greeting);
+        greetingTitle = findViewById(R.id.greetingTitle);
+
         getAndSetIntentData();
+
+        switchHoliday.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                showHolidayDialog();
+                createGreeting = 1;
+            } else {
+                createGreeting = 0;
+            }
+        });
 
         switch_Reminder.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -88,29 +116,36 @@ public class UpdateEventInMonthView extends AppCompatActivity {
             public void onClick(View view) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateEventInMonthView.this);
 
-                if (ins_reminder == null){
-                    ins_reminder = reminder;
-                }
-
-                myDB.updateData(id_str, title.getText().toString().trim(), description.getText().toString().trim(),
-                        Integer.parseInt(date_data_str), Integer.parseInt(date_month_str), Integer.parseInt(date_year_str),
-                        Integer.parseInt(startHour_str), Integer.parseInt(startMinute_str), Integer.parseInt(endHour_str), Integer.parseInt(endMinute_str) , ins_reminder);/**/
-
-                if (ins_reminder == 1)
+                if (createGreeting == 1)
                 {
-                    createNotificationForEvent(UpdateEventInMonthView.this, Integer.parseInt(id_str));
+                    ConfirmDialogGenerateGreeting();
+                    createGreeting = 0;
                 } else {
-                    if (isNotificationScheduled(UpdateEventInMonthView.this, Integer.parseInt(id_str))){
-                        cancelNotification(UpdateEventInMonthView.this, Integer.parseInt(id_str));
+                    if (ins_reminder == null){
+                        ins_reminder = reminder;
                     }
-                }
-                finish();
-            }
-        });
 
-        switchHoliday.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                showHolidayDialog();
+                    if (greeting_ID != 0){
+                        myDB.updateData(id_str, title.getText().toString().trim(), description.getText().toString().trim(),
+                                Integer.parseInt(date_data_str), Integer.parseInt(date_month_str), Integer.parseInt(date_year_str),
+                                Integer.parseInt(startHour_str), Integer.parseInt(startMinute_str), Integer.parseInt(endHour_str), Integer.parseInt(endMinute_str), ins_reminder, greeting_ID);
+                    } else {
+                        myDB.updateData(id_str, title.getText().toString().trim(), description.getText().toString().trim(),
+                                Integer.parseInt(date_data_str), Integer.parseInt(date_month_str), Integer.parseInt(date_year_str),
+                                Integer.parseInt(startHour_str), Integer.parseInt(startMinute_str), Integer.parseInt(endHour_str), Integer.parseInt(endMinute_str), ins_reminder, 0);
+                    }
+
+                    if (ins_reminder == 1)
+                    {
+                        createNotificationForEvent(UpdateEventInMonthView.this, Integer.parseInt(id_str));
+                    } else {
+                        if (isNotificationScheduled(UpdateEventInMonthView.this, Integer.parseInt(id_str))){
+                            cancelNotification(UpdateEventInMonthView.this, Integer.parseInt(id_str));
+                        }
+                    }
+                    createGreeting = 0;
+                    finish();
+                }
             }
         });
 
@@ -217,6 +252,7 @@ public class UpdateEventInMonthView extends AppCompatActivity {
             endHour_str = getIntent().getStringExtra("endTimeHour");
             endMinute_str = getIntent().getStringExtra("endTimeMinute");
             reminder = getIntent().getIntExtra("reminder", 0);
+            greeting_ID = getIntent().getIntExtra("greeting_id", 0);
 
             //====
             title.setText(title_str);
@@ -231,6 +267,28 @@ public class UpdateEventInMonthView extends AppCompatActivity {
                 switch_Reminder.setChecked(false);
             }
 
+            if (greeting_ID == 0){
+                switchHoliday.setVisibility(View.VISIBLE);
+                greeting.setVisibility(View.GONE);
+                greetingTitle.setVisibility(View.GONE);
+            } else {
+                switchHoliday.setVisibility(View.GONE);
+                greeting.setVisibility(View.VISIBLE);
+                greetingTitle.setVisibility(View.VISIBLE);
+                MyDatabaseHelper db = new MyDatabaseHelper(UpdateEventInMonthView.this);
+                Cursor cursor = db.getGreetingBuID(String.valueOf(greeting_ID));
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    do {
+                        textGreeting = cursor.getString(cursor.getColumnIndexOrThrow("greeting_text"));
+                    } while (cursor.moveToNext());
+                }
+                if (cursor != null) {
+                    cursor.close();
+                }
+                greeting.setText(textGreeting);
+            }
+
 
         } else {
             //Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
@@ -243,7 +301,7 @@ public class UpdateEventInMonthView extends AppCompatActivity {
     }
 
     void ConfirmDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomTimePickerDialog);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.ConfirmDialogTheme);
         builder.setTitle("Удалить событие?");
         builder.setMessage("Вы уверены, что хотите удалить событие?");
         builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
@@ -422,6 +480,152 @@ public class UpdateEventInMonthView extends AppCompatActivity {
         } else {
             Log.e("AlarmManager", "AlarmManager is null. Alarm not set.");
         }
+    }
+
+    void ConfirmDialogGenerateGreeting(){
+        AlertDialog alertDialog;
+        alertDialog = new AlertDialog.Builder(UpdateEventInMonthView.this, R.style.ConfirmDialogTheme) //
+                .setTitle("Проверьте корректность данных для поздравления!")
+                .setMessage("После нажатия кнопки «Изменить», изменить данные для генерации поздравления уже не получится.")
+                .setCancelable(false)
+                //call button
+                .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateEventInMonthView.this);
+
+                        GreetingID = saveToDatabase(holidayName, fromPerson, toPerson);
+                        generateText(holidayName, fromPerson, toPerson, GreetingID);
+
+                        if (ins_reminder == null){
+                            ins_reminder = reminder;
+                        }
+
+                        myDB.updateData(id_str, title.getText().toString().trim(), description.getText().toString().trim(),
+                                Integer.parseInt(date_data_str), Integer.parseInt(date_month_str), Integer.parseInt(date_year_str),
+                                Integer.parseInt(startHour_str), Integer.parseInt(startMinute_str), Integer.parseInt(endHour_str), Integer.parseInt(endMinute_str), ins_reminder, GreetingID);/**/
+
+                        if (ins_reminder == 1)
+                        {
+                            createNotificationForEvent(UpdateEventInMonthView.this, Integer.parseInt(id_str));
+                        } else {
+                            if (isNotificationScheduled(UpdateEventInMonthView.this, Integer.parseInt(id_str))){
+                                cancelNotification(UpdateEventInMonthView.this, Integer.parseInt(id_str));
+                            }
+                        }
+                        createGreeting = 0;
+                        finish();
+                    }
+                })
+                //cancel button
+                .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //что то при кансел
+                    }
+                }).show();
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(UpdateEventInMonthView.this, R.color.buttons_color));
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(UpdateEventInMonthView.this, R.color.buttons_color));
+    }
+
+    private void generateText(String holidayName, String fromPerson, String toPerson, int GreetingID) {
+        new Thread(() -> {
+            try {
+                String url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion";
+                String apiKey = "AQVNxK6uX87oexJoy46jRHmAMikDCbt1HBS7XEGx";
+
+                // Создание JSON-объекта программно
+                JSONObject prompt = new JSONObject();
+                prompt.put("modelUri", "gpt://b1g96ft3q1np7uts57fu/yandexgpt-lite");
+
+                JSONObject completionOptions = new JSONObject();
+                completionOptions.put("stream", false);
+                completionOptions.put("temperature", 0.6);
+                completionOptions.put("maxTokens", "2000");
+                prompt.put("completionOptions", completionOptions);
+
+                JSONArray messages = new JSONArray();
+                JSONObject message = new JSONObject();
+                message.put("role", "user");
+
+                String input = "Напиши поздравление для " + toPerson + " с " + holidayName;
+                if (!fromPerson.isEmpty()){
+                    input = input + " от " + fromPerson;
+                }
+                Log.e("greetingText", input);
+
+                message.put("text", input);
+                messages.put(message);
+                prompt.put("messages", messages);
+
+                // Преобразование JSON в строку
+                String json = prompt.toString();
+
+                // Настройка клиента и запроса
+                OkHttpClient client = new OkHttpClient();
+                MediaType JSON = MediaType.get("application/json; charset=utf-8");
+                RequestBody body = RequestBody.create(json, JSON);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Authorization", "Api-Key " + apiKey)
+                        .post(body)
+                        .build();
+
+                // Выполнение запроса
+                Response response = client.newCall(request).execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    String responseData = response.body().string();
+
+                    String formattedText = extractTextFromJson(responseData);
+
+                    MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateEventInMonthView.this);
+
+                    // Обновление UI
+                    runOnUiThread(() -> myDB.updateGreeting(String.valueOf(GreetingID), formattedText));
+                    //runOnUiThread(() -> textView.setText(formattedText));
+                } else {
+                    //runOnUiThread(() -> textView.setText("Ошибка: " + response.code()));
+                }/**/
+
+            } catch (Exception e) {
+                //runOnUiThread(() -> textView.setText("Ошибка: " + e.getMessage()));
+            }
+        }).start();
+    }
+
+    private String extractTextFromJson(String jsonResponse) {
+        try {
+            JSONObject jsonObject = new JSONObject(jsonResponse);
+            JSONObject resultObject = jsonObject.getJSONObject("result");
+            JSONObject alternativesObject = resultObject.getJSONArray("alternatives").getJSONObject(0);
+            JSONObject messageObject = alternativesObject.getJSONObject("message");
+
+            String rawText = messageObject.getString("text");
+            return rawText;
+        } catch (Exception e) {
+            return "Ошибка при обработке ответа: " + e.getMessage();
+        }
+    }
+
+    private int saveToDatabase(String holidayName, String from, String to) {
+        MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateEventInMonthView.this);
+
+        myDB.addGreeting(holidayName, from, to);
+
+        Cursor cursor = myDB.getGreeting(holidayName, from, to);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                GreetingID = cursor.getInt(cursor.getColumnIndexOrThrow("greeting_id"));
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return GreetingID;
+
     }
 
 }

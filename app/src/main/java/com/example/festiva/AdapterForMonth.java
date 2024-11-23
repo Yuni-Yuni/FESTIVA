@@ -19,12 +19,13 @@ public class AdapterForMonth extends RecyclerView.Adapter<AdapterForMonth.MyView
     private Context context;
     private ArrayList<String> event_id, event_title, event_description;
     private ArrayList<String> data_data, data_month, data_year, start_time_hour, start_time_minute, end_time_hour, end_time_minute;
-    private ArrayList<Integer> event_reminder;
+    private ArrayList<Integer> event_reminder, event_greeting_id;
     Activity activity;
 
     AdapterForMonth(Activity activity, Context context, ArrayList<String> event_id, ArrayList<String> event_title, ArrayList<String> event_description,
                   ArrayList<String> data_data, ArrayList<String> data_month, ArrayList<String> data_year, ArrayList<String> start_time_hour,
-                  ArrayList<String> start_time_minute, ArrayList<String> end_time_hour, ArrayList<String> end_time_minute, ArrayList<Integer> event_reminder){
+                  ArrayList<String> start_time_minute, ArrayList<String> end_time_hour, ArrayList<String> end_time_minute,
+                    ArrayList<Integer> event_reminder, ArrayList<Integer> event_greeting_id){
         this.activity = activity;
         this.context = context;
         this.event_id = event_id;
@@ -38,6 +39,7 @@ public class AdapterForMonth extends RecyclerView.Adapter<AdapterForMonth.MyView
         this.end_time_hour = end_time_hour;
         this.end_time_minute = end_time_minute;
         this.event_reminder = event_reminder;
+        this.event_greeting_id =event_greeting_id;
     }
 
     @NonNull
@@ -77,6 +79,7 @@ public class AdapterForMonth extends RecyclerView.Adapter<AdapterForMonth.MyView
                 intent.putExtra("endTimeHour", String.valueOf(end_time_hour.get(position)));
                 intent.putExtra("endTimeMinute", String.valueOf(end_time_minute.get(position)));
                 intent.putExtra("reminder", event_reminder.get(position));
+                intent.putExtra("greeting_id", event_greeting_id.get(position));
                 activity.startActivityForResult(intent, 2);
             }
         });
@@ -118,7 +121,7 @@ public class AdapterForMonth extends RecyclerView.Adapter<AdapterForMonth.MyView
     // Метод для обновления данных
     public void updateData(ArrayList<String> newEventId, ArrayList<String> newEventTitle, ArrayList<String> newEventDescription,
                            ArrayList<String> newDataData, ArrayList<String> newDataMonth, ArrayList<String> newDataYear,
-                           ArrayList<String> newStartTimeHour, ArrayList<String> newStartTimeMinute, ArrayList<String> newEndTimeHour, ArrayList<String> newEndTimeMinute, ArrayList<Integer> newEvent_reminder) {
+                           ArrayList<String> newStartTimeHour, ArrayList<String> newStartTimeMinute, ArrayList<String> newEndTimeHour, ArrayList<String> newEndTimeMinute, ArrayList<Integer> newEvent_reminder, ArrayList<Integer> newEvent_greeting_id) {
         this.event_id = newEventId;
         this.event_title = newEventTitle;
         this.event_description = newEventDescription;
@@ -130,6 +133,7 @@ public class AdapterForMonth extends RecyclerView.Adapter<AdapterForMonth.MyView
         this.end_time_hour = newEndTimeHour;
         this.end_time_minute = newEndTimeMinute;
         this.event_reminder = newEvent_reminder;
+        this.event_greeting_id =newEvent_greeting_id;
     }
 
     public void deleteData() {
@@ -144,6 +148,7 @@ public class AdapterForMonth extends RecyclerView.Adapter<AdapterForMonth.MyView
         this.end_time_hour.clear();
         this.end_time_minute.clear();
         this.event_reminder.clear();
+        this.event_greeting_id.clear();
     }
 
 }

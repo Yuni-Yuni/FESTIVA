@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GetGreetingActivity"
+    android:background="@color/page_color">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="374dp"
+        android:layout_height="57dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:maxWidth="400dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginHorizontal="20dp"
+        android:text="Просмотр поздравления"
+        android:fontFamily="@font/montserrat_medium"
+        android:textColor="@color/buttons_color"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp" />
+
+    <ImageButton
+        android:id="@+id/homeButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="10dp"
+        android:maxHeight="36dp"
+        android:maxWidth="36dp"
+        android:contentDescription="@string/back_main"
+        android:src="@drawable/ic_back"
+        android:background="@android:color/transparent"
+        android:onClick="backToHomeFragment"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextFieldLayoutShowGreeting"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="Поздравление"
+        android:maxWidth="380dp"
+        android:textColor="@color/buttons_color"
+        android:textColorHint="@color/buttons_color"
+        app:boxStrokeColor="@color/buttons_color"
+        app:boxStrokeErrorColor="@color/red"
+        app:cursorColor="@color/buttons_color"
+        app:hintTextColor="@color/buttons_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ShowGreeting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="top|start"
+            android:textColor="@color/buttons_color"
+            android:textColorHint="@color/buttons_color"
+            app:cursorColor="@color/buttons_color" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+</LinearLayout>

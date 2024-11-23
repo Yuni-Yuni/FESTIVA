@@ -1,17 +1,25 @@
 package com.example.festiva;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +27,15 @@ import com.google.android.material.button.MaterialButton;
  * create an instance of this fragment.
  */
 public class CardsAndGreetingsFragment extends Fragment {
+
+    ImageView imageView;
+    TextView textEmpty;
+    boolean statement = false;
+
+    MyDatabaseHelper myDB;
+    ArrayList<String> event_title, greeting_text;
+    ArrayList<Integer> event_greeting_id;
+    AdapterForGreetings customAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,6 +97,19 @@ public class CardsAndGreetingsFragment extends Fragment {
         MaterialButton cards = view.findViewById(R.id.cards);
         MaterialButton greetings = view.findViewById(R.id.greetings);
 
+        RecyclerView recyclerView = view.findViewById(R.id.listOfGreetings);
+
+        myDB = new MyDatabaseHelper(getContext());
+        event_title = new ArrayList<>();
+        greeting_text = new ArrayList<>();
+        event_greeting_id = new ArrayList<>();
+
+        customAdapter = new AdapterForGreetings(getActivity(), getContext(), event_title, event_greeting_id, greeting_text);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        readDataFromTableGreetingsForLoad();
+
         cards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +117,9 @@ public class CardsAndGreetingsFragment extends Fragment {
                 cards.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.page_color));
                 greetings.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), android.R.color.transparent));
                 greetings.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.buttons_color));
+                readDataFromTableCards();
+                ImageNoDataAppearence(statement);
+                textEmpty.setText("Генерация открыток недоступна");
             }
         });
 
@@ -97,11 +130,68 @@ public class CardsAndGreetingsFragment extends Fragment {
                 greetings.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.page_color));
                 cards.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), android.R.color.transparent));
                 cards.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.buttons_color));
+                readDataFromTableGreetings();
+                ImageNoDataAppearence(statement);
             }
         });
+
+        imageView = (ImageView) view.findViewById(R.id.emptyField);
+        textEmpty = (TextView) view.findViewById(R.id.emptyText);
+        ImageNoDataAppearence(statement);
 
         // Inflate the layout for this fragment
 
         return view;
+    }
+
+    void readDataFromTableGreetingsForLoad(){
+        Cursor cursor = myDB.getEventAndGreeting();
+        if(cursor.getCount() == 0){
+            //Toast.makeText(getContext(),"No data.", Toast.LENGTH_SHORT).show();
+            statement = true;
+        }else{
+            statement = false;
+            while (cursor.moveToNext()){
+                event_title.add(cursor.getString(cursor.getColumnIndexOrThrow("event_name")));
+                event_greeting_id.add(cursor.getColumnIndexOrThrow("event_greeting_id"));
+                greeting_text.add(cursor.getString(cursor.getColumnIndexOrThrow("greeting_text")));
+            }
+
+        }
+    }
+
+    void readDataFromTableGreetings(){
+        customAdapter.deleteData();
+        Cursor cursor = myDB.getEventAndGreeting();
+        if(cursor.getCount() == 0){
+            //Toast.makeText(getContext(),"No data.", Toast.LENGTH_SHORT).show();
+            statement = true;
+        }else{
+            statement = false;
+            while (cursor.moveToNext()){
+                event_title.add(cursor.getString(cursor.getColumnIndexOrThrow("event_name")));
+                event_greeting_id.add(cursor.getColumnIndexOrThrow("event_greeting_id"));
+                greeting_text.add(cursor.getString(cursor.getColumnIndexOrThrow("greeting_text")));
+            }
+        }
+
+        customAdapter.updateData(event_title, event_greeting_id, greeting_text);
+        customAdapter.notifyDataSetChanged();
+    }
+
+    void readDataFromTableCards(){
+        customAdapter.deleteData();
+        statement = true;
+        customAdapter.notifyDataSetChanged();
+    }
+
+    void ImageNoDataAppearence(boolean statement){
+        if (statement){
+            imageView.setVisibility(View.VISIBLE);
+            textEmpty.setVisibility(View.VISIBLE);
+        } else {
+            imageView.setVisibility(View.GONE);
+            textEmpty.setVisibility(View.GONE);
+        }
     }
 }

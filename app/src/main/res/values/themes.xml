@@ -9,7 +9,12 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@android:color/transparent</item>
         <item name="colorAccent">@android:color/transparent</item>
+    </style>
 
+    <style name="ConfirmDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@color/page_color</item>
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="android:textColorPrimary">@color/buttons_color</item>
     </style>
 
     <style name="CustomDatePickerDialog" parent="Theme.MaterialComponents.Light.Dialog">

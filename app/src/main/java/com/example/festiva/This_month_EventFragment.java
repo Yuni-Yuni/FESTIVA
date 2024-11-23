@@ -45,7 +45,7 @@ public class This_month_EventFragment extends Fragment {
     MyDatabaseHelper myDB;
     ArrayList<String> event_id, event_title, event_description, event_data_data, event_data_month, event_data_year, event_startTime_hour,
             event_startTime_minute, event_endTime_hour, event_endTime_minute;
-    ArrayList<Integer> event_reminder;
+    ArrayList<Integer> event_reminder, event_greeting_id;
     AdapterForMonth customAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -128,6 +128,7 @@ public class This_month_EventFragment extends Fragment {
         event_endTime_hour = new ArrayList<>();
         event_endTime_minute = new ArrayList<>();
         event_reminder = new ArrayList<>();
+        event_greeting_id = new ArrayList<>();
 
         Calendar currentDate = Calendar.getInstance();
         int year = currentDate.get(Calendar.YEAR);
@@ -156,7 +157,7 @@ public class This_month_EventFragment extends Fragment {
         }
 
         customAdapter = new AdapterForMonth(getActivity(), getContext(), event_id, event_title, event_description, event_data_data, event_data_month,
-                event_data_year, event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder);
+                event_data_year, event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder, event_greeting_id);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -227,6 +228,7 @@ public class This_month_EventFragment extends Fragment {
                     event_endTime_minute.add(cursor.getString(9));
                 }
                 event_reminder.add(cursor.getInt(10));
+                event_greeting_id.add(cursor.getInt(11));
             }
 
         }
@@ -263,6 +265,7 @@ public class This_month_EventFragment extends Fragment {
                     event_endTime_minute.add(cursor.getString(9));
                 }
                 event_reminder.add(cursor.getInt(10));
+                event_greeting_id.add(cursor.getInt(11));
             }
 
         }
@@ -300,11 +303,12 @@ public class This_month_EventFragment extends Fragment {
                     event_endTime_minute.add(cursor.getString(9));
                 }
                 event_reminder.add(cursor.getInt(10));
+                event_greeting_id.add(cursor.getInt(11));
             }
         }
 
         customAdapter.updateData(event_id, event_title, event_description, event_data_data, event_data_month, event_data_year,
-                event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder);
+                event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder, event_greeting_id);
         customAdapter.notifyDataSetChanged();
     }
 
@@ -340,11 +344,12 @@ public class This_month_EventFragment extends Fragment {
                     event_endTime_minute.add(cursor.getString(9));
                 }
                 event_reminder.add(cursor.getInt(10));
+                event_greeting_id.add(cursor.getInt(11));
             }
         }
 
         customAdapter.updateData(event_id, event_title, event_description, event_data_data, event_data_month, event_data_year,
-                event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder);
+                event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder, event_greeting_id);
         customAdapter.notifyDataSetChanged();
     }
 

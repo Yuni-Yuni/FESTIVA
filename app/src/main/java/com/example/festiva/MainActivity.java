@@ -26,7 +26,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,13 +44,26 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 import java.util.Objects;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity{
 
     private static final int RC_NOTIFICATION = 99;
     private int data_selected, month_selected, year_selected, hour_start, hour_end, minute_start, minute_end;
+
+    BottomSheetDialog bottomSheetDialog;
+    TextInputEditText editTextEventName;
+    TextInputEditText editTextEventDescription;
 
     boolean statement = false;
     int year, month, day;// Переменные для хранения выбранной дат
@@ -65,8 +77,11 @@ public class MainActivity extends AppCompatActivity{
     private String holidayName = "";
     private String fromPerson = "";
     private String toPerson = "";
+    private String greetingText = "";
 
     private int RemindMe;
+    private int createGreeting;
+    private int GreetingID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,15 +102,20 @@ public class MainActivity extends AppCompatActivity{
             requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, RC_NOTIFICATION);
         }
 
-        boolean isChecked = sharedPreferences.getBoolean("isChecked", false);
+        int isChecked = sharedPreferences.getInt("isChecked", 1);
+        //Log.e("isCheckedNew", String.valueOf(isChecked));
 
-        if (isChecked) {
+        if (isChecked == 2) {
             loadFragment(new This_month_EventFragment());
-            editor.putBoolean("isChecked", false);
+            editor.putInt("isChecked", 1);
+            editor.apply(); // Или editor.commit()
+        } else if (isChecked == 1) {
+            loadFragment(new HomeFragment());
+            editor.putInt("isChecked", 1);
             editor.apply(); // Или editor.commit()
         } else {
-            loadFragment(new HomeFragment());
-            editor.putBoolean("isChecked", false);
+            loadFragment(new CardsAndGreetingsFragment());
+            editor.putInt("isChecked", 1);
             editor.apply(); // Или editor.commit()
         }
 
@@ -130,24 +150,28 @@ public class MainActivity extends AppCompatActivity{
                 fromPerson = "";
                 toPerson = "";
 
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
+                bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
                 View view1 = LayoutInflater.from(MainActivity.this).inflate(R.layout.bottom_dialog_sheet, null);
                 bottomSheetDialog.setContentView(view1);
                 bottomSheetDialog.show();
 
                 TextInputLayout textInputLayout = view1.findViewById(R.id.TextFieldLayout1);
 
-                TextInputEditText editTextEventName = view1.findViewById(R.id.eventName);
-                TextInputEditText editTextEventDescription = view1.findViewById(R.id.eventDescription);
+                editTextEventName = view1.findViewById(R.id.eventName);
+                editTextEventDescription = view1.findViewById(R.id.eventDescription);
                 EditText editTextDate = view1.findViewById(R.id.EventData);
                 EditText editTextTimeStart = view1.findViewById(R.id.EventStartTime);
                 EditText editTextTimeEnd = view1.findViewById(R.id.EventEndTime);
 
                 switchHoliday = view1.findViewById(R.id.switch_card_sender);
+                Log.e("switchHoliday", String.valueOf(createGreeting));
 
                 switchHoliday.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     if (isChecked) {
                         showHolidayDialog();
+                        createGreeting = 1;
+                    } else {
+                        createGreeting = 0;
                     }
                 });
 
@@ -306,22 +330,22 @@ public class MainActivity extends AppCompatActivity{
                 dismissBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         if (Objects.requireNonNull(editTextEventName.getText()).toString().isEmpty()) {
                             editTextEventName.setError("Введите название события");
                         } else {
-                            MyDatabaseHelper myDB = new MyDatabaseHelper(MainActivity.this);
-
-                            myDB.addEvent(editTextEventName.getText().toString().trim(), editTextEventDescription.getText().toString().trim(),
-                                    data_selected, month_selected, year_selected, hour_start, minute_start, hour_end, minute_end, RemindMe);
-
-                            if (RemindMe == 1)
+                            if (createGreeting == 1)
                             {
-                                CreateNotification(MainActivity.this);
-                            }
-                            //Toast.makeText(MainActivity.this, editTextEventName.getText().toString(), Toast.LENGTH_LONG).show();
+                                ConfirmDialog();
+                                createGreeting = 0;
+                            } else {
+                                MyDatabaseHelper myDB = new MyDatabaseHelper(MainActivity.this);
 
-                            bottomSheetDialog.dismiss();
+                                myDB.addEvent(editTextEventName.getText().toString().trim(), editTextEventDescription.getText().toString().trim(),
+                                        data_selected, month_selected, year_selected, hour_start, minute_start, hour_end, minute_end, RemindMe, createGreeting);
+
+                                bottomSheetDialog.dismiss();
+                                createGreeting = 0;
+                            }
                         }
                     }
                 });
@@ -360,7 +384,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2) {
-            editor.putBoolean("isChecked", true);
+            editor.putInt("isChecked", 2);
             editor.apply(); // Или editor.commit()
             boolean lastOrFuture = sharedPreferences.getBoolean("lastOrFuture", false);
             if (lastOrFuture){
@@ -372,8 +396,13 @@ public class MainActivity extends AppCompatActivity{
             }
         }
 
+        if (requestCode == 5) {
+            editor.putInt("isChecked", 5);
+            editor.apply(); // Или editor.commit()
+        }
+
         if (requestCode == 1) {
-            editor.putBoolean("isChecked", false);
+            editor.putInt("isChecked", 1);
             editor.apply(); // Или editor.commit()
         }
         recreate();
@@ -553,7 +582,6 @@ public class MainActivity extends AppCompatActivity{
                     fromPerson = inputFrom.getText().toString();
                     toPerson = inputTo.getText().toString();
 
-                    saveToDatabase(holidayName, fromPerson, toPerson);
                     //Toast.makeText(MainActivity.this, "Данные сохранены", Toast.LENGTH_SHORT).show();
                     dialog.dismiss(); // Закрываем диалог
                 }
@@ -563,9 +591,141 @@ public class MainActivity extends AppCompatActivity{
         dialog.show();
     }
 
-    private void saveToDatabase(String holidayName, String from, String to) {
-        // Реализуйте сохранение в SQLite
-        // Например: databaseHelper.insertData(holidayName, from, to);
+    private int saveToDatabase(String holidayName, String from, String to) {
+        MyDatabaseHelper myDB = new MyDatabaseHelper(MainActivity.this);
+
+        myDB.addGreeting(holidayName, from, to);
+
+        Cursor cursor = myDB.getGreeting(holidayName, from, to);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                GreetingID = cursor.getInt(cursor.getColumnIndexOrThrow("greeting_id"));
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return GreetingID;
+
+    }
+
+    void ConfirmDialog(){
+        AlertDialog alertDialog;
+        alertDialog = new AlertDialog.Builder(MainActivity.this, R.style.ConfirmDialogTheme) //
+                .setTitle("Проверьте корректность данных для поздравления!")
+                .setMessage("После нажатия кнопки «Создать», изменить данные для генерации поздравления уже не получится.")
+                .setCancelable(false)
+                //call button
+                .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MyDatabaseHelper myDB = new MyDatabaseHelper(MainActivity.this);
+
+                        GreetingID = saveToDatabase(holidayName, fromPerson, toPerson);
+                        generateText(holidayName, fromPerson, toPerson, GreetingID);
+
+                        myDB.addEvent(editTextEventName.getText().toString().trim(), editTextEventDescription.getText().toString().trim(),
+                                data_selected, month_selected, year_selected, hour_start, minute_start, hour_end, minute_end, RemindMe, GreetingID);
+
+                        if (RemindMe == 1)
+                        {
+                            CreateNotification(MainActivity.this);
+                        }
+                        bottomSheetDialog.dismiss();
+                    }
+                })
+                //cancel button
+                .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //что то при кансел
+                        switchHoliday.setChecked(false);
+                    }
+                }).show();
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(MainActivity.this, R.color.buttons_color));
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(MainActivity.this, R.color.buttons_color));
+    }
+
+    private void generateText(String holidayName, String fromPerson, String toPerson, int GreetingID) {
+        new Thread(() -> {
+            try {
+                String url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion";
+                String apiKey = "AQVNxK6uX87oexJoy46jRHmAMikDCbt1HBS7XEGx";
+
+                // Создание JSON-объекта программно
+                JSONObject prompt = new JSONObject();
+                prompt.put("modelUri", "gpt://b1g96ft3q1np7uts57fu/yandexgpt-lite");
+
+                JSONObject completionOptions = new JSONObject();
+                completionOptions.put("stream", false);
+                completionOptions.put("temperature", 0.6);
+                completionOptions.put("maxTokens", "2000");
+                prompt.put("completionOptions", completionOptions);
+
+                JSONArray messages = new JSONArray();
+                JSONObject message = new JSONObject();
+                message.put("role", "user");
+
+                String input = "Напиши поздравление для " + toPerson + " с " + holidayName;
+                if (!fromPerson.isEmpty()){
+                    input = input + " от " + fromPerson;
+                }
+                Log.e("greetingText", input);
+
+                message.put("text", input);
+                messages.put(message);
+                prompt.put("messages", messages);
+
+                // Преобразование JSON в строку
+                String json = prompt.toString();
+
+                // Настройка клиента и запроса
+                OkHttpClient client = new OkHttpClient();
+                MediaType JSON = MediaType.get("application/json; charset=utf-8");
+                RequestBody body = RequestBody.create(json, JSON);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Authorization", "Api-Key " + apiKey)
+                        .post(body)
+                        .build();
+
+                // Выполнение запроса
+                Response response = client.newCall(request).execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    String responseData = response.body().string();
+
+                    String formattedText = extractTextFromJson(responseData);
+
+                    MyDatabaseHelper myDB = new MyDatabaseHelper(MainActivity.this);
+
+                    // Обновление UI
+                    runOnUiThread(() -> myDB.updateGreeting(String.valueOf(GreetingID), formattedText));
+                    //runOnUiThread(() -> textView.setText(formattedText));
+                } else {
+                    //runOnUiThread(() -> textView.setText("Ошибка: " + response.code()));
+                }/**/
+
+            } catch (Exception e) {
+                //runOnUiThread(() -> textView.setText("Ошибка: " + e.getMessage()));
+            }
+        }).start();
+    }
+
+    private String extractTextFromJson(String jsonResponse) {
+        try {
+            JSONObject jsonObject = new JSONObject(jsonResponse);
+            JSONObject resultObject = jsonObject.getJSONObject("result");
+            JSONObject alternativesObject = resultObject.getJSONArray("alternatives").getJSONObject(0);
+            JSONObject messageObject = alternativesObject.getJSONObject("message");
+
+            String rawText = messageObject.getString("text");
+            return rawText;
+        } catch (Exception e) {
+            return "Ошибка при обработке ответа: " + e.getMessage();
+        }
     }
 
 }

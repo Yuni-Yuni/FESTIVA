@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
     MyDatabaseHelper myDB;
     ArrayList<String> event_id, event_title, event_description, event_data_data, event_data_month, event_data_year, event_startTime_hour,
                             event_startTime_minute, event_endTime_hour, event_endTime_minute;
-    ArrayList<Integer> event_reminder;
+    ArrayList<Integer> event_reminder, event_greeting_id;
     CustomAdapter customAdapter;
 
     ImageView imageView;
@@ -103,6 +103,7 @@ public class HomeFragment extends Fragment {
         event_endTime_hour = new ArrayList<>();
         event_endTime_minute = new ArrayList<>();
         event_reminder = new ArrayList<>();
+        event_greeting_id = new ArrayList<>();
 
         Calendar currentDate = Calendar.getInstance();
         int year = currentDate.get(Calendar.YEAR);
@@ -112,7 +113,7 @@ public class HomeFragment extends Fragment {
         storeDataOnCurrentDate(year, month + 1, day);
 
         customAdapter = new CustomAdapter(getActivity(), getContext(), event_id, event_title, event_description, event_data_data, event_data_month,
-                                event_data_year, event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder);
+                                event_data_year, event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder, event_greeting_id);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -166,6 +167,7 @@ public class HomeFragment extends Fragment {
                     event_endTime_minute.add(cursor.getString(9));
                 }
                 event_reminder.add(cursor.getInt(10));
+                event_greeting_id.add(cursor.getInt(11));
                 //Toast.makeText(getContext(), String.valueOf(event_reminder), Toast.LENGTH_SHORT).show();
             }
 
@@ -203,11 +205,12 @@ public class HomeFragment extends Fragment {
                     event_endTime_minute.add(cursor.getString(9));
                 }
                 event_reminder.add(cursor.getInt(10));
+                event_greeting_id.add(cursor.getInt(11));
             }
         }
 
         customAdapter.updateData(event_id, event_title, event_description, event_data_data, event_data_month, event_data_year,
-                            event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder);
+                            event_startTime_hour, event_startTime_minute, event_endTime_hour, event_endTime_minute, event_reminder, event_greeting_id);
         customAdapter.notifyDataSetChanged();
     }
 
