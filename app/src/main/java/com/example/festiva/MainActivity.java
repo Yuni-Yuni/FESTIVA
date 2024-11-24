@@ -14,6 +14,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,6 +29,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,6 +53,9 @@ import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -168,8 +175,17 @@ public class MainActivity extends AppCompatActivity{
 
                 switchHoliday.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     if (isChecked) {
-                        showHolidayDialog();
-                        createGreeting = 1;
+                        if (!isInternetAvailable()) {
+                            // Показать Toast
+                            Toast.makeText(MainActivity.this, "Нет подключения к интернету", Toast.LENGTH_SHORT).show();
+
+                            // Отключить свитч
+                            switchHoliday.setChecked(false);
+                        } else {
+                            showHolidayDialog();
+                            createGreeting = 1;
+                        }
+
                     } else {
                         createGreeting = 0;
                     }
@@ -726,6 +742,29 @@ public class MainActivity extends AppCompatActivity{
         } catch (Exception e) {
             return "Ошибка при обработке ответа: " + e.getMessage();
         }
+    }
+
+    private boolean isInternetAvailable() {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager != null) {
+            // Получаем активное соединение
+            android.net.Network network = connectivityManager.getActiveNetwork();
+            if (network == null) {
+                return false; // Нет активного соединения
+            }
+
+            // Проверяем возможности сети
+            android.net.NetworkCapabilities capabilities =
+                    connectivityManager.getNetworkCapabilities(network);
+
+            return capabilities != null &&
+                    (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET));
+        }
+        return false;
     }
 
 }

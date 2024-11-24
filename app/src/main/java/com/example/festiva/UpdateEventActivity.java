@@ -12,6 +12,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -91,8 +93,16 @@ public class UpdateEventActivity extends AppCompatActivity {
 
         switchHoliday.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                showHolidayDialog();
-                createGreeting = 1;
+                if (!isInternetAvailable()) {
+                    // Показать Toast
+                    Toast.makeText(UpdateEventActivity.this, "Нет подключения к интернету", Toast.LENGTH_SHORT).show();
+
+                    // Отключить свитч
+                    switchHoliday.setChecked(false);
+                } else {
+                    showHolidayDialog();
+                    createGreeting = 1;
+                }
             } else {
                 createGreeting = 0;
             }
@@ -630,6 +640,29 @@ public class UpdateEventActivity extends AppCompatActivity {
 
         return GreetingID;
 
+    }
+
+    private boolean isInternetAvailable() {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager != null) {
+            // Получаем активное соединение
+            android.net.Network network = connectivityManager.getActiveNetwork();
+            if (network == null) {
+                return false; // Нет активного соединения
+            }
+
+            // Проверяем возможности сети
+            android.net.NetworkCapabilities capabilities =
+                    connectivityManager.getNetworkCapabilities(network);
+
+            return capabilities != null &&
+                    (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET));
+        }
+        return false;
     }
 
 }

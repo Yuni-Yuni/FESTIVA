@@ -132,6 +132,7 @@ public class CardsAndGreetingsFragment extends Fragment {
                 cards.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.buttons_color));
                 readDataFromTableGreetings();
                 ImageNoDataAppearence(statement);
+                textEmpty.setText("Нет сгенерированных поздравлений");
             }
         });
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,17 +41,220 @@
             android:layout_gravity="center"
             android:textColor="@color/buttons_color"/>
 
-        <ImageButton
+        <TextView
             android:id="@+id/homeButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="105dp"
-            android:maxHeight="36dp"
-            android:maxWidth="36dp"
+            android:layout_marginTop="120dp"
             android:contentDescription="@string/back_main"
-            android:src="@drawable/ic_back"
-            android:background="@android:color/transparent"/>
+            android:text="Меню"
+            android:textColor="@color/buttons_color"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:drawableLeft="@drawable/ic_arrow_back" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="380dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:id="@+id/statusSub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="start"
+                        android:text="Статус подписки:"
+                        android:textSize="20sp"
+                        android:textColor="@color/buttons_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/statusSubText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:gravity="start"
+                        android:text="Free"
+                        android:textColor="@color/text_date"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/statusSub"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.6" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/optionsToSub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="start"
+                    android:text="Опции к Вашей подписке:"
+                    android:textSize="20sp"
+                    android:textColor="@color/buttons_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:maxWidth="380dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp" />
+
+                <TextView
+                    android:id="@+id/optionsToSubText1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="start"
+                    android:text="◇ Безлимитное генерирование поздравлений"
+                    android:textSize="18sp"
+                    android:textColor="@color/buttons_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:maxWidth="380dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp" />
+
+                <TextView
+                    android:id="@+id/optionsToSubText2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="start"
+                    android:text="◇ Создание напоминаний к событиям"
+                    android:textSize="18sp"
+                    android:textColor="@color/buttons_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:maxWidth="380dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/main_color"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="380dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:gravity="start"
+                        android:text="0 ₽"
+                        android:textSize="20sp"
+                        android:textColor="@color/text_date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="start"
+                        android:text="Спишется хх.хх"
+                        android:textColor="@color/buttons_color"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/continueSub"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:enabled="true"
+                    android:elevation="2dp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/montserrat_regular"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:gravity="center"
+                    android:paddingHorizontal="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Продлить подписку"
+                    android:textColor="@color/buttons_color"
+                    android:textSize="16sp"
+                    android:layout_marginHorizontal="10dp"
+                    app:backgroundTint="@color/page_color"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/changeTypeOfSub"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:enabled="true"
+                    android:elevation="2dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:gravity="center"
+                    android:paddingHorizontal="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Сменить тип подписки"
+                    android:textColor="@color/buttons_color"
+                    android:textSize="16sp"
+                    android:layout_marginHorizontal="10dp"
+                    app:backgroundTint="@color/page_color"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/chooseTypeOfPay"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:enabled="true"
+                    android:elevation="2dp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/montserrat_regular"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:gravity="center"
+                    android:paddingHorizontal="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Выбрать тип оплаты"
+                    android:textColor="@color/buttons_color"
+                    android:textSize="16sp"
+                    android:layout_marginHorizontal="10dp"
+                    app:backgroundTint="@color/page_color"/>
+
+            </LinearLayout>
+        </ScrollView>
+
 
     </LinearLayout>
 
