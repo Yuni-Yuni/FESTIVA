@@ -389,6 +389,12 @@ public class MainActivity extends AppCompatActivity{
                             loadFragment(new UserGuideFragment());
                         } else if (currentFragment instanceof SettingsFragment) {
                             loadFragment(new SettingsFragment());
+                        } else if (currentFragment instanceof ApplicationPolicyFragment) {
+                            loadFragment(new ApplicationPolicyFragment());
+                        } else if (currentFragment instanceof CardsAndGreetingsFragment) {
+                            loadFragment(new CardsAndGreetingsFragment());
+                        } else if (currentFragment instanceof MainFunctionsFragment) {
+                            loadFragment(new MainFunctionsFragment());
                         }
                     }
                 });

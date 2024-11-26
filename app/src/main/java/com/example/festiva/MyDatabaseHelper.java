@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -219,13 +220,26 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         int endYear = endOfWeek.get(Calendar.YEAR);
 
         // Запрос для выборки событий, попадающих в диапазон дат
+        /*String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EVENT_DATA_YEAR + " = ? AND " +
+                EVENT_DATA_MONTH + " = ? AND " + EVENT_DATA_DATA + " >= ?";*/
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EVENT_DATA_YEAR + " = ? AND " +
-                EVENT_DATA_MONTH + " = ? AND " + EVENT_DATA_DATA + " >= ?" + " AND " + EVENT_DATA_YEAR + " = ? AND " +
-                EVENT_DATA_MONTH + " = ? AND " + EVENT_DATA_DATA + " <= ? ORDER BY " + EVENT_DATA_DATA + ", " + EVENT_START_TIME_HOUR + ", " + EVENT_START_TIME_MINUTE + ", " + EVENT_END_TIME_HOUR + ", " + EVENT_END_TIME_MINUTE + ";";;
+                EVENT_DATA_MONTH + " = ? AND " + EVENT_DATA_DATA + " >= ?" + " AND " + EVENT_DATA_DATA +
+                " <= ? + 6 OR " + EVENT_DATA_YEAR + " = ? AND " +
+                EVENT_DATA_MONTH + " = ? AND " + EVENT_DATA_DATA + " <= ?" + " AND " + EVENT_DATA_DATA +
+                " >= ? - 6 ORDER BY " + EVENT_DATA_YEAR + ", " + EVENT_DATA_MONTH + ", " + EVENT_DATA_DATA + ", "
+                + EVENT_START_TIME_HOUR + ", " + EVENT_START_TIME_MINUTE + ", " + EVENT_END_TIME_HOUR + ", "
+                + EVENT_END_TIME_MINUTE + ";";
         String[] args = {
-                String.valueOf(startYear), String.valueOf(startMonth), String.valueOf(startDay),
-                String.valueOf(endYear), String.valueOf(endMonth), String.valueOf(endDay)
+                String.valueOf(startYear), String.valueOf(startMonth), String.valueOf(startDay), String.valueOf(startDay),
+                String.valueOf(endYear), String.valueOf(endMonth), String.valueOf(endDay), String.valueOf(endDay)
         };
+
+        Log.e("query", query);
+
+
+        //Toast.makeText(context, startDay + " | " + endDay, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, startMonth + " | " + endMonth, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, startYear + " | " + endYear, Toast.LENGTH_SHORT).show();
 
         return db.rawQuery(query, args);
     }
