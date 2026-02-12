@@ -673,12 +673,12 @@ public class MainActivity extends AppCompatActivity{
     private void generateText(String holidayName, String fromPerson, String toPerson, int GreetingID) {
         new Thread(() -> {
             try {
-                String url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion";
-                String apiKey = "AQVNxK6uX87oexJoy46jRHmAMikDCbt1HBS7XEGx";
+                String url = "urlHere";
+                String apiKey = "APIKey";
 
                 // Создание JSON-объекта программно
                 JSONObject prompt = new JSONObject();
-                prompt.put("modelUri", "gpt://b1g96ft3q1np7uts57fu/yandexgpt-lite");
+                prompt.put("modelUri", "yandexgpt-lite");
 
                 JSONObject completionOptions = new JSONObject();
                 completionOptions.put("stream", false);
